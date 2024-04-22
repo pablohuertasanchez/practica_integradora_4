@@ -1,0 +1,15 @@
+** DUDAS PABLO **
+Usuario es un campo de cliente, y tiene que existir el usuario antes de ser cliente?
+o en el momento de dar de alta a un cliente, se le lleva a otro mapping para hacer el usuario?
+3.2.1 y 3.2.3
+Si damos de alta a los usuarios, tenemos que poner en calidad de qué?,
+por ejemplo, los administradores son unos por defecto y no se pueden crear más?
+
+Auditoria no entiendo muy bien qué es
+3.1.6 es acceder a la base de datos de clientes y hacer filtros y que te muestre el resultado?
+
+las bases de datos?, los usuarios, empleados.. mysql? y productos mongodb?
+
+3.1.11 Cómo que productos seleccionados??
+
+

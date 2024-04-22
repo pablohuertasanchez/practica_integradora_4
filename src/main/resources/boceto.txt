@@ -1,0 +1,34 @@
+--admin (administración)
+3.1.1 Autenticar usuario
+3.1.2 Desconexióin de usuario
+3.1.3 bloquear/desbloquear a un usuario o empleado
+3.1.4 baja de usuario/cliente/empleado
+3.1.5 Recuperación de usuario
+3.1.6 Consulta parametrizada de los clientes
+3.1.8 Alta de un producto (crear)
+3.1.9 modificar productos y atributos de productos(update)
+3.1.11 Asociar productos a un lado
+3.1.13 Listas categorías
+3.1.16 subida del catálogo de un proveedor (añadir un json)
+3.1.17 Consulta del catálogo de un proveedor
+3.1.18 Creación de avisos
+3.1.19 Consulta de avisos y procesamiento
+
+--empleado, clientes (RRHH/Tienda)
+3.2.1 Registro de usuario
+3.2.2 Autenticar por pasos
+3.2.3 Registro de clientes
+3.2.4 Desconexión
+3.2.5 Establecimiento una pregunta de control
+3.2.6 Recuperar contraseña (con la pregunta de control)
+3.2.7 Eliminar cliente
+3.2.8 Consulta de productos
+3.2.9 Mostrar los productos relacionados
+3.2.11 Consultar carrito
+3.2.12 Vaciar el carrito
+3.2.13 eliminar modificar línea de carrito
+3.2.14 Resumen de carrito
+3.2.16 Persistir el carrito
+
+
+
