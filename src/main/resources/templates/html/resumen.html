@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<th:block th:replace="~{fragments/cabecera}"></th:block>
+
+<form action="/registro/resumen" method="post" th:object="${usuarioPlantilla}">
+
+    <fieldset>
+        <legend>Datos de Usuario: </legend>
+        <th:text class="error">*</th:text>
+        <th:text class="pre">Usuario: </th:text>
+        <th:block th:name=*{nombre} th:text="*{nombre}"></th:block>
+        <div th:errors="*{nombre}" class="error"></div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Datos personales:</legend>
+
+        <th:text class="pre">Tratamiento : </th:text>
+        <th:block th:text="*{tratamiento_deseado}"></th:block>
+<!--        <div th:errors="*{tratamiento_deseado}" class="error"></div>-->
+        <br>
+        <th:text class="error">*</th:text>
+        <th:text class="pre">Apellido: </th:text>
+        <th:block th:text="*{apellido}"></th:block>
+        <div th:errors="*{apellido}" class="error"></div>
+        <br>
+        <th:text class="pre">Fecaha Nacimiento: </th:text>
+        <th:block th:text="*{fechaNacimiento}"></th:block>
+        <br>
+        <th:text class="pre">Edad: </th:text>
+        <th:block th:text="*{edad}"></th:block>
+        <br>
+        <th:text class="pre">Genero: </th:text>
+        <th:block th:text="*{genero}"></th:block>
+        <br>
+        <th:text class="pre">Pareja: </th:text>
+        <th:block th:text="*{casado_pareja}"></th:block>
+        <br>
+        <th:text class="pre">Hijos: </th:text>
+        <th:block th:text="*{hijos}"></th:block>
+        <br>
+        <th:text class="pre">Nacionalidades: </th:text>
+        <th:block th:text="*{nacionalidades}"></th:block>
+    </fieldset>
+
+    <fieldset>
+        <legend>Datos profesionales: </legend>
+
+        <th:text class="pre">Departamento: </th:text>
+        <th:block th:text="*{departamento}"></th:block>
+        <br>
+        <th:text class="error">*</th:text>
+        <th:text class="pre">Salario: </th:text>
+        <th:block th:text="*{salario}"></th:block>
+        <br>
+        <th:text class="pre">Comentarios: </th:text>
+        <th:block th:text="*{comentarios}"></th:block>
+    </fieldset>
+    <input type="submit" value="Confirmar y Guardar">
+</form>
+
+
+<form action="/registro/cerrar-sesion" method="post">
+    <input type="submit" value="Borrar sesión y voler al paso1">
+</form>
+<!--<form action="/registro/cerrar-sesion" method="post">-->
+<!--    <input type="submit" value="Confirmar y Guardar">-->
+<!--</form>-->
+
+</body>
+</html>

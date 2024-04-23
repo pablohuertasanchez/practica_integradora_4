@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<th:block th:replace="~{fragments/cabecera}"></th:block>
+<form action="/registro/datos-usuario" method="post" th:object="${usuarioPlantilla}">
+    <fieldset>
+        <legend>Datos de Usuario: </legend>
+
+        <label for="usuario" >Nombre: </label>
+        <input placeholder="pablo1234.." type="text" th:field="*{nombre}"/>
+        <div th:errors="*{usuario}" class="error"></div>
+        <br>
+
+        <!--CLAVE-->
+        <label for="clave">Clave: </label>
+        <input placeholder="escribe aquí la contraseña" type="text"  th:field="*{clave}">
+        <div th:errors="*{clave}" class="error"></div>
+        <br>
+        <!--CLAVE VERIFICAR-->
+        <label for="confirmarClave">Confirmar Clave: </label>
+        <input placeholder="vuelve a escribir la contraseña" type="text"  th:field="*{confirmarClave}">
+        <div th:errors="*{confirmarClave}" class="error"></div>
+        <div th:if="${#fields.hasErrors('global')}">
+            <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error"/>
+        <br>
+    </fieldset>
+    <input type="submit" value="Guardar infortmación y pasar al siguente paso">
+</form>
+<a th:href="@{/autenticar/login}">Ya tengo usuario</a>
+
+
+</body>
+</html>
