@@ -8,6 +8,7 @@ class PracticaIntegradoraG4ApplicationTests {
 
     @Test
     void contextLoads() {
+
     }
 
 }
