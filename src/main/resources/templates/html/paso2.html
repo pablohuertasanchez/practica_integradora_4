@@ -7,86 +7,29 @@
 </head>
 <body>
 <th:block th:replace="~{fragments/cabecera}"></th:block>
-<form action="/registro/datos-personales" method="post" th:object="${usuarioPlantilla}">
+<form action="/registro/datos-personales" method="post" th:object="${clientePlantilla}">
   <fieldset>
-    <legend>Datos personales:</legend>
+    <legend>Datos de contacto:</legend>
 
-    <label for="trato">Trato: </label>
-    <select id="trato" name="tratamiento_deseado">
+    <label for="prefijo">Prefijo: </label>
+    <select id="prefijo" name="tratamiento_deseado">
       <option th:each="p : ${listaPrefijos}"
               th:value="${p.key}"
-              th:text="${p.value}"
-              th:field="*{tratamiento_deseado}">
+              th:text="${p.value}">
+<!--              th:field="*{tratamiento_deseado}"-->
+
       </option>
     </select>
+
+    <label for="telefonoMovil" >Teléfono Móvil: </label>
+    <input placeholder="999 999 999.." type="text" th:field="*{telefonoMovil}"/>
+    <div th:errors="*{telefonoMovil}" class="error"></div>
     <br>
 
-    <label for="apellido" >Apellido: </label>
-    <input placeholder="pablo1234.." type="text" th:field="*{apellido}"/>
-    <div th:errors="*{apellido}" class="error"></div>
+    <label for="direccion" >Direccion: </label>
+    <input placeholder="C/sjdfjk, 5, 3d" type="text" th:field="*{direccion}"/>
+    <div th:errors="*{direccion}" class="error"></div>
     <br>
-
-    <!--FECHA DE NACIMIENTO-->
-    <label for="fechaNacimiento" th:text="#{etiquetaFechaNacimiento}">Fecha de Nacimiento:</label>
-    <input placeholder="YYYY-MM-DD" type="date" th:field="*{fechaNacimiento}"/>
-    <br>
-    <th:block th:each="error : ${#fields.errors('fechaNacimiento')}">
-      <div class="error" th:text="${error}" ></div>
-    </th:block>
-
-    <!--EDAD-->
-    <label for="edad" >Edad:</label>
-    <input placeholder="(0-99)" type="text" th:field="*{edad}"/>
-    <br>
-    <div th:errors="*{edad}" class="error"></div>
-
-    <!--GENERO (RADIO)-->
-    <label>Género:</label><br>
-    <th:block th:each="g : ${listaGeneros}">
-      <input type="radio" name="residencia" th:id="${g.getKey()}"
-             th:value="${g.getKey()}"
-             th:field="*{genero}">
-      <label th:for="${g.getKey()}"
-             th:text="${g.getValue()}"></label>
-    </th:block>
-    <div th:errors="*{genero}" class="error"></div>
-    <br>
-
-    <label for="pareja" >Casado/Pareja: </label>
-    <input type="checkbox" value="true" id="pareja" th:field="*{casado_pareja}"/>
-    <div th:errors="*{casado_pareja}" class="error"></div>
-    <br>
-
-    <label for="hijos" >Hijos: </label>
-    <input type="checkbox" value="true" id="hijos" th:field="*{hijos}"/>
-    <div th:errors="*{hijos}" class="error"></div>
-    <br>
-
-    <label for="nacionalidades">Nacionalidades: </label>
-    <select id="nacionalidades" name="nacionalidades" multiple size="3">
-      <option th:each="p : ${listaNacinalidades}"
-              th:value="${p.key}"
-              th:text="${p.value}"
-              th:field="*{nacionalidades}">
-      </option>
-    </select>
-    <br>
-
-
-
-
-
-<!--    &lt;!&ndash;PAIS SELECCIONADO&ndash;&gt;-->
-<!--    <label for="paisSeleccionado" th:text="#{etiquetaNacionalidad}"></label>-->
-<!--    <select name="paisSeleccionado" id="paisSeleccionado">-->
-<!--      <option th:each="p : ${listPaises}"-->
-<!--              th:value="${p.getKey()}"-->
-<!--              th:text="${p.getValue().nombre}"-->
-<!--              th:field="*{paisSeleccionado}">-->
-<!--      </option>-->
-<!--    </select>-->
-<!--    <br>-->
-<!--    <div th:errors="*{paisSeleccionado}" class="error"></div>-->
   </fieldset>
   <input type="submit" value="Guardar infortmación y pasar al siguente paso">
 

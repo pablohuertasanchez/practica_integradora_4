@@ -16,18 +16,21 @@ import java.util.Set;
 
 
 public class Cliente {
-
-
-    private Usuario usuario;
+    //DATOS PERSONALES
     private String genero;
     private LocalDate fechaNacimiento;
     private Pais pais;
     private String tipoDocumentoCliente;
     private String documento;
-    private String telefonoMovil;
     private String nombre;
     private String apellidos;
+
+    //DATOS DE CONTACTO
     private Direccion direccion;
+    private String telefonoMovil;
+
+    //DATOS DE CLIENTE
+    private Usuario usuario;
     private Set<Direccion> direccionesEntrega;
     private Set<TarjetaCredito> tarjetasCredito;
     private BigDecimal gastoAcumuladoCliente;

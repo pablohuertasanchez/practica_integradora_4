@@ -16,4 +16,5 @@ public class Usuario {
     private LocalDate fechaUltimaConexion;
     private Integer numeroAccesos;
     private Auditoria auditoria;
+
 }
