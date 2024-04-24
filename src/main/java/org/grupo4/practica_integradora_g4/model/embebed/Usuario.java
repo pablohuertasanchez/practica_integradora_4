@@ -1,4 +1,4 @@
-package org.grupo4.practica_integradora_g4.model;
+package org.grupo4.practica_integradora_g4.model.embebed;
 
 import lombok.*;
 

@@ -1,7 +1,6 @@
 package org.grupo4.practica_integradora_g4.extras;
 
-import org.grupo4.practica_integradora_g4.model.Cliente;
-import org.grupo4.practica_integradora_g4.model.Usuario;
+import org.grupo4.practica_integradora_g4.model.embebed.Usuario;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;

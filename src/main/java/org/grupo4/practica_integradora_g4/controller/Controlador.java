@@ -2,8 +2,7 @@ package org.grupo4.practica_integradora_g4.controller;
 
 import jakarta.servlet.http.HttpSession;
 import org.grupo4.practica_integradora_g4.extras.Colecciones;
-import org.grupo4.practica_integradora_g4.model.Cliente;
-import org.grupo4.practica_integradora_g4.model.Usuario;
+import org.grupo4.practica_integradora_g4.model.entidades.Cliente;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,8 +34,6 @@ public class Controlador {
     @ModelAttribute("listaTiposDocumento")
     private Map<String, String> getTipoDocumento(){return Colecciones.getTipoDocumento();}
 
-    //En algún momento pondría todo esto en MongoDB, y en lugar del get,
-    //accedería a la base de datos y optener los objetos
 
     //PASO 1
     @GetMapping("paso1")
@@ -60,7 +57,7 @@ public class Controlador {
             HttpSession sesion
     ){
         if (posiblesErrores.hasErrors()) {
-            System.out.println("holaa");
+            System.out.println(posiblesErrores.getAllErrors());
             return "html/paso1";
         }
         else {

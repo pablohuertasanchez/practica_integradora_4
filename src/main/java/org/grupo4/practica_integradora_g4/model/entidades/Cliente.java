@@ -1,11 +1,11 @@
-package org.grupo4.practica_integradora_g4.model;
+package org.grupo4.practica_integradora_g4.model.entidades;
 
 
 import lombok.*;
+import org.grupo4.practica_integradora_g4.model.embebed.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 @Getter
