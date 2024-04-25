@@ -28,7 +28,7 @@
         <br>
 
         <label for="pais">Pais: </label>
-        <select id="pais" name="pais" size="3">
+        <select id="pais" name="pais">
             <option th:each="p : ${listaPaises}"
                     th:value="${p.key}"
                     th:text="${p.value}"

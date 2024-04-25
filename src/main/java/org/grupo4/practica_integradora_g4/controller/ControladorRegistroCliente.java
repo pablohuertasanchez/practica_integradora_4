@@ -56,7 +56,7 @@ public class ControladorRegistroCliente {
     }
     @PostMapping("paso1")
     private String paso1Post(
-            @Validated//({DatosPersonales.class})
+            @Validated({DatosPersonales.class})
             @ModelAttribute("clientePlantilla")Cliente cliente,
             BindingResult posiblesErrores,
             HttpSession sesion
@@ -86,7 +86,7 @@ public class ControladorRegistroCliente {
     }
     @PostMapping("paso2")
     private String paso2Post(
-            @Validated//({DatosContacto.class})
+            @Validated({DatosContacto.class})
             @ModelAttribute("clientePlantilla")Cliente cliente,
             BindingResult posiblesErrores,
             HttpSession sesion
@@ -116,7 +116,7 @@ public class ControladorRegistroCliente {
 
     @PostMapping("paso3")
     private String paso3Post(
-            @Validated//({DatosUsuario.class})
+            @Validated({DatosUsuario.class})
             @ModelAttribute("clientePlantilla")Cliente cliente,
             BindingResult posiblesErrores,
             HttpSession sesion
@@ -141,18 +141,26 @@ public class ControladorRegistroCliente {
         int comprobador=0;
         if (sesion.getAttribute("datos_personales")!=null) {
             Cliente datos_personales = (Cliente) sesion.getAttribute("datos_personales");
+            cliente.setGenero(datos_personales.getGenero());
+            cliente.setFechaNacimiento(datos_personales.getFechaNacimiento());
+            cliente.setPais(datos_personales.getPais());
+            cliente.setTipoDocumentoCliente(datos_personales.getTipoDocumentoCliente());
+            cliente.setDocumento(datos_personales.getDocumento());
             cliente.setNombre(datos_personales.getNombre());
-
+            cliente.setApellidos(datos_personales.getApellidos());
             comprobador++;
         }
         if (sesion.getAttribute("datos_contacto")!=null) {
             Cliente datos_contacto = (Cliente) sesion.getAttribute("datos_contacto");
+            cliente.setDireccion(datos_contacto.getDireccion());
             cliente.setTelefonoMovil(datos_contacto.getTelefonoMovil());
             comprobador++;
         }
         if (sesion.getAttribute("datos_usuario")!=null) {
             Cliente datos_usuario = (Cliente) sesion.getAttribute("datos_usuario");
+            cliente.setUsuario(datos_usuario.getUsuario());
             cliente.setComentarios(datos_usuario.getComentarios());
+            cliente.setLicencia(datos_usuario.isLicencia());
             comprobador++;
         }
         model.addAttribute("clientePlantilla", cliente);
@@ -180,6 +188,13 @@ public class ControladorRegistroCliente {
         else {
             return "html/resumen";
         }
+    }
+
+    @PostMapping("cerrar-sesion")
+    private String cerrarSesion(HttpSession sesion){
+        registroCompleto=false;
+        sesion.invalidate();
+        return "redirect:/grupo4/paso1";
     }
 
 }

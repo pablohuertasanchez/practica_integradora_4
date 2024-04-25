@@ -1,6 +1,7 @@
 package org.grupo4.practica_integradora_g4.model.entidades;
 
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.grupo4.practica_integradora_g4.model.embebed.*;
 import org.grupo4.practica_integradora_g4.model.extra.DatosContacto;
@@ -25,23 +26,24 @@ public class Cliente {
     private String pais;
     private String tipoDocumentoCliente;
     private String documento;
-//    @NotBlank ( groups = DatosPersonales.class)
+    @NotBlank( groups = DatosPersonales.class)
     private String nombre;
     private String apellidos;
 
     //DATOS DE CONTACTO
-    private Direccion direccion;
-//    @NotBlank ( groups = DatosContacto.class)
+    private String direccion;
+    @NotBlank ( groups = DatosContacto.class)
     private String telefonoMovil;
 
     //DATOS DE CLIENTE
-//    @NotBlank ( groups = DatosUsuario.class)
-    private Usuario usuario;
+
+    private String usuario;
     private Set<Direccion> direccionesEntrega;
     private Set<TarjetaCredito> tarjetasCredito;
     private BigDecimal gastoAcumuladoCliente;
     private String tipoCliente;
     private Set<Categoria> categoriasInteres;
+    @NotBlank ( groups = DatosUsuario.class)
     private String comentarios;
     private boolean licencia;
     private Auditoria auditoria;
