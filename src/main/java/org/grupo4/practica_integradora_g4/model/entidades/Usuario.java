@@ -1,6 +1,7 @@
-package org.grupo4.practica_integradora_g4.model.embebed;
+package org.grupo4.practica_integradora_g4.model.entidades;
 
 import lombok.*;
+import org.grupo4.practica_integradora_g4.model.embebed.Auditoria;
 
 import java.time.LocalDate;
 

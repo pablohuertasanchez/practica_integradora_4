@@ -74,6 +74,22 @@ public class Controlador {
         model.addAttribute("clientePlantilla", cliente);
         return "html/paso2";
     }
+    @PostMapping("paso2")
+    private String paso2Post(
+            @Validated
+            @ModelAttribute("clientePlantilla")Cliente cliente,
+            BindingResult posiblesErrores,
+            HttpSession sesion
+    ){
+        if (posiblesErrores.hasErrors()) {
+            System.out.println(posiblesErrores.getAllErrors());
+            return "html/paso2";
+        }
+        else {
+            sesion.setAttribute("datos_contacto", cliente);
+            return "redirect:/grupo4/paso3";
+        }
+    }
 
     //PASO 3
     @GetMapping("paso3")
