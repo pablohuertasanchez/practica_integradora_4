@@ -13,13 +13,20 @@ public class ControladorLoginUsuario {
     @GetMapping("/loginUsuario")
     public String log1(@ModelAttribute("usuario")Usuario u,
                        Model modelo){
-        return "loginUsuario";
+        return "loginUsuario.html";
     }
 
     @PostMapping("/loginUsuario-post")
     public String log1P(@ModelAttribute("usario") Usuario u,
                         Model modelo){
         return "redirect:/registro";
+    }
+
+    @GetMapping("/registroUsuario")
+    public String reg1(@ModelAttribute("usuario")Usuario u,
+                       Model modelo){
+
+        return "registroUsuario.html";
     }
 
 }

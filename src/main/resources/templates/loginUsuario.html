@@ -8,10 +8,16 @@
     <div class="login-container">
         <h2>Inicio de Sesión</h2>
         <form th:action="@{//loginUsuario-post}" method="post" th:object="${usuario}">
-            <label for="email">Email::</label>
+            <label for="email">Email:</label>
                 <input type="text" th:field="*{email}">
 
             <h3>Usuarios ya registrados</h3>
+                <select>
+
+                </select>
+                <input type="submit" value="Iniciar Sesión">
+
+            <p>No tienes un Usuario? <a href="/registroUsuario">Regístrate aquí</a></p>
         </form>
 
     </div>
