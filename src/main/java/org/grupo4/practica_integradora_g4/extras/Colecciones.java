@@ -1,5 +1,6 @@
 package org.grupo4.practica_integradora_g4.extras;
 
+import org.grupo4.practica_integradora_g4.model.entidades.Cliente;
 import org.grupo4.practica_integradora_g4.model.entidades.Usuario;
 
 import java.util.HashMap;
@@ -13,6 +14,7 @@ public class Colecciones {
     private final static Map<String, String> DEPARTAMENTOS = new LinkedHashMap<String,String>();
     private final static Map<String, Usuario> USUARIOS = new HashMap<String,Usuario>();
     private final static Map<String, String> TIPO_DOCUMENTO = new HashMap<String,String>();
+    private final static Map<String, Cliente> CLIENTES = new HashMap<String,Cliente>();
 
 
 
@@ -59,4 +61,8 @@ public class Colecciones {
 //    public static void addUsuario(Usuario u){
 //        USUARIOS.put(u.getNombre(),u);
 //    }
+
+    public static void addCliente(Cliente cliente){
+        CLIENTES.put(cliente.getNombre(),cliente);
+    }
 }

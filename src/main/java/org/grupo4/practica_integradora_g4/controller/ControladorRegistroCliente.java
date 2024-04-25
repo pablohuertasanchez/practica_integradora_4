@@ -3,6 +3,9 @@ package org.grupo4.practica_integradora_g4.controller;
 import jakarta.servlet.http.HttpSession;
 import org.grupo4.practica_integradora_g4.extras.Colecciones;
 import org.grupo4.practica_integradora_g4.model.entidades.Cliente;
+import org.grupo4.practica_integradora_g4.model.extra.DatosContacto;
+import org.grupo4.practica_integradora_g4.model.extra.DatosPersonales;
+import org.grupo4.practica_integradora_g4.model.extra.DatosUsuario;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,6 +37,8 @@ public class ControladorRegistroCliente {
     @ModelAttribute("listaTiposDocumento")
     private Map<String, String> getTipoDocumento(){return Colecciones.getTipoDocumento();}
 
+    private boolean registroCompleto;
+
 
     //PASO 1
     @GetMapping("paso1")
@@ -51,7 +56,7 @@ public class ControladorRegistroCliente {
     }
     @PostMapping("paso1")
     private String paso1Post(
-            @Validated
+            @Validated//({DatosPersonales.class})
             @ModelAttribute("clientePlantilla")Cliente cliente,
             BindingResult posiblesErrores,
             HttpSession sesion
@@ -69,14 +74,19 @@ public class ControladorRegistroCliente {
     //PASO 2
     @GetMapping("paso2")
     private String paso2Get(Cliente cliente,
-                               Model model
+                               Model model,
+                                HttpSession sesion
     ){
-        model.addAttribute("clientePlantilla", cliente);
+        if (sesion.getAttribute("datos_contacto")!=null){
+            cliente=(Cliente) sesion.getAttribute("datos_contacto");
+            model.addAttribute("clientePlantilla", cliente);
+        }else model.addAttribute("clientePlantilla",cliente);
+
         return "html/paso2";
     }
     @PostMapping("paso2")
     private String paso2Post(
-            @Validated
+            @Validated//({DatosContacto.class})
             @ModelAttribute("clientePlantilla")Cliente cliente,
             BindingResult posiblesErrores,
             HttpSession sesion
@@ -94,17 +104,82 @@ public class ControladorRegistroCliente {
     //PASO 3
     @GetMapping("paso3")
     private String paso3Get(Cliente cliente,
-                            Model model
+                            Model model,
+                            HttpSession sesion
     ){
-        model.addAttribute("clientePlantilla", cliente);
+        if (sesion.getAttribute("datos_usuario")!=null){
+            cliente=(Cliente) sesion.getAttribute("datos_usuario");
+            model.addAttribute("clientePlantilla", cliente);
+        }else model.addAttribute("clientePlantilla",cliente);
         return "html/paso3";
     }
+
+    @PostMapping("paso3")
+    private String paso3Post(
+            @Validated//({DatosUsuario.class})
+            @ModelAttribute("clientePlantilla")Cliente cliente,
+            BindingResult posiblesErrores,
+            HttpSession sesion
+    ){
+        if (posiblesErrores.hasErrors()) {
+            System.out.println(posiblesErrores.getAllErrors());
+            return "html/paso3";
+        }
+        else {
+            sesion.setAttribute("datos_usuario", cliente);
+            return "redirect:/grupo4/resumen";
+        }
+    }
+
+
+
     @GetMapping("resumen")
     private String resumenGet(Cliente cliente,
-                              Model model
+                              Model model,
+                              HttpSession sesion
     ){
+        int comprobador=0;
+        if (sesion.getAttribute("datos_personales")!=null) {
+            Cliente datos_personales = (Cliente) sesion.getAttribute("datos_personales");
+            cliente.setNombre(datos_personales.getNombre());
+
+            comprobador++;
+        }
+        if (sesion.getAttribute("datos_contacto")!=null) {
+            Cliente datos_contacto = (Cliente) sesion.getAttribute("datos_contacto");
+            cliente.setTelefonoMovil(datos_contacto.getTelefonoMovil());
+            comprobador++;
+        }
+        if (sesion.getAttribute("datos_usuario")!=null) {
+            Cliente datos_usuario = (Cliente) sesion.getAttribute("datos_usuario");
+            cliente.setComentarios(datos_usuario.getComentarios());
+            comprobador++;
+        }
         model.addAttribute("clientePlantilla", cliente);
+        sesion.setAttribute("clienteFinal",cliente);
+        if (comprobador==3){
+            registroCompleto=true;
+        }
         return "html/resumen";
+    }
+
+    @PostMapping("resumen")
+    private String resumen(
+            Model model,
+            HttpSession sesion
+    ){
+        Cliente cliente = (Cliente) sesion.getAttribute("clienteFinal");
+        model.addAttribute("clientePlantilla", cliente);
+
+        if (registroCompleto) {
+            registroCompleto=false;
+            Colecciones.addCliente(cliente);
+            sesion.invalidate();
+            return "redirect:/grupo4/paso1";
+        }
+        else {
+            return "html/resumen";
+        }
     }
 
 }
