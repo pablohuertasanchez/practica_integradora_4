@@ -17,7 +17,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value = "grupo4")
-public class Controlador {
+public class ControladorRegistroCliente {
 
     @ModelAttribute("listaGeneros")
     private Map<String, String> getGeneros(){return Colecciones.getGeneros();}
