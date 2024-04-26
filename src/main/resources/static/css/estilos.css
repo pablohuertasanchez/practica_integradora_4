@@ -1,0 +1,10 @@
+body{
+    background-color: bisque;
+}
+.error{
+    font-style: italic;
+    color: darkred;
+}
+.pre{
+    font-weight: bold;
+}

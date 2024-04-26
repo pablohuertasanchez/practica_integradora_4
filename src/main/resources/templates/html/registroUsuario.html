@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Registro</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
 </head>
 <body>
 
@@ -13,12 +14,18 @@
             <legend>Datos de Usuario</legend>
                 <label for="email">Email:</label>
                     <input type="text" th:field="*{email}">
+                        <div class="error" th:errors="*{email}"></div>
             <br>
                 <label for="clave">Clave:</label>
                     <input type="password" th:field="*{clave}">
+                        <div class="error" th:errors="*{clave}"></div>
             <br>
                 <label for="confirmarClave">Confirmar Clave:</label>
                     <input type="password" th:field="*{confirmarClave}">
+                        <div class="error" th:errors="*{confirmarClave}"></div>
+                        <div th:if="${#fields.hasErrors('global')}">
+                        <p th:each="error : ${#fields.errors('global')}" th:text="${error}" class="error"/>
+                        </div>
             <br>
                 <input type="submit" value="Guardar Usuario">
                 <input type="reset" value="Resetear">

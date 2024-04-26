@@ -11,8 +11,8 @@ public class ValidadorNombreEmail implements ConstraintValidator <ComprobarNombr
     }
     //Metodo para comprobar si el email ya existe
     public boolean emailYaRegistrado(String email) {
-        for(String n : Colecciones.obtenerEmailUsuarios()) {
-            if(n.equals(email)) {
+        for(String e : Colecciones.obtenerEmailUsuarios()) {
+            if(e.equals(email)) {
                 return true;
             }
         }
