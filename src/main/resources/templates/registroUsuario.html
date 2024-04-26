@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+</head>
+<body>
+
+    <h3>Registro de Usuario</h3>
+<br>
+    <form th:action="@{/registroUsuario-post}" method="post" th:object="${usuario}">
+        <fieldset>
+            <legend>Datos de Usuario</legend>
+                <label for="email">Email:</label>
+                    <input type="text" th:field="*{email}">
+                        <div class="error" th:errors="*{email}"></div>
+            <br>
+                <label for="clave">Clave:</label>
+                    <input type="password" th:field="*{clave}">
+            <br>
+                <label for="confirmarClave">Confirmar Clave:</label>
+                    <input type="password" th:field="*{confirmarClave}">
+            <br>
+                <input type="submit" value="Guardar Usuario">
+                <input type="reset" value="Resetear">
+                <input type="button" value="Mostrar Contraseñas" onclick="
+                    let claveInput = document.getElementById('clave');
+                    let confirmarClaveInput = document.getElementById('confirmarClave');
+                    if (claveInput.type === 'password') {
+                        claveInput.type = 'text';
+                        confirmarClaveInput.type = 'text';
+                    } else {
+                        claveInput.type = 'password';
+                        confirmarClaveInput.type = 'password';
+                }">
+        </fieldset>
+    </form>
+</body>
+</html>
