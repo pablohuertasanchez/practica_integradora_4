@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<th:block th:replace="~{fragments/cabecera}"></th:block>
+<form action="/grupo4/paso3" method="post" th:object="${clientePlantilla}">
+    <fieldset>
+        <legend>Datos de cliente: </legend>
+
+        <!--TEXTAREA-->
+        <label for="comentarios">Comentarios: </label><br>
+        <textarea name="comentarios"  cols="20" rows="2"
+                  th:field="*{comentarios}">
+        </textarea>
+        <br>
+        <label for="licencia" >Licencia: </label>
+        <input type="checkbox" value="true" id="licencia" th:field="*{licencia}"/>
+        <div th:errors="*{licencia}" class="error"></div>
+        <br>
+    </fieldset>
+    <input type="submit" value="Guardar infortmación y pasar al siguente paso">
+</form>
+
+</body>
+</html>
