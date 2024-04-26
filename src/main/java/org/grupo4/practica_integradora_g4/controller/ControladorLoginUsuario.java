@@ -29,4 +29,10 @@ public class ControladorLoginUsuario {
         return "registroUsuario.html";
     }
 
+    @PostMapping("/registroUsuario-post")
+    public String reg1P(@ModelAttribute("usuario")Usuario u,
+                        Model modelo){
+        return "redirect:/loginUsuario";
+    }
+
 }
