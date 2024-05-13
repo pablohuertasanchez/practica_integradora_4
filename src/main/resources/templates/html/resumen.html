@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<th:block th:replace="~{fragments/cabecera}"></th:block>
+
+<form action="/grupo4/resumen" method="post" th:object="${clientePlantilla}">
+
+    <fieldset>
+        <legend>Datos Personales: </legend>
+        <th:text class="pre">Genero: </th:text>
+        <th:block th:text="*{genero}"></th:block>
+        <br>
+        <th:text class="pre">Fecha Nacimiento: </th:text>
+        <th:block th:text="*{fechaNacimiento}"></th:block>
+        <br>
+        <th:text class="pre">pais: </th:text>
+        <th:block th:text="*{pais}"></th:block>
+        <br>
+        <th:text class="pre">tipoDocumentoCliente: </th:text>
+        <th:block th:text="*{tipoDocumentoCliente}"></th:block>
+        <br>
+        <th:text class="pre">documento: </th:text>
+        <th:block th:text="*{documento}"></th:block>
+        <br>
+        <th:text class="pre">nombre: </th:text>
+        <th:block th:text="*{nombre}"></th:block>
+        <br>
+        <th:text class="pre">apellidos: </th:text>
+        <th:block th:text="*{apellidos}"></th:block>
+        <br>
+    </fieldset>
+
+    <fieldset>
+        <legend>Datos de contacto:</legend>
+
+        <th:text class="pre">direccion: </th:text>
+        <th:block th:text="*{direccion}"></th:block>
+        <br>
+        <th:text class="pre">telefonoMovil: </th:text>
+        <th:block th:text="*{telefonoMovil}"></th:block>
+        <br>
+    </fieldset>
+
+    <fieldset>
+        <legend>Datos de usuario: </legend>
+
+        <th:text class="pre">usuario: </th:text>
+        <th:block th:text="*{usuario}"></th:block>
+        <br>
+        <th:text class="pre">direccionesEntrega: </th:text>
+        <th:block th:text="*{direccionesEntrega}"></th:block>
+        <br>
+        <th:text class="pre">tarjetasCredito: </th:text>
+        <th:block th:text="*{tarjetasCredito}"></th:block>
+        <br>
+        <th:text class="pre">gastoAcumuladoCliente: </th:text>
+        <th:block th:text="*{gastoAcumuladoCliente}"></th:block>
+        <br>
+        <th:text class="pre">tipoCliente: </th:text>
+        <th:block th:text="*{tipoCliente}"></th:block>
+        <br>
+        <th:text class="pre">categoriasInteres: </th:text>
+        <th:block th:text="*{categoriasInteres}"></th:block>
+        <br>
+        <th:text class="pre">comentarios: </th:text>
+        <th:block th:text="*{comentarios}"></th:block>
+        <br>
+        <th:text class="pre">licencia: </th:text>
+        <th:block th:text="*{licencia}"></th:block>
+        <br>
+        <th:text class="pre">auditoria: </th:text>
+        <th:block th:text="*{auditoria}"></th:block>
+        <br>
+    </fieldset>
+    <input type="submit" value="Confirmar y Guardar">
+</form>
+
+<form action="/grupo4/cerrar-sesion" method="post">
+    <input type="submit" value="Borrar sesión y voler al paso1">
+</form>
+</body>
+</html>
