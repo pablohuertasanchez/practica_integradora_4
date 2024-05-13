@@ -1,15 +1,17 @@
 package org.grupo4.practica_integradora_g4.model.embedded;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.Embeddable;
+import lombok.*;
+
+import java.io.Serializable;
 
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Getter
 @Setter
-public class Pais {
+@Embeddable
+@Data
+public class Pais implements Serializable {
     private String siglas;
     private String nombre;
 }

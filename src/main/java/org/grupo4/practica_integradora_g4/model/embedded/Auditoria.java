@@ -1,6 +1,8 @@
 package org.grupo4.practica_integradora_g4.model.embedded;
 
+import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,5 +10,7 @@ import lombok.Setter;
 //@RequiredArgsConstructor
 @Getter
 @Setter
+@Embeddable
+@Data
 public class Auditoria {
 }
