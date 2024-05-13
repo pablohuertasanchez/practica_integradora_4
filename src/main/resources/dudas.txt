@@ -12,6 +12,17 @@ las bases de datos?, los usuarios, empleados.. mysql? y productos mongodb?
 
 3.1.11 Cómo que productos seleccionados??
 
+le ponemos en el jdbc la ip del wsl donde tenemos el contenedor mapeado de mysql
+ systemctl status docker
+ docker ps
+ docker run --name contiene_mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -d mysql
+ docker exec -it contiene_mysql /bin/bash
+ admin
+ show databases;
+ use practica4;
+ show tables;
+
+
 
 
 

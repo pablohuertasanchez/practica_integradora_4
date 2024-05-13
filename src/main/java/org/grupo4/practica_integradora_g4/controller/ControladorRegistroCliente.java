@@ -158,9 +158,9 @@ public class ControladorRegistroCliente {
         }
         if (sesion.getAttribute("datos_usuario")!=null) {
             Cliente datos_usuario = (Cliente) sesion.getAttribute("datos_usuario");
-         //   cliente.setUsuario(datos_usuario.getUsuario());
+            //cliente.setUsuario(datos_usuario.getUsuario());
             cliente.setComentarios(datos_usuario.getComentarios());
-         //   cliente.setLicencia(datos_usuario.isLicencia());
+            //cliente.setLicencia(datos_usuario.isLicencia());
             comprobador++;
         }
         model.addAttribute("clientePlantilla", cliente);
