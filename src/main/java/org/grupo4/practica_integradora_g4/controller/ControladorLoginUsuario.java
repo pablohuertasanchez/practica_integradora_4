@@ -27,8 +27,27 @@ public class ControladorLoginUsuario {
 
     @PostMapping("/loginUsuario-post")
     public String log1P(@ModelAttribute("usuario") Usuario u,
-                        Model modelo){
-        return "redirect:/registro";
+                        Model modelo, HttpSession sesion){
+        List<String> emailUsu = Colecciones.obtenerEmailUsuarios();
+        modelo.addAttribute("emailUsuarios",emailUsu);
+        List <Usuario> listaUsuarios = Colecciones.devuelveUsu();
+        Usuario usuarioAut = null;
+        for (Usuario usu : listaUsuarios){
+            if (usu.getEmail().equals(u.getEmail())){
+                usuarioAut = usu;
+            }
+        }
+        System.out.println(u.toString());
+        if (usuarioAut != null) {
+            sesion.setAttribute("usuarioAut", usuarioAut);
+
+            return "redirect:/loginUsuario2";
+        }else {
+            modelo.addAttribute("error", "Usuario no existente");
+            return "html/loginUsuario.html";
+        }
+
+
     }
 
     @GetMapping("/registroUsuario")
@@ -68,5 +87,32 @@ public class ControladorLoginUsuario {
 
 
     }
+
+    @GetMapping("/loginUsuario2")
+    public String aut2(@ModelAttribute("usuario") Usuario u,
+                       Model modelo){
+
+        return "html/loginUsuario2.html";
+    }
+
+    @PostMapping("/loginUsuario2-post")
+    public String aut2P(@ModelAttribute("usuario") Usuario u,
+                        Model modelo, HttpSession sesion) {
+        Usuario usuAut = (Usuario) sesion.getAttribute("usuarioAut");
+        if (usuAut != null) {
+            if (usuAut.getClave().equals(u.getClave())) {
+                return "redirect:/grupo4/paso1";
+            } else {
+                modelo.addAttribute("error", "Clave incorrecta");
+                return "html/loginUsuario2";
+            }
+        } else {
+            modelo.addAttribute("error", "No se ha iniciado sesión");
+            return "html/loginUsuario2";
+        }
+    }
+
+
+
 
 }

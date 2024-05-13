@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Password</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <h3>Estás a punto de iniciar tu sesión, introduce tu clave</h3>
+    <br>
+    <form th:action="@{/loginUsuario2-post}" method="post" th:object="${usuario}">
+        <label for="clave">Clave: </label>
+            <input type="password" th:field="*{clave}">
+            <p th:if="${error}" style="color:red" th:text="${error}"></p>
+    <br>
+            <input type="submit" value="Iniciar Sesión">
+</form>
+</body>
+</html>

@@ -1,5 +1,5 @@
-document.addEventListener('DOMContentLoaded', function() {
-    console.log("js enlazado");
+
+
     let selectElement = document.getElementById("registeredUsers");
     let emailInputElement = document.getElementById("email");
 
@@ -7,4 +7,3 @@ document.addEventListener('DOMContentLoaded', function() {
         let selectedEmail = selectElement.value;
         emailInputElement.value = selectedEmail;
     });
-});

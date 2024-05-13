@@ -8,13 +8,14 @@
 <body>
     <div class="login-container">
         <h2>Inicio de Sesión</h2>
-        <form th:action="@{//loginUsuario-post}" method="post" th:object="${usuario}">
+        <form th:action="@{/loginUsuario-post}" method="post" th:object="${usuario}">
             <label for="email">Email:</label>
                 <input type="text" th:field="*{email}">
+            <p th:if="${error}" class="error" th:text="${error}"></p>
                 <input type="submit" value="Iniciar Sesión">
 
             <h3>Usuarios ya registrados</h3>
-                <select  id="registeredUsers"  th:field="*{email}">
+                <select  id="registeredUsers">
                     <option value="">Selecciona un usuario</option>
                     <option th:each="emailUsu : ${emailUsuarios}" th:text="${emailUsu}" th:value="${emailUsu}"></option>
                 </select>

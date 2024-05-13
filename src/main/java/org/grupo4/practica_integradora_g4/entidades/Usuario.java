@@ -10,12 +10,12 @@ import org.springframework.validation.annotation.Validated;
 import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 
+@Data
 @Getter
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
 @ToString
-@Data
 @Validated
 @ComprobarClaves
 public class Usuario {
