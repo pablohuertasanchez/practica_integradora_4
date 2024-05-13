@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build": "vue-cli-service build && cp -R dist/* ../src/main/resources/static/tienda_vue/",
+    "lint": "vue-cli-service lint",
+    "start": "npm run serve",
+    "start-all": "npm run start && cd .. && ./mvnw spring-boot:run"
   },
   "dependencies": {
     "core-js": "^3.8.3",

@@ -1,18 +1,36 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
   <HelloWorld msg="Welcome to Your Vue.js App"/>
-  <movie-list></movie-list>
+  <router-link to="/tienda/loginUsuario"><button>Ir a login de usuario</button></router-link>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-import MovieList from './components/MovieList.vue';
+import axios from 'axios'
 export default {
   name: 'App',
   components: {
     HelloWorld,
-    MovieList
+  },
+  data(){
+    return {
+      message: ''
+    };
+  },
+  created() {
+    this.fetchData();
+  },
+  methods: {
+    fetchData() {
+      axios.get('/api/data').then(response => {
+        this.message = response.data;
+      })
+          .catch(error => {
+            console.error(error);
+          });
+    }
   }
+
 }
 </script>
 
