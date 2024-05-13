@@ -3,18 +3,19 @@ package org.grupo4.practica_integradora_g4.extras;
 import org.grupo4.practica_integradora_g4.model.entidades.Cliente;
 import org.grupo4.practica_integradora_g4.model.entidades.Usuario;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Colecciones {
     private final static Map<String, String> GENEROS = new HashMap<String, String>();
     private final static Map<String, String> PREFIJOS = new LinkedHashMap<String, String>();
     private final static Map<String, String> NACIONALIDADES = new HashMap<String, String>();
     private final static Map<String, String> DEPARTAMENTOS = new LinkedHashMap<String,String>();
-    private final static Map<String, Usuario> USUARIOS = new HashMap<String,Usuario>();
+    //private final static Map<String, Usuario> USUARIOS = new HashMap<String,Usuario>();
     private final static Map<String, String> TIPO_DOCUMENTO = new HashMap<String,String>();
     private final static Map<String, Cliente> CLIENTES = new HashMap<String,Cliente>();
+
+    private static final List<Usuario> USUARIOS = new ArrayList<>();
+
 
 
 
@@ -55,8 +56,23 @@ public class Colecciones {
     public static Map<String, String> getGPrefijos(){ return PREFIJOS; }
     public static Map<String, String> getNacionalidades(){ return NACIONALIDADES; }
     public static Map<String, String> getDepartamentos(){ return DEPARTAMENTOS; }
-    public static Map<String, Usuario> getUsuarios(){ return USUARIOS; }
+    //public static Map<String, Usuario> getUsuarios(){ return USUARIOS; }
     public static Map<String, String> getTipoDocumento(){ return TIPO_DOCUMENTO; }
+
+    public static List<Usuario> devuelveUsu() {
+        return USUARIOS;
+    }
+
+    public static void agregarUsuario(Usuario usuario) {
+        USUARIOS.add(usuario);
+    }
+    public static List<String> obtenerEmailUsuarios() {
+        List<String> emailUsuarios = new ArrayList<>();
+        for (Usuario usuario : USUARIOS) {
+            emailUsuarios.add(usuario.getEmail());
+        }
+        return emailUsuarios;
+    }
 
 //    public static void addUsuario(Usuario u){
 //        USUARIOS.put(u.getNombre(),u);

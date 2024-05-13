@@ -27,6 +27,14 @@
                         <p th:each="error : ${#fields.errors('global')}" th:text="${error}" class="error"/>
                         </div>
             <br>
+                <label for="pregRec">Pregunta de Recuperacion:</label>
+                    <textarea th:field="*{pregRec}" cols="20" rows="2"></textarea>
+                        <div class="error" th:errors="*{pregRec}"></div>
+            <br>
+                <label for="respRec">Respuesta de Recuperacion:</label>
+                    <textarea th:field="*{respRec}" cols="20" rows="2"></textarea>
+                        <div class="error" th:errors="*{respRec}"></div>
+            <br>
                 <input type="submit" value="Guardar Usuario">
                 <input type="reset" value="Resetear">
                 <input type="button" value="Mostrar Contraseñas" onclick="
