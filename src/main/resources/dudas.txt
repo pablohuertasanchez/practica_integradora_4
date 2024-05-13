@@ -13,3 +13,5 @@ las bases de datos?, los usuarios, empleados.. mysql? y productos mongodb?
 3.1.11 Cómo que productos seleccionados??
 
 
+
+

@@ -91,7 +91,7 @@ public class ControladorLoginUsuario {
     @GetMapping("/loginUsuario2")
     public String aut2(@ModelAttribute("usuario") Usuario u,
                        Model modelo){
-
+        //prueba
         return "html/loginUsuario2.html";
     }
 
