@@ -1,5 +1,7 @@
+/*
 package org.grupo4.practica_integradora_g4.config;
 
+import org.grupo4.practica_integradora_g4.config.filter.CorsFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,4 +29,6 @@ public class WebConfig implements WebMvcConfigurer {
         bean.addUrlPatterns("/*");
         return bean;
     }
+
 }
+*/

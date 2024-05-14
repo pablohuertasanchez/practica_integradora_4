@@ -1,20 +1,29 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-  <router-link to="/tienda/loginUsuario"><button>Ir a login de usuario</button></router-link>
+  <NavBar/>
+  <MongoComponent/>
+  <router-link to="/loginUsuario">
+    <button class="btn btn-success">Ir a login de usuario</button>
+  </router-link>
+  <router-link to="/productos">
+    <button class="btn btn-success">Ir a productos</button>
+  </router-link>
+  <router-view></router-view>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 import axios from 'axios'
+import NavBar from "@/components/NavBarComponent.vue";
+import MongoComponent from "@/components/MongoComponent.vue";
+
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    NavBar,
+    MongoComponent,
   },
-  data(){
+  data() {
     return {
-      message: ''
+      message: '',
     };
   },
   created() {
@@ -42,5 +51,13 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+
+.fade-enter, fade-leave-to {
+  opacity: 0
 }
 </style>

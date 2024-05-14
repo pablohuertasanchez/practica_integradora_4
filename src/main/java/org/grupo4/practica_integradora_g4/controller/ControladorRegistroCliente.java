@@ -52,7 +52,7 @@ public class ControladorRegistroCliente {
             model.addAttribute("clientePlantilla", cliente);
         }else model.addAttribute("clientePlantilla",cliente);
 
-        return "html/paso1";
+        return "paso1";
     }
     @PostMapping("paso1")
     private String paso1Post(
@@ -63,7 +63,7 @@ public class ControladorRegistroCliente {
     ){
         if (posiblesErrores.hasErrors()) {
             System.out.println(posiblesErrores.getAllErrors());
-            return "html/paso1";
+            return "paso1";
         }
         else {
             sesion.setAttribute("datos_personales", cliente);
@@ -82,7 +82,7 @@ public class ControladorRegistroCliente {
             model.addAttribute("clientePlantilla", cliente);
         }else model.addAttribute("clientePlantilla",cliente);
 
-        return "html/paso2";
+        return "paso2";
     }
     @PostMapping("paso2")
     private String paso2Post(
@@ -93,7 +93,7 @@ public class ControladorRegistroCliente {
     ){
         if (posiblesErrores.hasErrors()) {
             System.out.println(posiblesErrores.getAllErrors());
-            return "html/paso2";
+            return "paso2";
         }
         else {
             sesion.setAttribute("datos_contacto", cliente);
@@ -111,7 +111,7 @@ public class ControladorRegistroCliente {
             cliente=(Cliente) sesion.getAttribute("datos_usuario");
             model.addAttribute("clientePlantilla", cliente);
         }else model.addAttribute("clientePlantilla",cliente);
-        return "html/paso3";
+        return "paso3";
     }
 
     @PostMapping("paso3")
@@ -123,7 +123,7 @@ public class ControladorRegistroCliente {
     ){
         if (posiblesErrores.hasErrors()) {
             System.out.println(posiblesErrores.getAllErrors());
-            return "html/paso3";
+            return "paso3";
         }
         else {
             sesion.setAttribute("datos_usuario", cliente);
@@ -168,7 +168,7 @@ public class ControladorRegistroCliente {
         if (comprobador==3){
             registroCompleto=true;
         }
-        return "html/resumen";
+        return "resumen";
     }
 
     @PostMapping("resumen")
@@ -186,7 +186,7 @@ public class ControladorRegistroCliente {
             return "redirect:/grupo4/paso1";
         }
         else {
-            return "html/resumen";
+            return "resumen";
         }
     }
 

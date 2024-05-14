@@ -1,3 +1,5 @@
+package org.grupo4.practica_integradora_g4.config.filter;
+
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

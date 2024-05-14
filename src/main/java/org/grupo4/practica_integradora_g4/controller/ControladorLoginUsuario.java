@@ -4,7 +4,6 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.grupo4.practica_integradora_g4.Colecciones;
 import org.grupo4.practica_integradora_g4.entidades.Usuario;
-import org.springframework.beans.BeanMetadataAttributeAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,7 +21,7 @@ public class ControladorLoginUsuario {
                        Model modelo){
         List<String> emailUsu = Colecciones.obtenerEmailUsuarios();
         modelo.addAttribute("emailUsuarios",emailUsu);
-        return "html/loginUsuario.html";
+        return "loginUsuario";
     }
 
     @PostMapping("/loginUsuario-post")
@@ -44,7 +43,7 @@ public class ControladorLoginUsuario {
             return "redirect:/loginUsuario2";
         }else {
             modelo.addAttribute("error", "Usuario no existente");
-            return "html/loginUsuario.html";
+            return "loginUsuario";
         }
 
 
@@ -62,7 +61,7 @@ public class ControladorLoginUsuario {
             System.out.println(uS.toString());
         }
 
-        return "html/registroUsuario.html";
+        return "registroUsuario";
     }
 
     @PostMapping("/registroUsuario-post")
@@ -75,7 +74,7 @@ public class ControladorLoginUsuario {
         if (result.hasErrors()){
             modelo.addAttribute("errors",result.getAllErrors());
             System.out.println(result.getAllErrors());
-            return "html/registroUsuario.html";
+            return "registroUsuario";
         }
 
         System.out.println(u.toString());
@@ -92,7 +91,7 @@ public class ControladorLoginUsuario {
     public String aut2(@ModelAttribute("usuario") Usuario u,
                        Model modelo){
 
-        return "html/loginUsuario2.html";
+        return "loginUsuario2";
     }
 
     @PostMapping("/loginUsuario2-post")
@@ -104,11 +103,11 @@ public class ControladorLoginUsuario {
                 return "redirect:/grupo4/paso1";
             } else {
                 modelo.addAttribute("error", "Clave incorrecta");
-                return "html/loginUsuario2";
+                return "loginUsuario2";
             }
         } else {
             modelo.addAttribute("error", "No se ha iniciado sesión");
-            return "html/loginUsuario2";
+            return "loginUsuario2";
         }
     }
 
