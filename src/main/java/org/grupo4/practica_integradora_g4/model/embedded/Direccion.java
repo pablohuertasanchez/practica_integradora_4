@@ -1,15 +1,15 @@
-package org.grupo4.practica_integradora_g4.model.embebed;
+package org.grupo4.practica_integradora_g4.model.embedded;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.Embeddable;
+import lombok.*;
 
 @AllArgsConstructor
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Setter
 
+@Embeddable
+@Data
 public class Direccion {
     private Long tipoVia;
     private Integer numero;

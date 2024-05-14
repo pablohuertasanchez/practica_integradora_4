@@ -2,7 +2,7 @@ package org.grupo4.practica_integradora_g4.validaciones;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import org.grupo4.practica_integradora_g4.Colecciones;
+import org.grupo4.practica_integradora_g4.extras.Colecciones;
 
 public class ValidadorNombreEmail implements ConstraintValidator <ComprobarNombreEmail,String> {
     public boolean isValid(String nombre, ConstraintValidatorContext context) {

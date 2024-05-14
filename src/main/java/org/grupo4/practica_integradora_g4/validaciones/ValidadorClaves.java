@@ -2,7 +2,7 @@ package org.grupo4.practica_integradora_g4.validaciones;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import org.grupo4.practica_integradora_g4.entidades.Usuario;
+import org.grupo4.practica_integradora_g4.model.entidades.Usuario;
 
 public class ValidadorClaves implements ConstraintValidator<ComprobarClaves, Usuario> {
     @Override

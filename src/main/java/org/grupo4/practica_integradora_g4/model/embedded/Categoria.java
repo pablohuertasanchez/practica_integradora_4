@@ -1,13 +1,16 @@
-package org.grupo4.practica_integradora_g4.model.embebed;
+package org.grupo4.practica_integradora_g4.model.embedded;
 
+import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @AllArgsConstructor
 //@RequiredArgsConstructor
 @Getter
 @Setter
+@Embeddable
+@Data
 public class Categoria {
 }
