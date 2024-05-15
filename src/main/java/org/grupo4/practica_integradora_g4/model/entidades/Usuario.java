@@ -1,7 +1,9 @@
 package org.grupo4.practica_integradora_g4.model.entidades;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.*;
 
 import org.grupo4.practica_integradora_g4.validaciones.ComprobarClaves;
@@ -11,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 
 import jakarta.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Data
 @Getter
@@ -43,6 +46,7 @@ public class Usuario {
     private String respRec;
     private LocalDate fechaUltimaConexion=LocalDate.now();
     private Integer numeroAccesos=0;
-    private Auditoria auditoria;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Auditoria> auditoria;
 }
 

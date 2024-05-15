@@ -24,4 +24,7 @@ public class Direccion {
     private String localidad;
     private String region;
     private String codigoPostal;
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
 }

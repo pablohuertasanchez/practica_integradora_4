@@ -152,7 +152,7 @@ public class ControladorRegistroCliente {
         }
         if (sesion.getAttribute("datos_contacto")!=null) {
             Cliente datos_contacto = (Cliente) sesion.getAttribute("datos_contacto");
-            cliente.setDireccion(datos_contacto.getDireccion());
+            cliente.setDirecciones(datos_contacto.getDirecciones());
             cliente.setTelefonoMovil(datos_contacto.getTelefonoMovil());
             comprobador++;
         }
