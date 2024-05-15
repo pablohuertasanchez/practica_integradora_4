@@ -1,13 +1,15 @@
+import Producto from '../models/Producto';
+
 const state = {
     productos: [
-        { id: 1, nombre: 'Tornillo', precio: 10, imagen: 'https://via.placeholder.com/150', descripcion: 'Tornillo de acero galvanizado' },
-        { id: 2, nombre: 'Taladro', precio: 20, imagen: 'https://via.placeholder.com/150', descripcion: 'Taladro eléctrico de alta potencia' },
-        { id: 3, nombre: 'Martillo', precio: 30, imagen: 'https://via.placeholder.com/150', descripcion: 'Martillo de carpintero de mango de madera' },
-        { id: 4, nombre: 'Destornillador', precio: 40, imagen: 'https://via.placeholder.com/150', descripcion: 'Destornillador Phillips magnético' },
-        { id: 5, nombre: 'Sierra', precio: 50, imagen: 'https://via.placeholder.com/150', descripcion: 'Sierra circular de corte fino' },
-        { id: 6, nombre: 'Llave Inglesa', precio: 60, imagen: 'https://via.placeholder.com/150', descripcion: 'Llave inglesa ajustable de 10 pulgadas' },
-        { id: 7, nombre: 'Cinta Métrica', precio: 70, imagen: 'https://via.placeholder.com/150', descripcion: 'Cinta métrica de 5 metros' },
-    ],
+    new Producto(1, 'Tornillo', 10, 'https://via.placeholder.com/150', 'Tornillo de acero galvanizado'),
+    new Producto(2, 'Taladro', 20, 'https://via.placeholder.com/150', 'Taladro eléctrico de alta potencia'),
+    new Producto(3, 'Martillo', 30, 'https://via.placeholder.com/150', 'Martillo de carpintero de mango de madera'),
+    new Producto(4, 'Destornillador', 40, 'https://via.placeholder.com/150', 'Destornillador Phillips magnético'),
+    new Producto(5, 'Sierra', 50, 'https://via.placeholder.com/150', 'Sierra circular de corte fino'),
+    new Producto(6, 'Llave Inglesa', 60, 'https://via.placeholder.com/150', 'Llave inglesa ajustable de 10 pulgadas'),
+    new Producto(7, 'Cinta Métrica', 70, 'https://via.placeholder.com/150', 'Cinta métrica de 5 metros')
+],
     query: '', // Variable para almacenar la consulta de búsqueda
     productosFiltrados: [] // Lista de productos filtrados por búsqueda
 };

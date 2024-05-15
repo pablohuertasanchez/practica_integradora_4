@@ -5,7 +5,7 @@
         <div class="card">
           <div class="card-body">
             <h3>{{ producto.nombre }}</h3>
-            <img :src="producto.imagen" class="img-fluid mb-2" :alt="producto.nombre">
+            <img :src="producto.imagen" class="img-fluid mb-2 expand-on-hover" :alt="producto.nombre">
             <p class="d-none d-md-block">{{ producto.descripcion }}</p>
             <p>{{ producto.precio }}</p>
           </div>
@@ -17,7 +17,7 @@
         <div class="card">
           <div class="card-body">
             <h3>{{ producto.nombre }}</h3>
-            <img :src="producto.imagen" class="img-fluid mb-2" :alt="producto.nombre">
+            <img :src="producto.imagen" class="img-fluid mb-2 expand-on-hover" :alt="producto.nombre">
             <p class="d-none d-md-block">{{ producto.descripcion }}</p>
             <p>{{ producto.precio }}</p>
           </div>
@@ -68,4 +68,12 @@ export default {
   display: flex;
   flex-wrap: wrap;
 }
+.expand-on-hover {
+  transition: transform 0.3s ease;
+}
+
+.expand-on-hover:hover {
+  transform: scale(1.2); /* Puedes ajustar el factor de escala según tus preferencias */
+}
+
 </style>

@@ -1,9 +1,11 @@
-// Producto.js
+// models/Producto.js
 export default class Producto {
-    constructor(nombre, precio, imagen, descripcion) {
+    constructor(id, nombre, precio, imagen, descripcion) {
+        this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.imagen = imagen;
         this.descripcion = descripcion;
     }
 }
+
