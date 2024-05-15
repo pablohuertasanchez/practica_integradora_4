@@ -1,15 +1,15 @@
-import { createApp } from 'vue';
-import App from './App.vue';
+import {createApp} from 'vue';
+import App from './App.vue'
 // Importamos bootstrap
 import '@/assets/css/bootstrap.min.css';
 /* eslint-disable */
 // eslint-disable-next-line
 import '@/assets/js/bootstrap.bundle.min.js';
+import store from './store'; // Importa tu tienda Vuex
 import {createRouter, createWebHistory} from 'vue-router';
 import ProductosView from './views/ProductosView.vue';
 import HomeView from "@/views/HomeView.vue";
-
-
+import Carrito from "@/views/CarritoView.vue";
 
 const router = createRouter({
     history: createWebHistory('/tienda'),
@@ -20,9 +20,9 @@ const router = createRouter({
         //     component: App
         // },
         {
-          path: "/",
-          name: 'HomeView',
-          component: HomeView
+            path: "/",
+            name: 'HomeView',
+            component: HomeView
         },
         {
             path: '/loginUsuario',
@@ -32,12 +32,19 @@ const router = createRouter({
             path: '/productos',
             name: 'productos',
             component: ProductosView,
+        },
+        {
+            path: '/carrito',
+            name: 'carrito',
+            component: Carrito
         }
-
     ]
+});
 
-})
 const app = createApp(App);
 app.use(router);
+app.use(store); // Usa tu tienda Vuex
 
 app.mount('#app');
+
+
