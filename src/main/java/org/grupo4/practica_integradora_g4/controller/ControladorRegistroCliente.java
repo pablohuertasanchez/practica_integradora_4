@@ -3,9 +3,12 @@ package org.grupo4.practica_integradora_g4.controller;
 import jakarta.servlet.http.HttpSession;
 import org.grupo4.practica_integradora_g4.extras.Colecciones;
 import org.grupo4.practica_integradora_g4.model.entidades.Cliente;
+import org.grupo4.practica_integradora_g4.model.entidades.Usuario;
 import org.grupo4.practica_integradora_g4.model.extra.DatosContacto;
 import org.grupo4.practica_integradora_g4.model.extra.DatosPersonales;
 import org.grupo4.practica_integradora_g4.model.extra.DatosUsuario;
+import org.grupo4.practica_integradora_g4.services.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -157,9 +160,12 @@ public class ControladorRegistroCliente {
             comprobador++;
         }
         if (sesion.getAttribute("datos_usuario")!=null) {
+
             Cliente datos_usuario = (Cliente) sesion.getAttribute("datos_usuario");
             //cliente.setUsuario(datos_usuario.getUsuario());
             cliente.setComentarios(datos_usuario.getComentarios());
+            Usuario usuAut = (Usuario) sesion.getAttribute("usuarioAut");
+            cliente.setUsuarioEmail(usuAut);
             //cliente.setLicencia(datos_usuario.isLicencia());
             comprobador++;
         }

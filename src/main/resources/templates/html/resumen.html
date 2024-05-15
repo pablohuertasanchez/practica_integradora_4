@@ -39,7 +39,7 @@
         <legend>Datos de contacto:</legend>
 
         <th:text class="pre">direccion: </th:text>
-        <th:block th:text="*{direccion}"></th:block>
+        <th:block th:text="*{direcciones}"></th:block>
         <br>
         <th:text class="pre">telefonoMovil: </th:text>
         <th:block th:text="*{telefonoMovil}"></th:block>
@@ -49,8 +49,8 @@
     <fieldset>
         <legend>Datos de usuario: </legend>
 
-        <th:text class="pre">usuario: </th:text>
-        <th:block th:text="*{usuario}"></th:block>
+        <th:text class="pre">usuario correspondiente: </th:text>
+        <th:block th:text="*{usuarioEmail}"></th:block>
         <br>
         <th:text class="pre">direccionesEntrega: </th:text>
         <th:block th:text="*{direccionesEntrega}"></th:block>
@@ -63,9 +63,6 @@
         <br>
         <th:text class="pre">tipoCliente: </th:text>
         <th:block th:text="*{tipoCliente}"></th:block>
-        <br>
-        <th:text class="pre">categoriasInteres: </th:text>
-        <th:block th:text="*{categoriasInteres}"></th:block>
         <br>
         <th:text class="pre">comentarios: </th:text>
         <th:block th:text="*{comentarios}"></th:block>
