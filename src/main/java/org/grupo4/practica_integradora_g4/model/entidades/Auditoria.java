@@ -1,4 +1,4 @@
-package org.grupo4.practica_integradora_g4.model.embedded;
+package org.grupo4.practica_integradora_g4.model.entidades;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
