@@ -1,0 +1,134 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+}
+
+/* Estilos del encabezado */
+header {
+    background: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+header h1 {
+    margin: 0;
+    display: inline;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Estilos de la sección de héroe */
+.hero {
+    background: #f4f4f4;
+    padding: 100px 0;
+    text-align: center;
+}
+
+.hero h2 {
+    margin-bottom: 20px;
+}
+
+.hero p {
+    margin-bottom: 40px;
+}
+
+.btn {
+    display: inline-block;
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background: #555;
+}
+
+/* Estilos del pie de página */
+footer {
+    background: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+/* Añade esto al final de tu archivo CSS */
+
+.filtros {
+    margin-bottom: 20px;
+}
+
+.filtros select, .filtros button {
+    margin-left: 10px;
+}
+
+.lista-productos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.producto {
+    width: 30%;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.producto h3 {
+    margin-top: 0;
+}
+
+.producto p {
+    margin-bottom: 5px;
+}
+
+.producto span {
+    font-weight: bold;
+}
+.busqueda {
+    margin-bottom: 20px;
+}
+
+.busqueda input[type="text"] {
+    padding: 10px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.busqueda button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.busqueda button:hover {
+    background-color: #45a049;
+}

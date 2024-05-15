@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Web</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Autos Elite</h1>
+            <nav>
+                <button id="menuBtn">Menú</button>
+                <ul id="menu">
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Productos</a></li>
+                    <li><a href="#">Carrito</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="busqueda">
+        <input type="text" id="inputBusqueda" placeholder="Buscar por modelo...">
+        <button id="btnBuscar">Buscar</button>
+    </div>
+    
+    
+    <!-- <section class="hero">
+        <div class="container">
+            <h2>Bienvenido a nuestra tienda en línea</h2>
+            <p>Encuentra los mejores productos aquí.</p>
+            <a href="#" class="btn">Explorar productos</a>
+        </div>
+    </section> -->
+    <!-- Añade esto dentro del cuerpo de tu documento HTML, debajo de la sección de héroe -->
+<section class="productos">
+    <div class="container">
+        <div class="filtros">
+            <label for="filtroCategoria">Filtrar por categoría:</label>
+            <select id="filtroCategoria">
+                <option value="todos">Todos</option>
+                <option value="familiar">Familiar</option>
+                <option value="compacto">Compacto</option>
+                <option value="deportivo">Deportivo</option>
+                <option value="lujo">Lujo</option>
+                <option value="suv">SUV</option>
+                <option value="electrico">Eléctrico</option>
+                <option value="sedan">Sedán</option>
+
+
+            </select>
+            <button id="btnOrdenarPrecio">Ordenar por precio</button>
+        </div>
+        <div id="listaProductos" class="lista-productos"></div>
+    </div>
+</section>
+
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Tienda Web. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
