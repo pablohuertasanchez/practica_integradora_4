@@ -24,3 +24,12 @@ export default {
   }
 };
 </script>
+
+<style>
+
+#app{
+  background-image: linear-gradient(to left, #ededed 0%, #ffffff 100%);
+}
+
+
+</style>

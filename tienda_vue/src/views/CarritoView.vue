@@ -4,7 +4,7 @@
 
 <template>
   <div>
-    <h1>Carrito</h1>
+    <h1>Carrito en proceso</h1>
   </div>
 </template>
 

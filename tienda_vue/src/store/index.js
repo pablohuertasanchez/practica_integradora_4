@@ -18,9 +18,19 @@ export default createStore({
     actions: {
         searchProducto({ state, commit }, query) {
             const productos = state.productos.productos;
-            const productosFiltrados = productos.filter(producto =>
-                producto.nombre.toLowerCase().includes(query.toLowerCase())
-            );
+            let productosFiltrados = [];
+
+            if (typeof query === 'string' && query.trim() !== '') { // Verificar si query es una cadena no vacía
+                productosFiltrados = productos.filter(producto =>
+                    producto.marca.toLowerCase().includes(query.toLowerCase())
+                );
+            }
+
+            commit('setSearchProductos', productosFiltrados);
+        },
+        searchByCategory({ state, commit }, category) {
+            const productos = state.productos.productos;
+            const productosFiltrados = productos.filter(producto => producto.categoria === category);
             commit('setSearchProductos', productosFiltrados);
         }
     }
