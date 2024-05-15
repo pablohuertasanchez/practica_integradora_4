@@ -1,16 +1,21 @@
-package org.grupo4.practica_integradora_g4.model.embedded;
+package org.grupo4.practica_integradora_g4.model.entidades;
 
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.UUID;
 
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Getter
 @Setter
 
-@Embeddable
+@Entity
 @Data
 public class Direccion {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     private Long tipoVia;
     private Integer numero;
     private String portal;
@@ -19,4 +24,7 @@ public class Direccion {
     private String localidad;
     private String region;
     private String codigoPostal;
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
 }

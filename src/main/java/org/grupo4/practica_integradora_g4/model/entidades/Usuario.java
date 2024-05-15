@@ -1,12 +1,11 @@
 package org.grupo4.practica_integradora_g4.model.entidades;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.*;
 
-import org.grupo4.practica_integradora_g4.model.embedded.Auditoria;
 import org.grupo4.practica_integradora_g4.validaciones.ComprobarClaves;
 import org.grupo4.practica_integradora_g4.validaciones.ComprobarEmail;
 import org.grupo4.practica_integradora_g4.validaciones.ComprobarNombreEmail;
@@ -14,7 +13,7 @@ import org.springframework.validation.annotation.Validated;
 
 import jakarta.validation.constraints.*;
 import java.time.LocalDate;
-import java.util.UUID;
+import java.util.Set;
 
 @Data
 @Getter
@@ -27,8 +26,6 @@ import java.util.UUID;
 @Entity
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
     @NotNull
     @NotBlank
     @ComprobarEmail
@@ -49,6 +46,7 @@ public class Usuario {
     private String respRec;
     private LocalDate fechaUltimaConexion=LocalDate.now();
     private Integer numeroAccesos=0;
-  //  private Auditoria auditoria;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Auditoria> auditoria;
 }
 
