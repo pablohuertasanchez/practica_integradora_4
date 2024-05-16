@@ -6,8 +6,13 @@
   <link rel="stylesheet" th:href="@{/css/estilos.css}">
 </head>
 <body>
-<th:block th:replace="~{fragments/cabecera}"></th:block>
-<form action="/grupo4/paso2" method="post" th:object="${clientePlantilla}">
+<header>
+    <div class="logo">
+        <img th:src="@{/img/logo.png}" height="100" width="100" alt="Logo de tu Aplicación">
+        <h1>Autos Elite</h1>
+    </div>
+    <nav th:replace="~{fragments/barraNavegacionRegistro}"></nav>
+</header><form action="/grupo4/paso2" method="post" th:object="${clientePlantilla}">
   <fieldset>
     <legend>Datos de contacto:</legend>
 

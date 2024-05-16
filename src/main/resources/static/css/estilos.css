@@ -1,10 +1,110 @@
-body{
-    background-color: bisque;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
 }
-.error{
-    font-style: italic;
-    color: darkred;
+
+form {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 600px;
+    margin: 50px auto;
 }
-.pre{
+
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+legend {
     font-weight: bold;
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+input[type="radio"]{
+    display: inline;
+}
+
+input[type="submit"],input[type="button"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+a {
+    display: block;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.error {
+    color: red;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+
+
+header {
+    background-color: #959292; /* Color de fondo de la cabecera */
+    color: #fff; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+    display: flex; /* Mostrar elementos en línea */
+    justify-content: space-between; /* Alinear elementos en los extremos */
+    align-items: center; /* Alinear verticalmente al centro */
+}
+
+.logo h1 {
+    margin: 0; /* Eliminar márgenes del título */
+    font-size: 24px; /* Tamaño del texto */
+}
+
+.navigation-bar {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.navigation-bar li {
+    margin-right: 20px; /* Espaciado entre elementos de la barra de navegación */
+}
+
+.navigation-bar a {
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+}
+
+.navigation-bar a:hover {
+    text-decoration: underline; /* Subrayar enlaces al pasar el mouse */
 }

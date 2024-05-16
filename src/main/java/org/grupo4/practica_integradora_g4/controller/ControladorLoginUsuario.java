@@ -2,8 +2,8 @@ package org.grupo4.practica_integradora_g4.controller;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-import org.grupo4.practica_integradora_g4.Colecciones;
-import org.grupo4.practica_integradora_g4.entidades.Usuario;
+import org.grupo4.practica_integradora_g4.extras.Colecciones;
+import org.grupo4.practica_integradora_g4.model.entidades.Usuario;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

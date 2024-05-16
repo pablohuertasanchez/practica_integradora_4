@@ -11,6 +11,12 @@
     </script>
 </head>
 <body>
+<header>
+    <div class="logo">
+        <img th:src="@{/img/logo.png}" height="100" width="100" alt="Logo de tu Aplicación">
+        <h1>Autos Elite</h1>
+    </div>
+</header>
     <div class="login-container">
         <h2>Inicio de Sesión</h2>
         <form th:action="@{/loginUsuario-post}" method="post" th:object="${usuario}">
@@ -29,7 +35,7 @@
             <p>No tienes un Usuario? <a href="/registroUsuario">Regístrate aquí</a></p>
 
         </form>
-        <button formnovalidate onclick="redirectToVue()">Ir a tienda</button>
+        <input type="button" value="Ir a la tienda" formnovalidate onclick="redirectToVue()">
     </div>
 </body>
 

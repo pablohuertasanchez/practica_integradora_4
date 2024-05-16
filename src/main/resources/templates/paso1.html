@@ -4,9 +4,20 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    <script>
+        function redirectToVue() {
+            window.location.href = 'http://localhost:8081/tienda';
+        }
+    </script>
 </head>
 <body>
-<th:block th:replace="~{fragments/cabecera}"></th:block>
+<header>
+    <div class="logo">
+        <img th:src="@{/img/logo.png}" height="100" width="100" alt="Logo de tu Aplicación">
+        <h1>Autos Elite</h1>
+    </div>
+    <nav th:replace="~{fragments/barraNavegacionRegistro}"></nav>
+</header>
 <form action="/grupo4/paso1" method="post" th:object="${clientePlantilla}">
     <fieldset>
         <legend>Datos personales: </legend>
@@ -64,8 +75,9 @@
         <br>
     </fieldset>
     <input type="submit" value="Guardar infortmación y pasar al siguente paso">
+    <input type="button" value="Ir a la Tienda sin registrarme" formnovalidate onclick="redirectToVue()">
 </form>
-<a th:href="@{/autenticar/login}">Ya tengo usuario</a>
+
 
 
 </body>
