@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" th:href="@{/css/loginAdmin.css}">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        <form action="/loginAdmin" method="post">
+            <div class="input-group">
+                <label for="email">Nombre de usuario:</label>
+                <input type="text" id="email" name="email">
+            </div>
+            <div class="input-group">
+                <label for="clave">Contraseña:</label>
+                <div class="password-input">
+                    <input type="text" id="clave" name="clave">
+                    <span class="toggle-password">👁️</span>
+                </div>
+            </div>
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+    </div>
+
+    <script src="/js/loginAdmin.js"></script>
+</body>
+</html>

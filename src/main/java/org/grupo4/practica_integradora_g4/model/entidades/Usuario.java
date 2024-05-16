@@ -33,7 +33,7 @@ public class Usuario {
     private String email;
     @NotNull
     @NotBlank
-    @Size(min=6, max=12)
+    @Size(min=3, max=12)
     //@Pattern(regexp ="(?=.*[0-9])(?=.*[a-zñ])(?=.*[A-ZÑ])(?=.*[!#$%&]).*")
     private String clave;
     @NotNull
