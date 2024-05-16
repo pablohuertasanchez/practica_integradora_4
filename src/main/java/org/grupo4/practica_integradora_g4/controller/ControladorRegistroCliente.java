@@ -22,7 +22,7 @@ import java.util.Map;
 
 
 @Controller
-@RequestMapping(value = "grupo4")
+@RequestMapping(value = "registro")
 public class ControladorRegistroCliente {
 
     @ModelAttribute("listaGeneros")
