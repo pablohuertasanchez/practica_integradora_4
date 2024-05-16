@@ -81,6 +81,7 @@ export default {
 }
 img{
   margin: 1em;
+  border: 1px solid black;
   height: 50%;
   width: 50%;
 }

@@ -34,7 +34,11 @@ export default {
 </script>
 
 <style scoped>
+/*Al poner el style scoped, los estilos solo se aplican a este componente*/
 .card{
   margin: 1em;
+}
+p, h2{
+  margin-left: 1em;
 }
 </style>

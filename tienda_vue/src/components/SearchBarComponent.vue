@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="search">
-    <input v-model="query" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+    <input v-model="query" class="form-control mr-sm-2" type="search" placeholder="Buscar por marca" aria-label="Search">
+    <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar por marca</button>
   </form>
 </template>
 
