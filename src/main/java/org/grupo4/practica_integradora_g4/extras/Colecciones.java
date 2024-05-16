@@ -47,7 +47,7 @@ public class Colecciones {
 
 
         USUARIOSADMIN.put("root",new Usuario("root","admin","admin","","",null,0,null));
-        USUARIOSADMIN.put("olga",new Usuario("olga","hidalgo","hidalgo","","",null,0,null));
+        USUARIOSADMIN.put("pablo",new Usuario("pablo","huerta","huerta","","",null,0,null));
 
     }
 
