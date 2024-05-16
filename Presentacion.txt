@@ -1,0 +1,13 @@
+CEsquema de colores
+Bocetos (podemos usar lo que hice de js)
+Diseños descartados(podemos usar lo que hiciste de js, es demasiado detallado para ser un boceto)
+Cabecera (Intentar implementar registro(
+Footer
+Cuerpo y posibilidad de mover el registro de cliente a vue.
+Contemplar si cambiar el filtro de categoria a botones.
+Google fonts, VueTify y bootstrap.
+Jquery.
+Mostrar las herramientas de diseño y de desarrollo.
+Esta parte podrías decirla tú (Andrés) Vue, Boostrap...
+rutas (login, registro...)
+

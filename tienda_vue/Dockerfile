@@ -5,19 +5,19 @@ FROM node:latest
 WORKDIR /app
 
 ## Copia los archivos necesarios al directorio de trabajo
-#COPY package*.json ./
+COPY . .
 
 # Instala las dependencias
 RUN npm install
 
-# Compila la aplicacion Vue.js
-RUN npm run build
+# Instala jQuery
+RUN npm install --save jquery
 
-# Copia todos los archivos del directorio actual al directorio de trabajo
-COPY . .
+## Compila la aplicacion Vue.js
+#RUN npm run build
 
-# Expone el puerto 8080 para que la aplicacion Vue.js sea accesible desde fuera del contenedor
-EXPOSE 8080
+# Expone el puerto 8081 para que la aplicacion Vue.js sea accesible desde fuera del contenedor
+EXPOSE 8081
 
 # Ejecuta la aplicacion Vue.js
-CMD ["npm", "run", "serve"]
+CMD ["bash", "-c", "npm run build && npm run serve"]

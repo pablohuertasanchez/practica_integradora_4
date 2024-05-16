@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    <script>
+        function redirectToVue() {
+            window.location.href = 'http://localhost:8081/tienda';
+        }
+    </script>
 </head>
 <body>
     <div class="login-container">
@@ -22,9 +27,13 @@
 
 
             <p>No tienes un Usuario? <a href="/registroUsuario">Regístrate aquí</a></p>
-        </form>
 
+        </form>
+        <button formnovalidate onclick="redirectToVue()">Ir a tienda</button>
     </div>
 </body>
-<script src="/js/form.js"></script>
+
+<script src="/js/form.js">
+
+</script>
 </html>

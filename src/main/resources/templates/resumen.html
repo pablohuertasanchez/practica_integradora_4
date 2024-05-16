@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    <link rel="stylesheet" th:href="@{/static/css/estilos.css}">
+    <script>
+        function redirectToVue() {
+            window.location.href = 'http://localhost:8081/tienda';
+        }
+    </script>
 </head>
 <body>
 <th:block th:replace="~{fragments/cabecera}"></th:block>
@@ -80,5 +85,6 @@
 <form action="/grupo4/cerrar-sesion" method="post">
     <input type="submit" value="Borrar sesión y voler al paso1">
 </form>
+<button formnovalidate onclick="redirectToVue()">Ir a tienda</button>
 </body>
 </html>

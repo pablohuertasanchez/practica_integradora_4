@@ -1,31 +1,57 @@
-import { createApp } from 'vue';
-import App from './App.vue';
-import mongoose from 'mongoose';
-import MovieList from './components/MovieList.vue';
-import Movie from './models/movies.js';
+import {createApp} from 'vue';
+import App from './App.vue'
+// Importamos bootstrap
+import '@/assets/css/bootstrap.min.css';
+/* eslint-disable */
+// eslint-disable-next-line
+import '@/assets/js/bootstrap.bundle.min.js';
+import store from './store'; // Importa tu tienda Vuex
+import {createRouter, createWebHistory} from 'vue-router';
+import ProductosView from './views/ProductosView.vue';
+import HomeView from "@/views/HomeView.vue";
+import Carrito from "@/views/CarritoView.vue";
+import ProductDetail from "@/views/ProductDetailView.vue";
 
-mongoose.connect('mongodb://localhost:27017/prueba', {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
-    console.log('Connected to MongoDB');
-    // Fetch data from MongoDB
-    Movie.find({}, (err, movies) => {
-        if (err) {
-            console.error('Error fetching movies:', err);
-        } else {
-            // Pass the movies to the MovieList component
-            const app = createApp({
-                render: (h) => h(App),
-                components: {
-                    MovieList
-                },
-                data() {
-                    return {
-                        movies: movies
-                    };
-                }
-            });
-            app.mount('#app');
-        }
-    });
-}).catch((error) => {
-    console.error('Error connecting to MongoDB:', error);
+const router = createRouter({
+    history: createWebHistory('/tienda'),
+    routes: [
+        // {
+        //     path: '/',
+        //     name: 'App',
+        //     component: App
+        // },
+        {
+            path: "/",
+            name: 'HomeView',
+            component: HomeView
+        },
+        {
+            path: '/loginUsuario',
+            redirect: () => window.location.href = 'http://localhost:8080/loginUsuario'
+        },
+        {
+            path: '/productos',
+            name: 'productos',
+            component: ProductosView,
+        },
+        {
+            path: '/producto/:id',
+            name: 'ProductDetail',
+            component: ProductDetail,
+        },
+        {
+            path: '/carrito',
+            name: 'carrito',
+            component: Carrito
+        },
+
+    ]
 });
+
+const app = createApp(App);
+app.use(router);
+app.use(store); // Usa tu tienda Vuex
+
+app.mount('#app');
+
+

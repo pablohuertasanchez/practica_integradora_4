@@ -1,0 +1,4 @@
+cmd en administrador
+cd C:\Users\Diurno\IdeaProjects\practica_integradora_4\tienda_vue
+docker build -t vue-app
+docker run -d -p 8081:8081 vue-app

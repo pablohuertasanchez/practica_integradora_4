@@ -1,0 +1,4 @@
+cmd en administrador
+cd C:\Users\Diurno\IdeaProjects\practica_integradora_4
+docker build -t contiene_tomcat
+docker run -d -p 8080:8080 contiene_tomcat
