@@ -18,7 +18,7 @@
     </div>
     <nav th:replace="~{fragments/barraNavegacionRegistro}"></nav>
 </header>
-<form action="/grupo4/resumen" method="post" th:object="${clientePlantilla}">
+<form action="/registro/resumen" method="post" th:object="${clientePlantilla}">
 
     <fieldset>
         <legend>Datos Personales: </legend>
@@ -87,7 +87,7 @@
     <input type="submit" value="Confirmar y Guardar">
 </form>
 
-<form action="/grupo4/cerrar-sesion" method="post">
+<form action="/registro/cerrar-sesion" method="post">
     <input type="submit" value="Borrar sesión y voler al paso1">
     <input type="button" value="Ir a la Tienda" formnovalidate onclick="redirectToVue()">
 </form>

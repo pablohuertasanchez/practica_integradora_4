@@ -70,7 +70,7 @@ public class ControladorRegistroCliente {
         }
         else {
             sesion.setAttribute("datos_personales", cliente);
-            return "redirect:/grupo4/paso2";
+            return "redirect:/registro/paso2";
         }
     }
 
@@ -100,7 +100,7 @@ public class ControladorRegistroCliente {
         }
         else {
             sesion.setAttribute("datos_contacto", cliente);
-            return "redirect:/grupo4/paso3";
+            return "redirect:/registro/paso3";
         }
     }
 
@@ -130,7 +130,7 @@ public class ControladorRegistroCliente {
         }
         else {
             sesion.setAttribute("datos_usuario", cliente);
-            return "redirect:/grupo4/resumen";
+            return "redirect:/registro/resumen";
         }
     }
 
@@ -189,7 +189,7 @@ public class ControladorRegistroCliente {
             registroCompleto=false;
             Colecciones.addCliente(cliente);
             sesion.invalidate();
-            return "redirect:/grupo4/paso1";
+            return "redirect:/registro/paso1";
         }
         else {
             return "resumen";
@@ -200,7 +200,7 @@ public class ControladorRegistroCliente {
     private String cerrarSesion(HttpSession sesion){
         registroCompleto=false;
         sesion.invalidate();
-        return "redirect:/grupo4/paso1";
+        return "redirect:/registro/paso1";
     }
 
 }
