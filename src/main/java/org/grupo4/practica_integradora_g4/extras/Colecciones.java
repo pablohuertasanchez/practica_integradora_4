@@ -10,7 +10,7 @@ public class Colecciones {
     private final static Map<String, String> PREFIJOS = new LinkedHashMap<String, String>();
     private final static Map<String, String> NACIONALIDADES = new HashMap<String, String>();
     private final static Map<String, String> DEPARTAMENTOS = new LinkedHashMap<String,String>();
-    //private final static Map<String, Usuario> USUARIOS = new HashMap<String,Usuario>();
+    private final static Map<String, Usuario> USUARIOSADMIN = new HashMap<String,Usuario>();
     private final static Map<String, String> TIPO_DOCUMENTO = new HashMap<String,String>();
     private final static Map<String, Cliente> CLIENTES = new HashMap<String,Cliente>();
 
@@ -46,17 +46,16 @@ public class Colecciones {
         TIPO_DOCUMENTO.put("pass","Pasaporte");
 
 
-        /*USUARIOS.put("pablo",new Usuario("pablo","hola","hola","Sr", "huerta", null, null, null, false, false, null, null, 10000.0, null));
-        USUARIOS.put("olga",new Usuario("olga","olga","olga","Sra", "Hidalgo", null, null, null, false, false, null, null, 10000.0, null));
-        USUARIOS.put("root",new Usuario("root","root","root","Caballero", "root", null, null, null, false, false, null, null, 10000.0, null));
-        */
+        USUARIOSADMIN.put("root",new Usuario("root","admin","admin","","",null,0,null));
+        USUARIOSADMIN.put("olga",new Usuario("olga","hidalgo","hidalgo","","",null,0,null));
+
     }
 
     public static Map<String, String> getGeneros(){ return GENEROS; }
     public static Map<String, String> getGPrefijos(){ return PREFIJOS; }
     public static Map<String, String> getNacionalidades(){ return NACIONALIDADES; }
     public static Map<String, String> getDepartamentos(){ return DEPARTAMENTOS; }
-    //public static Map<String, Usuario> getUsuarios(){ return USUARIOS; }
+    public static Map<String, Usuario> getUsuariosAdmin(){ return USUARIOSADMIN; }
     public static Map<String, String> getTipoDocumento(){ return TIPO_DOCUMENTO; }
 
     public static List<Usuario> devuelveUsu() {
