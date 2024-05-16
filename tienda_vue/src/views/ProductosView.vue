@@ -78,6 +78,7 @@ export default {
 /* Estilos */
 .card{
   background-image: linear-gradient(to left, #c6c2c2 0%, #ffffff 100%);
+  height: 35em;
 }
 img{
   margin: 1em;
@@ -88,6 +89,7 @@ img{
 
 select{
   margin : 1em;
+
 }
 
 .expand-on-hover {
