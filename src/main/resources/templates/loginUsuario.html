@@ -25,6 +25,9 @@
             <p th:if="${error}" class="error" th:text="${error}"></p>
                 <input type="submit" value="Iniciar Sesión">
 
+        </form>
+        <form action="" method="get">
+
             <h3>Usuarios ya registrados</h3>
                 <select  id="registeredUsers">
                     <option value="">Selecciona un usuario</option>
@@ -33,9 +36,10 @@
 
 
             <p>No tienes un Usuario? <a href="/registroUsuario">Regístrate aquí</a></p>
+            <input type="button" value="Ir a la tienda" formnovalidate onclick="redirectToVue()">
 
         </form>
-        <input type="button" value="Ir a la tienda" formnovalidate onclick="redirectToVue()">
+
     </div>
 </body>
 

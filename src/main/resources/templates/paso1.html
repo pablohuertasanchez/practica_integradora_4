@@ -21,7 +21,7 @@
 <form action="/registro/paso1" method="post" th:object="${clientePlantilla}">
     <fieldset>
         <legend>Datos personales: </legend>
-
+        <br>
         <!--GENERO (RADIO)-->
         <label>Género:</label>
         <div class="radio-buttons">
@@ -33,12 +33,12 @@
             </th:block>
         </div>
         <div th:errors="*{genero}" class="error"></div>
-        <br>
 
-        <label for="fechaNacimiento" >Fecha de Nacimiento: </label>
+
+<!--        <label for="fechaNacimiento" >Fecha de Nacimiento: </label>-->
 <!--        <input placeholder="pablo1234.." type="text" th:field="*{fechaNacimiento}"/>-->
 <!--        <div th:errors="*{fechaNacimiento}" class="error"></div>-->
-        <br>
+<!--        <br>-->
 
         <label for="pais">Pais: </label>
         <select id="pais" name="pais">

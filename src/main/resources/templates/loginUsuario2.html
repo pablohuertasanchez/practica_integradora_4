@@ -12,8 +12,7 @@
         <h1>Autos Elite</h1>
     </div>
 </header>
-    <h3>Estás a punto de iniciar tu sesión, introduce tu clave</h3>
-    <br>
+    <h3 id="textoContra">Estás a punto de iniciar tu sesión, introduce tu clave</h3>
     <form th:action="@{/loginUsuario2-post}" method="post" th:object="${usuario}">
         <label for="clave">Clave: </label>
             <input type="password" th:field="*{clave}">
