@@ -108,3 +108,17 @@ header {
 .navigation-bar a:hover {
     text-decoration: underline; /* Subrayar enlaces al pasar el mouse */
 }
+/* CSS */
+.radio-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.radio-label {
+    margin-right: 10px; /* Espacio entre los botones de radio */
+}
+
+/* Opcional: Alinear verticalmente los botones de radio con el texto */
+input[type="radio"] {
+    vertical-align: middle;
+}

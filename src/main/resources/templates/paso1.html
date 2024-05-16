@@ -23,16 +23,18 @@
         <legend>Datos personales: </legend>
 
         <!--GENERO (RADIO)-->
-        <label>Género:</label><br>
-        <th:block th:each="g : ${listaGeneros}">
-            <input type="radio" name="residencia" th:id="${g.getKey()}"
-                   th:value="${g.getKey()}"
-                   th:field="*{genero}">
-            <label th:for="${g.getKey()}"
-                   th:text="${g.getValue()}"></label>
-        </th:block>
+        <label>Género:</label>
+        <div class="radio-buttons">
+            <th:block th:each="g : ${listaGeneros}">
+                <label class="radio-label">
+                    <input type="radio" name="genero" th:id="${g.getKey()}" th:value="${g.getKey()}" th:field="*{genero}">
+                    <span th:text="${g.getValue()}"></span>
+                </label>
+            </th:block>
+        </div>
         <div th:errors="*{genero}" class="error"></div>
         <br>
+
         <label for="fechaNacimiento" >Fecha de Nacimiento: </label>
 <!--        <input placeholder="pablo1234.." type="text" th:field="*{fechaNacimiento}"/>-->
 <!--        <div th:errors="*{fechaNacimiento}" class="error"></div>-->
