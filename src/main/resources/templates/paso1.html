@@ -41,10 +41,10 @@
 <!--        <br>-->
 
         <label for="pais">Pais: </label>
-        <select id="pais" name="pais" th:field="*{pais}">
-            <option th:each="p : ${listaPaises}"
-                    th:value="${p.value}"
-                    th:text="${p.value}">
+        <select th:field="*{pais}">
+            <option th:each="p : ${listaP}"
+                    th:value="${p.siglas}"
+                    th:text="${p.nombre}">
             </option>
         </select>
         <br>

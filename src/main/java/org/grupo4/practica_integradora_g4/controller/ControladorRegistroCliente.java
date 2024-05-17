@@ -8,23 +8,27 @@ import org.grupo4.practica_integradora_g4.model.entidades.Usuario;
 import org.grupo4.practica_integradora_g4.model.extra.DatosContacto;
 import org.grupo4.practica_integradora_g4.model.extra.DatosPersonales;
 import org.grupo4.practica_integradora_g4.model.extra.DatosUsuario;
+import org.grupo4.practica_integradora_g4.repositories.PaisRepository;
+import org.grupo4.practica_integradora_g4.services.PaisService;
 import org.grupo4.practica_integradora_g4.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.UUID;
 
 
 @Controller
 @RequestMapping(value = "registro")
 public class ControladorRegistroCliente {
+    @Autowired
+    private PaisService paisService;
+    @Autowired
+    private PaisRepository paisRepository;
 
     @ModelAttribute("listaGeneros")
     private Map<String, String> getGeneros(){return Colecciones.getGeneros();}
@@ -50,7 +54,14 @@ public class ControladorRegistroCliente {
                                 Model model,
                                 HttpSession sesion
     ){
+        // Cargar los países y guardarlos en el servicio de países
+        Colecciones.getNacionalidades().forEach((siglas, nombre) -> {
+            Pais pais = new Pais(nombre, siglas);
+            paisService.save(pais);
+        });
 
+        // Añadir la lista de países al modelo
+        model.addAttribute("listaP",paisRepository.findAll());
         if (sesion.getAttribute("datos_personales")!=null){
             cliente=(Cliente) sesion.getAttribute("datos_personales");
             model.addAttribute("clientePlantilla", cliente);
@@ -62,15 +73,37 @@ public class ControladorRegistroCliente {
     @PostMapping("paso1")
     private String paso1Post(
             @Validated({DatosPersonales.class})
-            @ModelAttribute("clientePlantilla")Cliente cliente,
+            @ModelAttribute("clientePlantilla") Cliente cliente,
             BindingResult posiblesErrores,
-            HttpSession sesion
+            @RequestParam("pais") String siglaPais,
+            HttpSession sesion,
+            Model model
     ){
+        // Añadir la lista de países al modelo
+        model.addAttribute("listaP", paisRepository.findAll());
+
+        // Obtener la sigla del país seleccionado en el formulario
+
+        System.out.println(siglaPais);
+        String cadenaRota = siglaPais.split(",")[0];
+
+        // Buscar el país en la base de datos por su sigla
+        Pais paisSeleccionado = paisRepository.findBySiglas(cadenaRota);
+
+        // Si se encuentra el país, asignarlo al cliente
+        if (paisSeleccionado != null) {
+            cliente.setPais(paisSeleccionado);
+            sesion.setAttribute("datos_personales", cliente);
+        } else {
+            model.addAttribute("error", "Usuario no existente");
+        }
+
         if (posiblesErrores.hasErrors()) {
             System.out.println(posiblesErrores.getAllErrors());
             return "paso1";
         }
         else {
+            System.out.println(cliente.toString());
             sesion.setAttribute("datos_personales", cliente);
             return "redirect:/registro/paso2";
         }
@@ -115,6 +148,7 @@ public class ControladorRegistroCliente {
     ){
         if (sesion.getAttribute("datos_usuario")!=null){
             cliente=(Cliente) sesion.getAttribute("datos_usuario");
+
             model.addAttribute("clientePlantilla", cliente);
         }else model.addAttribute("clientePlantilla",cliente);
         return "paso3";
@@ -144,12 +178,12 @@ public class ControladorRegistroCliente {
                               Model model,
                               HttpSession sesion
     ){
+
         int comprobador=0;
         if (sesion.getAttribute("datos_personales")!=null) {
             Cliente datos_personales = (Cliente) sesion.getAttribute("datos_personales");
             cliente.setGenero(datos_personales.getGenero());
             cliente.setFechaNacimiento(datos_personales.getFechaNacimiento());
-            cliente.setPais(datos_personales.getPais());
             cliente.setTipoDocumentoCliente(datos_personales.getTipoDocumentoCliente());
             cliente.setDocumento(datos_personales.getDocumento());
             cliente.setNombre(datos_personales.getNombre());

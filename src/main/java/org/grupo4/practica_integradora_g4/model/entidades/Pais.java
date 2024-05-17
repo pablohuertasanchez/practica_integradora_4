@@ -6,7 +6,7 @@ import lombok.*;
 import java.io.Serializable;
 import java.util.UUID;
 
-@AllArgsConstructor
+
 @RequiredArgsConstructor
 @Getter
 @Setter
@@ -14,9 +14,12 @@ import java.util.UUID;
 @Data
 public class Pais {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+
     private String nombre;
     private String siglas;
 
+    public Pais(String nombre, String siglas) {
+        this.nombre = nombre;
+        this.siglas = siglas;
+    }
 }
