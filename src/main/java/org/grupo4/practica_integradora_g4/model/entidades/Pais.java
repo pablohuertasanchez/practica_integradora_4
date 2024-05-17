@@ -1,11 +1,10 @@
 package org.grupo4.practica_integradora_g4.model.entidades;
 
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -15,6 +14,8 @@ import java.io.Serializable;
 @Data
 public class Pais {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     private String nombre;
     private String siglas;
 

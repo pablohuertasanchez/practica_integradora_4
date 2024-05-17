@@ -3,6 +3,7 @@ package org.grupo4.practica_integradora_g4.controller;
 import jakarta.servlet.http.HttpSession;
 import org.grupo4.practica_integradora_g4.extras.Colecciones;
 import org.grupo4.practica_integradora_g4.model.entidades.Cliente;
+import org.grupo4.practica_integradora_g4.model.entidades.Pais;
 import org.grupo4.practica_integradora_g4.model.entidades.Usuario;
 import org.grupo4.practica_integradora_g4.model.extra.DatosContacto;
 import org.grupo4.practica_integradora_g4.model.extra.DatosPersonales;
@@ -57,6 +58,7 @@ public class ControladorRegistroCliente {
 
         return "paso1";
     }
+
     @PostMapping("paso1")
     private String paso1Post(
             @Validated({DatosPersonales.class})
@@ -73,6 +75,7 @@ public class ControladorRegistroCliente {
             return "redirect:/registro/paso2";
         }
     }
+
 
     //PASO 2
     @GetMapping("paso2")
@@ -164,11 +167,13 @@ public class ControladorRegistroCliente {
             Cliente datos_usuario = (Cliente) sesion.getAttribute("datos_usuario");
             //cliente.setUsuario(datos_usuario.getUsuario());
             cliente.setComentarios(datos_usuario.getComentarios());
-            Usuario usuAut = (Usuario) sesion.getAttribute("usuarioAut");
-            cliente.setUsuarioEmail(usuAut);
+
             //cliente.setLicencia(datos_usuario.isLicencia());
             comprobador++;
         }
+        Usuario usuAut = (Usuario) sesion.getAttribute("usuarioAut");
+        cliente.setUsuarioEmail(usuAut);
+        System.out.println(cliente.toString());
         model.addAttribute("clientePlantilla", cliente);
         sesion.setAttribute("clienteFinal",cliente);
         if (comprobador==3){
