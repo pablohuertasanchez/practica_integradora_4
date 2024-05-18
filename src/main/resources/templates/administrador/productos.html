@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Productos</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<h1>Lista de Productos</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Unidades Vendidas</th>
+        <th>Gasto Acumulado</th>
+        <th>Cantidad en Almacén</th>
+        <th>Umbral de Solicitud al Proveedor</th>
+        <th>Umbral Oculto en Tienda</th>
+        <th>En Oferta</th>
+        <th>Descuento</th>
+        <th>Es Novedad</th>
+        <th>Valoración del Producto</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Imágenes</th>
+        <th>Comentarios</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="producto : ${productosPrueba}">
+        <td th:text="${producto.descripcion}"></td>
+        <td th:text="${producto.precio}"></td>
+        <td th:text="${producto.unidadesVendidas}"></td>
+        <td th:text="${producto.gastoAcumulado}"></td>
+        <td th:text="${producto.cantidadAlmacen}"></td>
+        <td th:text="${producto.umbralSolicitudProveedor}"></td>
+        <td th:text="${producto.umbralOcultoEnTienda}"></td>
+        <td th:text="${producto.enOferta} ? 'Sí' : 'No'"></td>
+        <td th:text="${producto.descuento}"></td>
+        <td th:text="${producto.esNovedad} ? 'Sí' : 'No'"></td>
+        <td th:text="${producto.valoracionProducto}"></td>
+        <td th:text="${producto.marca}"></td>
+        <td th:text="${producto.modelo}"></td>
+        <td>
+            <ul>
+                <li th:each="imagen : ${producto.imagenes}" th:text="${imagen}"></li>
+            </ul>
+        </td>
+        <td th:text="${producto.comentarios}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

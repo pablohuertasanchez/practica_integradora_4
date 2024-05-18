@@ -25,13 +25,10 @@ public class ControladorLoginUsuarioAdministrador {
                                  HttpSession sesion){
         if (Colecciones.getUsuariosAdmin().containsKey(email)) {
             if (Colecciones.getUsuariosAdmin().get(email).getClave().equals(clave)) {
-                return "redirect:/administrador";
+                return "redirect:/administrador/inicio";
             }
         }
         return "loginAdmin/loginAdmin.html";
     }
-    @GetMapping("/administrador")
-    public String getAdministracion(){
-        return "loginAdmin/administracion.html";
-    }
+
 }
