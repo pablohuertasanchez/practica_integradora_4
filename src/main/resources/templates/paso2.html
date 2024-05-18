@@ -15,9 +15,9 @@
 </header><form action="/registro/paso2" method="post" th:object="${clientePlantilla}">
   <fieldset>
     <legend>Datos de contacto:</legend>
-    <label for="telefonoMovil" >Teléfono Móvil: </label>
+  <!--  <label for="telefonoMovil" >Teléfono Móvil: </label>
     <input placeholder="999 999 999.." type="text" th:field="*{telefonoMovil}"/>
-    <div th:errors="*{telefonoMovil}" class="error"></div>
+    <div th:errors="*{telefonoMovil}" class="error"></div> -->
     <br>
 
 <!--    <label for="direccion" >Direccion: </label>-->
@@ -29,15 +29,15 @@
           <label for="numero" >Numero: </label>
           <input placeholder="46" type="text" th:field="*{direcciones.numero}" />
           <label for="portal" >Portal: </label>
-          <input placeholder="5" type="text" name="portal" id="portal"/>
+          <input placeholder="5" type="text" th:field="*{direcciones.portal}"/>
           <label for="planta" >Planta: </label>
-          <input placeholder="3" type="text" name="planta" id="planta"/>
+          <input placeholder="3" type="text" th:field="*{direcciones.planta}"/>
           <label for="localidad" >Localidad: </label>
-          <input placeholder="Aranjuez" type="text" name="localidad" id="localidad"/>
+          <input placeholder="Aranjuez" type="text" th:field="*{direcciones.localidad}"/>
           <label for="region" >Region: </label>
-          <input placeholder="Madrid" type="text" name="region" id="region"/>
+          <input placeholder="Madrid" type="text" th:field="*{direcciones.region}"/>
           <label for="codPostal" >Código Postal: </label>
-          <input placeholder="28000" type="text" name="codPostal" id="codPostal"/>
+          <input placeholder="28000" type="text" th:field="*{direcciones.codigoPostal}"/>
       </fieldset>
 
     <div th:errors="*{direcciones}" class="error"></div>

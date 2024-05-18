@@ -2,10 +2,7 @@ package org.grupo4.practica_integradora_g4.controller;
 
 import jakarta.servlet.http.HttpSession;
 import org.grupo4.practica_integradora_g4.extras.Colecciones;
-import org.grupo4.practica_integradora_g4.model.entidades.Cliente;
-import org.grupo4.practica_integradora_g4.model.entidades.Genero;
-import org.grupo4.practica_integradora_g4.model.entidades.Pais;
-import org.grupo4.practica_integradora_g4.model.entidades.Usuario;
+import org.grupo4.practica_integradora_g4.model.entidades.*;
 import org.grupo4.practica_integradora_g4.model.extra.DatosContacto;
 import org.grupo4.practica_integradora_g4.model.extra.DatosPersonales;
 import org.grupo4.practica_integradora_g4.model.extra.DatosUsuario;
@@ -22,6 +19,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 
@@ -138,6 +136,8 @@ public class ControladorRegistroCliente {
                                Model model,
                                 HttpSession sesion
     ){
+        System.out.println(cliente
+                .toString());
         if (sesion.getAttribute("datos_contacto")!=null){
             cliente=(Cliente) sesion.getAttribute("datos_contacto");
             model.addAttribute("clientePlantilla", cliente);
@@ -157,6 +157,7 @@ public class ControladorRegistroCliente {
             return "paso2";
         }
         else {
+            System.out.println(cliente.toString());
             sesion.setAttribute("datos_contacto", cliente);
             return "redirect:/registro/paso3";
         }
@@ -167,12 +168,16 @@ public class ControladorRegistroCliente {
     private String paso3Get(Cliente cliente,
                             Model model,
                             HttpSession sesion
+
     ){
+
+
         if (sesion.getAttribute("datos_usuario")!=null){
             cliente=(Cliente) sesion.getAttribute("datos_usuario");
 
             model.addAttribute("clientePlantilla", cliente);
         }else model.addAttribute("clientePlantilla",cliente);
+
         return "paso3";
     }
 
@@ -188,11 +193,24 @@ public class ControladorRegistroCliente {
             return "paso3";
         }
         else {
+            // Procesar las tarjetas de crédito y agregar al cliente
+
+            Set<TarjetaCredito> tarjetasCredito = cliente.getTarjetasCredito();
+            System.out.println(cliente.toString());
+
+            if (tarjetasCredito != null) {
+                for (TarjetaCredito tarjeta : tarjetasCredito) {
+                    tarjeta.setCliente(cliente);
+                }
+            }
+
+            // Guardar el cliente en la base de datos, si es necesario
+            // clienteService.save(cliente);
+            System.out.println(cliente.toString());
             sesion.setAttribute("datos_usuario", cliente);
             return "redirect:/registro/resumen";
         }
     }
-
 
 
     @GetMapping("resumen")
@@ -216,7 +234,7 @@ public class ControladorRegistroCliente {
         if (sesion.getAttribute("datos_contacto")!=null) {
             Cliente datos_contacto = (Cliente) sesion.getAttribute("datos_contacto");
             cliente.setDirecciones(datos_contacto.getDirecciones());
-            cliente.setTelefonoMovil(datos_contacto.getTelefonoMovil());
+//            cliente.setTelefonoMovil(datos_contacto.getTelefonoMovil());
             comprobador++;
         }
         if (sesion.getAttribute("datos_usuario")!=null) {
@@ -224,7 +242,6 @@ public class ControladorRegistroCliente {
             Cliente datos_usuario = (Cliente) sesion.getAttribute("datos_usuario");
             //cliente.setUsuario(datos_usuario.getUsuario());
             cliente.setComentarios(datos_usuario.getComentarios());
-
             //cliente.setLicencia(datos_usuario.isLicencia());
             comprobador++;
         }

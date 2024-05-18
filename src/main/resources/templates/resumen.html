@@ -51,9 +51,9 @@
         <th:text class="pre">direccion: </th:text>
         <th:block th:text="*{direcciones.numero}"></th:block>
         <br>
-        <th:text class="pre">telefonoMovil: </th:text>
+    <!--    <th:text class="pre">telefonoMovil: </th:text>
         <th:block th:text="*{telefonoMovil}"></th:block>
-        <br>
+        <br> -->
     </fieldset>
 
     <fieldset>
@@ -65,9 +65,10 @@
         <th:text class="pre">direccionesEntrega: </th:text>
         <th:block th:text="*{direccionesEntrega}"></th:block>
         <br>
-        <th:text class="pre">tarjetasCredito: </th:text>
-        <th:block th:text="*{tarjetasCredito}"></th:block>
+      <!--  <th:text class="pre">tarjetasCredito: </th:text>
+        <th:block th:text="*{tarjetasCredito[0].tipoTarjetaCredito} , *{tarjetasCredito[1].tipoTarjetaCredito}"></th:block>
         <br>
+        -->
         <th:text class="pre">gastoAcumuladoCliente: </th:text>
         <th:block th:text="*{gastoAcumuladoCliente}"></th:block>
         <br>

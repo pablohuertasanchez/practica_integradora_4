@@ -11,6 +11,7 @@ import org.grupo4.practica_integradora_g4.model.extra.DatosUsuario;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -22,6 +23,7 @@ import java.util.UUID;
 @Entity
 @Data
 public class Cliente {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -55,9 +57,9 @@ public class Cliente {
     )
     private Direccion direcciones;
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Direccion> direccionesEntrega;
-    @NotBlank ( groups = DatosContacto.class)
-    private String telefonoMovil;
+    private Set<Direccion> direccionesEntrega = new HashSet<>();
+ //   @NotBlank ( groups = DatosContacto.class)
+  //  private String telefonoMovil;
 
     //DATOS DE CLIENTE
     @OneToOne
@@ -68,7 +70,8 @@ public class Cliente {
     private Usuario usuarioEmail;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<TarjetaCredito> tarjetasCredito;
+    private Set<TarjetaCredito> tarjetasCredito ;
+
 
     private BigDecimal gastoAcumuladoCliente;
 
@@ -91,4 +94,9 @@ public class Cliente {
 
     @NotBlank ( groups = DatosUsuario.class)
     private String comentarios;
+   /* public Cliente() {
+        this.tarjetasCredito = new HashSet<>();
+        this.tarjetasCredito.add(new TarjetaCredito()); // Agregar una tarjeta por defecto
+    }*/
 }
+
