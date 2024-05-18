@@ -4,17 +4,18 @@ services:
     container_name: 'contiene_mongo'
     environment:
       - 'MONGO_INITDB_DATABASE=mydatabase'
-      - 'MONGO_INITDB_ROOT_PASSWORD=secret'
-      - 'MONGO_INITDB_ROOT_USERNAME=root'
+#      - 'MONGO_INITDB_ROOT_PASSWORD=secret'
+#      - 'MONGO_INITDB_ROOT_USERNAME=root'
     ports:
       - '27017:27017'
-#  mysql:
- #   image: 'mysql:latest'
-  #  container_name: 'contiene_mysql'
-  #  environment:
-   #   - 'MYSQL_DATABASE=integradora'
-   #   - 'MYSQL_PASSWORD=admin'
-   #   - 'MYSQL_ROOT_PASSWORD=admin'
-   #   - 'MYSQL_USER=root'
-   # ports:
-   #   - '3306:3306'
+#    volumes:
+#      - './productos.json:/data/db/productos.json'  # Monta el archivo JSON como un volumen
+
+  mysql:
+    image: 'mysql:latest'
+    container_name: 'contiene_mysql'
+    environment:
+      - 'MYSQL_DATABASE=integradora'
+      - 'MYSQL_ROOT_PASSWORD=admin'
+    ports:
+      - '3306:3306'
