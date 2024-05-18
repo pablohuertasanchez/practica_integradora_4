@@ -184,20 +184,22 @@ public class ControladorRegistroCliente {
     @PostMapping("paso3")
     private String paso3Post(
             @Validated({DatosUsuario.class})
-            @ModelAttribute("clientePlantilla")Cliente cliente,
+            @ModelAttribute("clientePlantilla") Cliente cliente,
             BindingResult posiblesErrores,
             HttpSession sesion
     ){
         if (posiblesErrores.hasErrors()) {
             System.out.println(posiblesErrores.getAllErrors());
             return "paso3";
-        }
-        else {
+        } else {
+            // El objeto cliente ya contiene las tarjetas de crédito ingresadas en el formulario
+            // Puedes acceder a ellas directamente desde el objeto cliente
+
+            // Por ejemplo, puedes iterar sobre las tarjetas de crédito y hacer algo con ellas
+
+
             // Procesar las tarjetas de crédito y agregar al cliente
-
             Set<TarjetaCredito> tarjetasCredito = cliente.getTarjetasCredito();
-            System.out.println(cliente.toString());
-
             if (tarjetasCredito != null) {
                 for (TarjetaCredito tarjeta : tarjetasCredito) {
                     tarjeta.setCliente(cliente);
@@ -206,6 +208,7 @@ public class ControladorRegistroCliente {
 
             // Guardar el cliente en la base de datos, si es necesario
             // clienteService.save(cliente);
+
             System.out.println(cliente.toString());
             sesion.setAttribute("datos_usuario", cliente);
             return "redirect:/registro/resumen";

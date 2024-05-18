@@ -18,7 +18,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
-@RequiredArgsConstructor
+
 @ToString
 @Entity
 @Data
@@ -70,7 +70,7 @@ public class Cliente {
     private Usuario usuarioEmail;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<TarjetaCredito> tarjetasCredito ;
+    private Set<TarjetaCredito> tarjetasCredito = new HashSet<>(1) ;
 
 
     private BigDecimal gastoAcumuladoCliente;
@@ -94,9 +94,9 @@ public class Cliente {
 
     @NotBlank ( groups = DatosUsuario.class)
     private String comentarios;
-   /* public Cliente() {
+    public Cliente() {
         this.tarjetasCredito = new HashSet<>();
         this.tarjetasCredito.add(new TarjetaCredito()); // Agregar una tarjeta por defecto
-    }*/
+    }
 }
 
