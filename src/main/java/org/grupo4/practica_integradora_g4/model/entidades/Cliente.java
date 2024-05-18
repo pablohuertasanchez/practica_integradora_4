@@ -48,8 +48,12 @@ public class Cliente {
     private String apellidos;
 
     //DATOS DE CONTACTO
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Direccion> direcciones;
+    @OneToOne
+    @JoinColumn(
+            name = "direccion_personal",
+            foreignKey = @ForeignKey(name = "FK_cli_direccion_direccionPersonal")
+    )
+    private Direccion direcciones;
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Direccion> direccionesEntrega;
     @NotBlank ( groups = DatosContacto.class)

@@ -205,6 +205,7 @@ public class ControladorRegistroCliente {
         if (sesion.getAttribute("datos_personales")!=null) {
             Cliente datos_personales = (Cliente) sesion.getAttribute("datos_personales");
             cliente.setGenero(datos_personales.getGenero());
+            cliente.setPais(datos_personales.getPais());
             cliente.setFechaNacimiento(datos_personales.getFechaNacimiento());
             cliente.setTipoDocumentoCliente(datos_personales.getTipoDocumentoCliente());
             cliente.setDocumento(datos_personales.getDocumento());
@@ -244,6 +245,7 @@ public class ControladorRegistroCliente {
             HttpSession sesion
     ){
         Cliente cliente = (Cliente) sesion.getAttribute("clienteFinal");
+        System.out.println(cliente.toString());
         model.addAttribute("clientePlantilla", cliente);
 
         if (registroCompleto) {
