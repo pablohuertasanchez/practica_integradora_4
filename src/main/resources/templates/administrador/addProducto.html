@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Añadir Producto</title>
+    <link rel="stylesheet" th:href="@{/css/estilosAddProducto.css}">
+</head>
+<body>
+<header>
+    <nav th:replace="~{fragments/cabeceraAdmin}"></nav>
+</header>
+<main>
+    <h2>Añadir Producto</h2>
+    <form th:action="@{/administrador/productos}" th:object="${nuevoProducto}" method="post" class="form-container">
+        <div class="form-group">
+            <label>Descripción:</label>
+            <input type="text" th:field="*{descripcion}" />
+            <div class="error" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}">Descripción Error</div>
+        </div>
+        <div class="form-group">
+            <label>Precio:</label>
+            <input type="text" th:field="*{precio}" />
+            <div class="error" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}">Precio Error</div>
+        </div>
+        <div class="form-group">
+            <label>Unidades Vendidas:</label>
+            <input type="text" th:field="*{unidadesVendidas}" />
+            <div class="error" th:if="${#fields.hasErrors('unidadesVendidas')}" th:errors="*{unidadesVendidas}">Unidades Vendidas Error</div>
+        </div>
+        <div class="form-group">
+            <label>Gasto Acumulado:</label>
+            <input type="text" th:field="*{gastoAcumulado}" />
+            <div class="error" th:if="${#fields.hasErrors('gastoAcumulado')}" th:errors="*{gastoAcumulado}">Gasto Acumulado Error</div>
+        </div>
+        <div class="form-group">
+            <label>Cantidad Almacén:</label>
+            <input type="text" th:field="*{cantidadAlmacen}" />
+            <div class="error" th:if="${#fields.hasErrors('cantidadAlmacen')}" th:errors="*{cantidadAlmacen}">Cantidad Almacén Error</div>
+        </div>
+        <div class="form-group">
+            <label>Umbral Solicitud Proveedor:</label>
+            <input type="text" th:field="*{umbralSolicitudProveedor}" />
+            <div class="error" th:if="${#fields.hasErrors('umbralSolicitudProveedor')}" th:errors="*{umbralSolicitudProveedor}">Umbral Solicitud Proveedor Error</div>
+        </div>
+        <div class="form-group">
+            <label>Umbral Oculto En Tienda:</label>
+            <input type="text" th:field="*{umbralOcultoEnTienda}" />
+            <div class="error" th:if="${#fields.hasErrors('umbralOcultoEnTienda')}" th:errors="*{umbralOcultoEnTienda}">Umbral Oculto En Tienda Error</div>
+        </div>
+        <div class="form-group">
+            <label>En Oferta:</label>
+            <input type="checkbox" th:field="*{enOferta}" />
+            <div class="error" th:if="${#fields.hasErrors('enOferta')}" th:errors="*{enOferta}">En Oferta Error</div>
+        </div>
+        <div class="form-group">
+            <label>Descuento:</label>
+            <input type="text" th:field="*{descuento}" />
+            <div class="error" th:if="${#fields.hasErrors('descuento')}" th:errors="*{descuento}">Descuento Error</div>
+        </div>
+        <div class="form-group">
+            <label>Es Novedad:</label>
+            <input type="checkbox" th:field="*{esNovedad}" />
+            <div class="error" th:if="${#fields.hasErrors('esNovedad')}" th:errors="*{esNovedad}">Es Novedad Error</div>
+        </div>
+        <div class="form-group">
+            <label>Valoración Producto:</label>
+            <input type="text" th:field="*{valoracionProducto}" />
+            <div class="error" th:if="${#fields.hasErrors('valoracionProducto')}" th:errors="*{valoracionProducto}">Valoración Producto Error</div>
+        </div>
+        <div class="form-group">
+            <label>Marca:</label>
+            <input type="text" th:field="*{marca}" />
+            <div class="error" th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}">Marca Error</div>
+        </div>
+        <div class="form-group">
+            <label>Modelo:</label>
+            <input type="text" th:field="*{modelo}" />
+            <div class="error" th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}">Modelo Error</div>
+        </div>
+        <div class="form-group">
+            <label>Comentarios:</label>
+            <input type="text" th:field="*{comentarios}" />
+            <div class="error" th:if="${#fields.hasErrors('comentarios')}" th:errors="*{comentarios}">Comentarios Error</div>
+        </div>
+        <button type="submit">Añadir Producto</button>
+    </form>
+</main>
+</body>
+</html>

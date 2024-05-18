@@ -17,8 +17,9 @@ public class MeteDatos {
 
     @PostConstruct
     public void init() {
+        productoRepository.deleteAll();
         Producto producto1 = new Producto();
-        producto1.setDescripcion("Camiseta");
+        producto1.setDescripcion("coche");
         producto1.setPrecio(new BigDecimal("19.99"));
         producto1.setUnidadesVendidas(100);
         producto1.setGastoAcumulado(new BigDecimal("1999.00"));

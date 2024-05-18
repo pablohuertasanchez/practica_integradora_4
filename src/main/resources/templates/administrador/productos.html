@@ -1,68 +1,60 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
     <title>Lista de Productos</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/estilosAddProducto.css}">
 </head>
 <body>
-<h1>Lista de Productos</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Descripción</th>
-        <th>Precio</th>
-        <th>Unidades Vendidas</th>
-        <th>Gasto Acumulado</th>
-        <th>Cantidad en Almacén</th>
-        <th>Umbral de Solicitud al Proveedor</th>
-        <th>Umbral Oculto en Tienda</th>
-        <th>En Oferta</th>
-        <th>Descuento</th>
-        <th>Es Novedad</th>
-        <th>Valoración del Producto</th>
-        <th>Marca</th>
-        <th>Modelo</th>
-        <th>Imágenes</th>
-        <th>Comentarios</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="producto : ${productosPrueba}">
-        <td th:text="${producto.descripcion}"></td>
-        <td th:text="${producto.precio}"></td>
-        <td th:text="${producto.unidadesVendidas}"></td>
-        <td th:text="${producto.gastoAcumulado}"></td>
-        <td th:text="${producto.cantidadAlmacen}"></td>
-        <td th:text="${producto.umbralSolicitudProveedor}"></td>
-        <td th:text="${producto.umbralOcultoEnTienda}"></td>
-        <td th:text="${producto.enOferta} ? 'Sí' : 'No'"></td>
-        <td th:text="${producto.descuento}"></td>
-        <td th:text="${producto.esNovedad} ? 'Sí' : 'No'"></td>
-        <td th:text="${producto.valoracionProducto}"></td>
-        <td th:text="${producto.marca}"></td>
-        <td th:text="${producto.modelo}"></td>
-        <td>
-            <ul>
-                <li th:each="imagen : ${producto.imagenes}" th:text="${imagen}"></li>
-            </ul>
-        </td>
-        <td th:text="${producto.comentarios}"></td>
-    </tr>
-    </tbody>
-</table>
+<header>
+    <nav th:replace="~{fragments/cabeceraAdmin}"></nav>
+</header>
+<main>
+    <h1>Lista de Productos</h1>
+    <a class="btn" th:href="@{/administrador/productos/add}">Añadir Producto</a>
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Unidades Vendidas</th>
+                <th>Gasto Acumulado</th>
+                <th>Cantidad Almacén</th>
+                <th>Umbral Solicitud Proveedor</th>
+                <th>Umbral Oculto En Tienda</th>
+                <th>En Oferta</th>
+                <th>Descuento</th>
+                <th>Es Novedad</th>
+                <th>Valoración Producto</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Comentarios</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="producto : ${productos}">
+                <td th:text="${producto.descripcion}">Descripción</td>
+                <td th:text="${producto.precio}">Precio</td>
+                <td th:text="${producto.unidadesVendidas}">Unidades Vendidas</td>
+                <td th:text="${producto.gastoAcumulado}">Gasto Acumulado</td>
+                <td th:text="${producto.cantidadAlmacen}">Cantidad Almacén</td>
+                <td th:text="${producto.umbralSolicitudProveedor}">Umbral Solicitud Proveedor</td>
+                <td th:text="${producto.umbralOcultoEnTienda}">Umbral Oculto En Tienda</td>
+                <td th:text="${producto.enOferta} ? 'Sí' : 'No'">En Oferta</td>
+                <td th:text="${producto.descuento}">Descuento</td>
+                <td th:text="${producto.esNovedad} ? 'Sí' : 'No'">Es Novedad</td>
+                <td th:text="${producto.valoracionProducto}">Valoración Producto</td>
+                <td th:text="${producto.marca}">Marca</td>
+                <td th:text="${producto.modelo}">Modelo</td>
+                <td th:text="${producto.comentarios}">Comentarios</td>
+                <td>
+                    <a class="btn-danger" th:href="@{/administrador/productos/eliminar(id=${producto.id})}">Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
 </body>
 </html>

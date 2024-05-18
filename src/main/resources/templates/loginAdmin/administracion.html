@@ -4,18 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Principal</title>
-    <link rel="stylesheet" th:href="@{/css/administracion.css}">
+    <link rel="stylesheet" th:href="@{/css/estilosAddProducto.css}">
+
 </head>
 <body>
 <header>
-    <nav>
-        <ul>
-            <li><a href="#">Clientes</a></li>
-            <li><a href="#">Productos</a></li>
-            <li><a href="#">Cerrar Sesión</a></li>
-        </ul>
-    </nav>
+    <nav th:replace="~{fragments/cabeceraAdmin}"></nav>
 </header>
+
 
 <div class="content">
     <h1>Página de administración</h1>

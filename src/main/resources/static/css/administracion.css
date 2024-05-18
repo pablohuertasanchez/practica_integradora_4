@@ -33,3 +33,8 @@ nav ul li a:hover {
 .content {
     padding: 20px;
 }
+.error {
+    color: red;
+    margin-top: 5px;
+    font-style: italic;
+}
