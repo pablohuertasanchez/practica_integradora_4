@@ -25,10 +25,10 @@
         <!--GENERO (RADIO)-->
         <label>Género:</label>
         <div class="radio-buttons">
-            <th:block th:each="g : ${listaGeneros}">
+            <th:block th:each="g : ${listaG}">
                 <label class="radio-label">
-                    <input type="radio" name="genero" th:id="${g.getKey()}" th:value="${g.getKey()}" th:field="*{genero}">
-                    <span th:text="${g.getValue()}"></span>
+                    <input type="radio"   th:value="${g.siglas}" th:field="*{genero}">
+                    <span th:text="${g.gen}"></span>
                 </label>
             </th:block>
         </div>

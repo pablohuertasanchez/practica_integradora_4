@@ -3,12 +3,15 @@ package org.grupo4.practica_integradora_g4.controller;
 import jakarta.servlet.http.HttpSession;
 import org.grupo4.practica_integradora_g4.extras.Colecciones;
 import org.grupo4.practica_integradora_g4.model.entidades.Cliente;
+import org.grupo4.practica_integradora_g4.model.entidades.Genero;
 import org.grupo4.practica_integradora_g4.model.entidades.Pais;
 import org.grupo4.practica_integradora_g4.model.entidades.Usuario;
 import org.grupo4.practica_integradora_g4.model.extra.DatosContacto;
 import org.grupo4.practica_integradora_g4.model.extra.DatosPersonales;
 import org.grupo4.practica_integradora_g4.model.extra.DatosUsuario;
+import org.grupo4.practica_integradora_g4.repositories.GeneroRepository;
 import org.grupo4.practica_integradora_g4.repositories.PaisRepository;
+import org.grupo4.practica_integradora_g4.services.GeneroService;
 import org.grupo4.practica_integradora_g4.services.PaisService;
 import org.grupo4.practica_integradora_g4.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +31,11 @@ public class ControladorRegistroCliente {
     @Autowired
     private PaisService paisService;
     @Autowired
+    private GeneroService generoService;
+    @Autowired
     private PaisRepository paisRepository;
+    @Autowired
+    private GeneroRepository generoRepository;
 
     @ModelAttribute("listaGeneros")
     private Map<String, String> getGeneros(){return Colecciones.getGeneros();}
@@ -59,9 +66,14 @@ public class ControladorRegistroCliente {
             Pais pais = new Pais(nombre, siglas);
             paisService.save(pais);
         });
+        Colecciones.getGeneros().forEach((siglas, gen) -> {
+            Genero genero = new Genero(gen, siglas);
+            generoService.save(genero);
+        });
 
         // Añadir la lista de países al modelo
         model.addAttribute("listaP",paisRepository.findAll());
+        model.addAttribute("listaG",generoRepository.findAll());
         if (sesion.getAttribute("datos_personales")!=null){
             cliente=(Cliente) sesion.getAttribute("datos_personales");
             model.addAttribute("clientePlantilla", cliente);
@@ -76,26 +88,36 @@ public class ControladorRegistroCliente {
             @ModelAttribute("clientePlantilla") Cliente cliente,
             BindingResult posiblesErrores,
             @RequestParam("pais") String siglaPais,
+            @RequestParam("genero") String siglaGenero,
             HttpSession sesion,
             Model model
     ){
-        // Añadir la lista de países al modelo
+        // Añadir la lista de países y generos al modelo
         model.addAttribute("listaP", paisRepository.findAll());
+        model.addAttribute("listaG", generoRepository.findAll());
 
-        // Obtener la sigla del país seleccionado en el formulario
+        // Obtener la sigla del país  y genero seleccionado en el formulario
 
         System.out.println(siglaPais);
-        String cadenaRota = siglaPais.split(",")[0];
+        String cadenaRotaPais = siglaPais.split(",")[0];
+        System.out.println(siglaGenero);
 
-        // Buscar el país en la base de datos por su sigla
-        Pais paisSeleccionado = paisRepository.findBySiglas(cadenaRota);
 
+        // Buscar el país y genero en la base de datos por su sigla
+        Pais paisSeleccionado = paisRepository.findBySiglas(cadenaRotaPais);
+        Genero generoSeleccionado = generoRepository.findBySiglas(siglaGenero);
         // Si se encuentra el país, asignarlo al cliente
         if (paisSeleccionado != null) {
             cliente.setPais(paisSeleccionado);
             sesion.setAttribute("datos_personales", cliente);
         } else {
-            model.addAttribute("error", "Usuario no existente");
+            model.addAttribute("error", "Pais no existente");
+        }
+        if (generoSeleccionado != null) {
+            cliente.setGenero(generoSeleccionado);
+            sesion.setAttribute("datos_personales", cliente);
+        } else {
+            model.addAttribute("error", "Pais no existente");
         }
 
         if (posiblesErrores.hasErrors()) {
