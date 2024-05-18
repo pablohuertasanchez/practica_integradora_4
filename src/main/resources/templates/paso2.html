@@ -17,7 +17,7 @@
     <legend>Datos de contacto:</legend>
 
     <label for="prefijo">Prefijo: </label>
-    <select id="prefijo" name="tratamiento_deseado">
+    <select id="prefijo" name="prefijo">
       <option th:each="p : ${listaPrefijos}"
               th:value="${p.key}"
               th:text="${p.value}">
@@ -31,8 +31,26 @@
     <div th:errors="*{telefonoMovil}" class="error"></div>
     <br>
 
-    <label for="direccion" >Direccion: </label>
-    <input placeholder="C/sjdfjk, 5, 3d" type="text" th:field="*{direcciones}"/>
+<!--    <label for="direccion" >Direccion: </label>-->
+<!--    <input placeholder="C/Alcalá, 5, 3d" type="text" th:field="*{direcciones}"/>-->
+
+
+      <fieldset id="fieldsetDireccion">
+          <legend>Dirección:</legend>
+          <label for="numero" >Numero: </label>
+          <input placeholder="46" type="text" name="numero" id="numero" />
+          <label for="portal" >Portal: </label>
+          <input placeholder="5" type="text" name="portal" id="portal"/>
+          <label for="planta" >Planta: </label>
+          <input placeholder="3" type="text" name="planta" id="planta"/>
+          <label for="localidad" >Localidad: </label>
+          <input placeholder="Aranjuez" type="text" name="localidad" id="localidad"/>
+          <label for="region" >Region: </label>
+          <input placeholder="Madrid" type="text" name="region" id="region"/>
+          <label for="codPostal" >Código Postal: </label>
+          <input placeholder="28000" type="text" name="codPostal" id="codPostal"/>
+      </fieldset>
+
     <div th:errors="*{direcciones}" class="error"></div>
     <br>
   </fieldset>
