@@ -26,6 +26,18 @@
         <input type="checkbox" value="true" id="licencia" th:field="*{licencia}"/>
         <div th:errors="*{licencia}" class="error"></div>
         <br>
+        <fieldset id="fieldsetTarjeta">
+            <legend>Tarjeta:</legend>
+            <label for="numero" >Numero: </label>
+            <input placeholder="AA00 0000 0000 0000" type="text" name="numero" id="numero" />
+            <label for="tipoTarjetaCredito" >Tipo de tarjerta de crédito: </label>
+            <input placeholder="Visa..." type="text" name="tipoTarjetaCredito" id="tipoTarjetaCredito"/>
+            <label for="cvv" >cvv: </label>
+            <input placeholder="123" type="text" name="cvv" id="cvv"/>
+            <label for="fechaCad" >Fecha de cadudcidad: </label>
+            <input placeholder="10-09-2027..." type="text" name="fechaCad" id="fechaCad"/>
+
+        </fieldset>
     </fieldset>
     <input type="submit" value="Guardar infortmación y pasar al siguente paso">
 </form>
