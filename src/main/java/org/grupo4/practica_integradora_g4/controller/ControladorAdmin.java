@@ -1,8 +1,10 @@
 package org.grupo4.practica_integradora_g4.controller;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-import org.grupo4.practica_integradora_g4.model.entidades.Producto;
-import org.grupo4.practica_integradora_g4.repositories.ProductoRepository;
+import org.grupo4.practica_integradora_g4.model.mongo.Producto;
+import org.grupo4.practica_integradora_g4.repositories.mongo.ProductoRepository;
+import org.grupo4.practica_integradora_g4.repositories.mongo.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,8 @@ public class ControladorAdmin {
 
     @Autowired
     private ProductoRepository productoRepository;
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     @GetMapping("/inicio")
     public String getAdministracion(){
@@ -30,14 +34,16 @@ public class ControladorAdmin {
     }
 
     @GetMapping("/productos/add")
-    public String getAgregarProducto(@ModelAttribute("nuevoProducto") Producto producto, Model model) {
+    public String getAgregarProducto(Model model) {
         model.addAttribute("nuevoProducto", new Producto());
+        model.addAttribute("categorias", categoriaRepository.findAll());
         return "administrador/addProducto";
     }
 
     @PostMapping("/productos")
-    public String agregarProducto(@Valid @ModelAttribute("nuevoProducto") Producto producto, BindingResult result) {
+    public String agregarProducto(@Valid @ModelAttribute("nuevoProducto") Producto producto, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("categorias", categoriaRepository.findAll());
             return "administrador/addProducto";
         }
         productoRepository.save(producto);
@@ -48,5 +54,11 @@ public class ControladorAdmin {
     public String eliminarProducto(@RequestParam String id) {
         productoRepository.deleteById(id);
         return "redirect:/administrador/productos";
+    }
+
+    @GetMapping("/cerrar_sesion")
+    public String cerrarSesion(HttpSession sesion) {
+        sesion.invalidate();
+        return "redirect:/loginAdmin";
     }
 }

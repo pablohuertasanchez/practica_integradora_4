@@ -1,7 +1,7 @@
 package org.grupo4.practica_integradora_g4.controller;
 
-import org.grupo4.practica_integradora_g4.model.entidades.Producto;
-import org.grupo4.practica_integradora_g4.repositories.ProductoRepository;
+import org.grupo4.practica_integradora_g4.model.mongo.Producto;
+import org.grupo4.practica_integradora_g4.repositories.mongo.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,9 +36,8 @@ public class ControladorMongo {
     }
 
 
-
     // Eliminar un producto
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/elimina/{id}")
     public ResponseEntity<Void> eliminarProducto(@PathVariable String id) {
         if (productoRepository.existsById(id)) {
             productoRepository.deleteById(id);

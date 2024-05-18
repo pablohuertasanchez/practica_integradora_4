@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Añadir Categoría</title>
+    <link rel="stylesheet" th:href="@{/css/estilosAddProducto.css}">
+</head>
+<body>
+<header>
+    <nav th:replace="~{fragments/cabeceraAdmin}"></nav>
+</header>
+<main>
+    <h2>Añadir Categoría</h2>
+    <form th:action="@{/categorias}" th:object="${nuevaCategoria}" method="post" class="form-container">
+        <div class="form-group">
+            <label>Nombre:</label>
+            <input type="text" th:field="*{nombre}" />
+        </div>
+        <div class="form-group">
+            <label>Descripción:</label>
+            <input type="text" th:field="*{descripcion}" />
+        </div>
+        <button type="submit">Añadir Categoría</button>
+    </form>
+</main>
+</body>
+</html>

@@ -1,8 +1,9 @@
-package org.grupo4.practica_integradora_g4.model.entidades;
+package org.grupo4.practica_integradora_g4.model.mongo;
 
 import jakarta.validation.constraints.*;
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.math.BigDecimal;
 import java.util.Set;
@@ -70,5 +71,9 @@ public class Producto {
 
     @Size(max = 255, message = "Los comentarios no pueden tener más de 255 caracteres")
     private String comentarios;
+
+//    @DBRef
+    @NotNull
+    private Categoria categoria;
 }
 

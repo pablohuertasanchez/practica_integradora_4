@@ -17,6 +17,7 @@
             <tr>
                 <th>Descripción</th>
                 <th>Precio</th>
+                <th>Categoría</th>
                 <th>Unidades Vendidas</th>
                 <th>Gasto Acumulado</th>
                 <th>Cantidad Almacén</th>
@@ -36,6 +37,7 @@
             <tr th:each="producto : ${productos}">
                 <td th:text="${producto.descripcion}">Descripción</td>
                 <td th:text="${producto.precio}">Precio</td>
+                <td th:text="${producto.categoria != null} ? ${producto.categoria.nombre} : 'No hay categoría seleccionada'">Categoría</td>
                 <td th:text="${producto.unidadesVendidas}">Unidades Vendidas</td>
                 <td th:text="${producto.gastoAcumulado}">Gasto Acumulado</td>
                 <td th:text="${producto.cantidadAlmacen}">Cantidad Almacén</td>
