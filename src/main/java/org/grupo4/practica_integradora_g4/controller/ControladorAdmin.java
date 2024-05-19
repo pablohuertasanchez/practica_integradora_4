@@ -9,11 +9,13 @@ import org.grupo4.practica_integradora_g4.repositories.UsuarioRepository;
 import org.grupo4.practica_integradora_g4.repositories.mongo.ProductoRepository;
 import org.grupo4.practica_integradora_g4.repositories.mongo.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 @Controller
@@ -39,11 +41,21 @@ public class ControladorAdmin {
 
     //PRODUCTOS
     @GetMapping("/productos")
-    public String listarProductos(HttpSession session,Model model) {
+    public String listarProductos(HttpSession session,Model model,
+                                  @RequestParam(required = false) String sortField,
+                                  @RequestParam(required = false) String sortDir) {
         if (session.getAttribute("usuario") == null) {
             return "redirect:/registro/paso1";
         }
-        model.addAttribute("productos", productoRepository.findAll());
+        Sort sort = Sort.by("cantidadAlmacen"); // default sort
+        if (sortField != null && sortDir != null) {
+            sort = sortDir.equals("asc") ? Sort.by(sortField).ascending() : Sort.by(sortField).descending();
+        }
+        model.addAttribute("productos", productoRepository.findAll(sort));
+        model.addAttribute("categorias", categoriaRepository.findAll());
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+
         model.addAttribute("usuario", session.getAttribute("usuario"));
         return "administrador/productos";
     }
@@ -68,6 +80,7 @@ public class ControladorAdmin {
             return "administrador/addProducto";
         }
         productoRepository.save(producto);
+
         model.addAttribute("usuario", session.getAttribute("usuario"));
         return "redirect:/administrador/productos";
     }
@@ -77,29 +90,69 @@ public class ControladorAdmin {
             return "redirect:/registro/paso1";
         }
         productoRepository.deleteById(id);
+
         model.addAttribute("usuario", session.getAttribute("usuario"));
         return "redirect:/administrador/productos";
     }
 
+    @GetMapping("/productos/categoria/{id}")
+    public String listarProductosPorCategoria(HttpSession session, @PathVariable String id, Model model) {
+        if (session.getAttribute("usuario") == null) {
+            return "redirect:/registro/paso1";
+        }
+        Categoria categoria = categoriaRepository.findById(id).orElse(null);
+        if (categoria != null) {
+            List<Producto> productos = productoRepository.findByCategoria(categoria);
+            model.addAttribute("productos", productos);
+            model.addAttribute("categoria", categoria);
+        } else {
+            model.addAttribute("productos", List.of());
+            model.addAttribute("categoria", null);
+        }
+
+        model.addAttribute("usuario", session.getAttribute("usuario"));
+        return "administrador/productosPorCategoria";
+    }
+
     //CATEGORIAS
     @GetMapping("/categorias")
-    public String listarCategorias(Model model) {
+    public String listarCategorias(HttpSession session, Model model) {
+        if (session.getAttribute("usuario") == null) {
+            return "redirect:/registro/paso1";
+        }
         model.addAttribute("categorias", categoriaRepository.findAll());
+
+        model.addAttribute("usuario", session.getAttribute("usuario"));
         return "administrador/listarCategorias";
     }
     @GetMapping("/categorias/add")
-    public String getAgregarCategoria(Model model) {
+    public String getAgregarCategoria(HttpSession session, Model model) {
+        if (session.getAttribute("usuario") == null) {
+            return "redirect:/registro/paso1";
+        }
         model.addAttribute("nuevaCategoria", new Categoria());
+
+        model.addAttribute("usuario", session.getAttribute("usuario"));
         return "administrador/addCategoria";
     }
     @PostMapping("/categorias")
-    public String agregarCategoria(@ModelAttribute Categoria categoria) {
+    public String agregarCategoria(HttpSession session, @ModelAttribute Categoria categoria, Model model) {
+        if (session.getAttribute("usuario") == null) {
+            return "redirect:/registro/paso1";
+        }
         categoriaRepository.save(categoria);
+
+        model.addAttribute("usuario", session.getAttribute("usuario"));
         return "redirect:/administrador/categorias";
     }
     @GetMapping("/categorias/eliminar")
-    public String eliminarCategoria(@RequestParam String id) {
+    public String eliminarCategoria(HttpSession session, @RequestParam String id, Model model) {
+        if (session.getAttribute("usuario") == null) {
+            return "redirect:/registro/paso1";
+        }
         categoriaRepository.deleteById(id);
+
+        model.addAttribute("usuario", session.getAttribute("usuario"));
         return "redirect:/administrador/categorias";
     }
 

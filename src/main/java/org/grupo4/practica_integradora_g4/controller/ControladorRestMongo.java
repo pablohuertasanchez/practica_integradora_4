@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/productos")
-public class ControladorMongo {
+public class ControladorRestMongo {
 
     @Autowired
     private ProductoRepository productoRepository;

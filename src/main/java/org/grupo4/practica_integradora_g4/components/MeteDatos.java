@@ -27,6 +27,7 @@ public class MeteDatos {
 
     @PostConstruct
     public void creaUsuariosAdmin() {
+//        usuarioRepository.deleteAll();
         if (usuarioRepository.count() == 0) {
             Usuario admin = new Usuario();
             admin.setEmail("root");
@@ -34,7 +35,14 @@ public class MeteDatos {
             admin.setConfirmarClave("admin");
             admin.setPregRec(" ");
             admin.setRespRec(" ");
+            Usuario admin2 = new Usuario();
+            admin2.setEmail("pablo");
+            admin2.setClave("huerta");
+            admin2.setConfirmarClave("huerta");
+            admin2.setPregRec(" ");
+            admin2.setRespRec(" ");
             usuarioRepository.save(admin);
+            usuarioRepository.save(admin2);
         }
     }
     @PostConstruct
