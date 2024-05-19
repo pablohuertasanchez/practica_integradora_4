@@ -8,6 +8,8 @@ import org.grupo4.practica_integradora_g4.model.mongo.Producto;
 import org.grupo4.practica_integradora_g4.repositories.UsuarioRepository;
 import org.grupo4.practica_integradora_g4.repositories.mongo.ProductoRepository;
 import org.grupo4.practica_integradora_g4.repositories.mongo.CategoriaRepository;
+import org.grupo4.practica_integradora_g4.service.CategoriaService;
+import org.grupo4.practica_integradora_g4.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -23,9 +25,11 @@ import java.util.List;
 public class ControladorAdmin {
 
     @Autowired
-    private ProductoRepository productoRepository;
+    private ProductoService productoService;
+
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private CategoriaService categoriaService;
+
     @Autowired
     private UsuarioRepository usuarioRepository;
 
@@ -41,7 +45,7 @@ public class ControladorAdmin {
 
     //PRODUCTOS
     @GetMapping("/productos")
-    public String listarProductos(HttpSession session,Model model,
+    public String listarProductos(HttpSession session, Model model,
                                   @RequestParam(required = false) String sortField,
                                   @RequestParam(required = false) String sortDir) {
         if (session.getAttribute("usuario") == null) {
@@ -51,8 +55,8 @@ public class ControladorAdmin {
         if (sortField != null && sortDir != null) {
             sort = sortDir.equals("asc") ? Sort.by(sortField).ascending() : Sort.by(sortField).descending();
         }
-        model.addAttribute("productos", productoRepository.findAll(sort));
-        model.addAttribute("categorias", categoriaRepository.findAll());
+        model.addAttribute("productos", productoService.findAll(sort));
+        model.addAttribute("categorias", categoriaService.findAll());
         model.addAttribute("sortField", sortField);
         model.addAttribute("sortDir", sortDir);
 
@@ -65,7 +69,7 @@ public class ControladorAdmin {
             return "administrador/errorAcceso";
         }
         model.addAttribute("nuevoProducto", new Producto());
-        model.addAttribute("categorias", categoriaRepository.findAll());
+        model.addAttribute("categorias", categoriaService.findAll());
         model.addAttribute("usuario", session.getAttribute("usuario"));
         return "administrador/addProducto";
     }
@@ -75,11 +79,11 @@ public class ControladorAdmin {
             return "administrador/errorAcceso";
         }
         if (result.hasErrors()) {
-            model.addAttribute("categorias", categoriaRepository.findAll());
+            model.addAttribute("categorias", categoriaService.findAll());
             model.addAttribute("usuario", session.getAttribute("usuario"));
             return "administrador/addProducto";
         }
-        productoRepository.save(producto);
+        productoService.save(producto);
 
         model.addAttribute("usuario", session.getAttribute("usuario"));
         return "redirect:/administrador/productos";
@@ -89,7 +93,7 @@ public class ControladorAdmin {
         if (session.getAttribute("usuario") == null) {
             return "administrador/errorAcceso";
         }
-        productoRepository.deleteById(id);
+        productoService.deleteById(id);
 
         model.addAttribute("usuario", session.getAttribute("usuario"));
         return "redirect:/administrador/productos";
@@ -100,9 +104,9 @@ public class ControladorAdmin {
         if (session.getAttribute("usuario") == null) {
             return "administrador/errorAcceso";
         }
-        Categoria categoria = categoriaRepository.findById(id).orElse(null);
+        Categoria categoria = categoriaService.findById(id).orElse(null);
         if (categoria != null) {
-            List<Producto> productos = productoRepository.findByCategoria(categoria);
+            List<Producto> productos = productoService.findByCategoriaId(id);
             model.addAttribute("productos", productos);
             model.addAttribute("categoria", categoria);
         } else {
@@ -120,7 +124,7 @@ public class ControladorAdmin {
         if (session.getAttribute("usuario") == null) {
             return "administrador/errorAcceso";
         }
-        model.addAttribute("categorias", categoriaRepository.findAll());
+        model.addAttribute("categorias", categoriaService.findAll());
 
         model.addAttribute("usuario", session.getAttribute("usuario"));
         return "administrador/listarCategorias";
@@ -140,7 +144,7 @@ public class ControladorAdmin {
         if (session.getAttribute("usuario") == null) {
             return "administrador/errorAcceso";
         }
-        categoriaRepository.save(categoria);
+        categoriaService.save(categoria);
 
         model.addAttribute("usuario", session.getAttribute("usuario"));
         return "redirect:/administrador/categorias";
@@ -150,7 +154,7 @@ public class ControladorAdmin {
         if (session.getAttribute("usuario") == null) {
             return "administrador/errorAcceso";
         }
-        categoriaRepository.deleteById(id);
+        categoriaService.deleteById(id);
 
         model.addAttribute("usuario", session.getAttribute("usuario"));
         return "redirect:/administrador/categorias";

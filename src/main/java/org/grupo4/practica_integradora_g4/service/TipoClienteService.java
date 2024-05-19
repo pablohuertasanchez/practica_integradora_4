@@ -1,4 +1,4 @@
-package org.grupo4.practica_integradora_g4.services;
+package org.grupo4.practica_integradora_g4.service;
 
 import org.grupo4.practica_integradora_g4.model.entidades.TipoCliente;
 import org.grupo4.practica_integradora_g4.repositories.TipoClienteRepository;

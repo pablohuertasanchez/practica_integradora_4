@@ -1,18 +1,15 @@
 package org.grupo4.practica_integradora_g4.controller;
 
 import jakarta.servlet.http.HttpSession;
-import org.grupo4.practica_integradora_g4.extras.Colecciones;
 import org.grupo4.practica_integradora_g4.model.entidades.Usuario;
-import org.grupo4.practica_integradora_g4.services.UsuarioService;
+import org.grupo4.practica_integradora_g4.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
 import java.util.Optional;
 
 @Controller

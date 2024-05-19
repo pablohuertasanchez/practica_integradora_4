@@ -8,7 +8,7 @@ import org.grupo4.practica_integradora_g4.model.extra.DatosPersonales;
 import org.grupo4.practica_integradora_g4.model.extra.DatosUsuario;
 import org.grupo4.practica_integradora_g4.repositories.GeneroRepository;
 import org.grupo4.practica_integradora_g4.repositories.PaisRepository;
-import org.grupo4.practica_integradora_g4.services.*;
+import org.grupo4.practica_integradora_g4.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
