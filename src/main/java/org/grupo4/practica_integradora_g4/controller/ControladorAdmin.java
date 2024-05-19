@@ -33,7 +33,7 @@ public class ControladorAdmin {
     @GetMapping("/inicio")
     public String getAdministracion(HttpSession session, Model model) {
         if (session.getAttribute("usuario") == null) {
-            return "redirect:/registro/paso1";
+            return "administrador/errorAcceso";
         }
         model.addAttribute("usuario", session.getAttribute("usuario"));
         return "loginAdmin/administracion";
@@ -45,7 +45,7 @@ public class ControladorAdmin {
                                   @RequestParam(required = false) String sortField,
                                   @RequestParam(required = false) String sortDir) {
         if (session.getAttribute("usuario") == null) {
-            return "redirect:/registro/paso1";
+            return "administrador/errorAcceso";
         }
         Sort sort = Sort.by("cantidadAlmacen"); // default sort
         if (sortField != null && sortDir != null) {
@@ -62,7 +62,7 @@ public class ControladorAdmin {
     @GetMapping("/productos/add")
     public String getAgregarProducto(HttpSession session,Model model) {
         if (session.getAttribute("usuario") == null) {
-            return "redirect:/registro/paso1";
+            return "administrador/errorAcceso";
         }
         model.addAttribute("nuevoProducto", new Producto());
         model.addAttribute("categorias", categoriaRepository.findAll());
@@ -72,7 +72,7 @@ public class ControladorAdmin {
     @PostMapping("/productos")
     public String agregarProducto(HttpSession session, @Valid @ModelAttribute("nuevoProducto") Producto producto, BindingResult result, Model model) {
         if (session.getAttribute("usuario") == null) {
-            return "redirect:/registro/paso1";
+            return "administrador/errorAcceso";
         }
         if (result.hasErrors()) {
             model.addAttribute("categorias", categoriaRepository.findAll());
@@ -87,7 +87,7 @@ public class ControladorAdmin {
     @GetMapping("/productos/eliminar")
     public String eliminarProducto(HttpSession session,Model model, @RequestParam String id) {
         if (session.getAttribute("usuario") == null) {
-            return "redirect:/registro/paso1";
+            return "administrador/errorAcceso";
         }
         productoRepository.deleteById(id);
 
@@ -98,7 +98,7 @@ public class ControladorAdmin {
     @GetMapping("/productos/categoria/{id}")
     public String listarProductosPorCategoria(HttpSession session, @PathVariable String id, Model model) {
         if (session.getAttribute("usuario") == null) {
-            return "redirect:/registro/paso1";
+            return "administrador/errorAcceso";
         }
         Categoria categoria = categoriaRepository.findById(id).orElse(null);
         if (categoria != null) {
@@ -118,7 +118,7 @@ public class ControladorAdmin {
     @GetMapping("/categorias")
     public String listarCategorias(HttpSession session, Model model) {
         if (session.getAttribute("usuario") == null) {
-            return "redirect:/registro/paso1";
+            return "administrador/errorAcceso";
         }
         model.addAttribute("categorias", categoriaRepository.findAll());
 
@@ -128,7 +128,7 @@ public class ControladorAdmin {
     @GetMapping("/categorias/add")
     public String getAgregarCategoria(HttpSession session, Model model) {
         if (session.getAttribute("usuario") == null) {
-            return "redirect:/registro/paso1";
+            return "administrador/errorAcceso";
         }
         model.addAttribute("nuevaCategoria", new Categoria());
 
@@ -138,7 +138,7 @@ public class ControladorAdmin {
     @PostMapping("/categorias")
     public String agregarCategoria(HttpSession session, @ModelAttribute Categoria categoria, Model model) {
         if (session.getAttribute("usuario") == null) {
-            return "redirect:/registro/paso1";
+            return "administrador/errorAcceso";
         }
         categoriaRepository.save(categoria);
 
@@ -148,7 +148,7 @@ public class ControladorAdmin {
     @GetMapping("/categorias/eliminar")
     public String eliminarCategoria(HttpSession session, @RequestParam String id, Model model) {
         if (session.getAttribute("usuario") == null) {
-            return "redirect:/registro/paso1";
+            return "administrador/errorAcceso";
         }
         categoriaRepository.deleteById(id);
 
@@ -160,7 +160,7 @@ public class ControladorAdmin {
     @GetMapping("/addAdmin")
     public String getAgregarAdministrador(HttpSession session, Model model){
         if (session.getAttribute("usuario") == null) {
-            return "redirect:/registro/paso1";
+            return "administrador/errorAcceso";
         }
         model.addAttribute("administrador", new Usuario());
         model.addAttribute("usuario", session.getAttribute("usuario"));
@@ -169,7 +169,7 @@ public class ControladorAdmin {
     @PostMapping("/addAdmin")
     public String postAgregarAdministrador(Usuario administrador,HttpSession session, Model model){
         if (session.getAttribute("usuario") == null) {
-            return "redirect:/registro/paso1";
+            return "administrador/errorAcceso";
         }
         if (usuarioRepository.findByEmail(administrador.getEmail()).isPresent()) {
             model.addAttribute("error", "Ya estás registrado");

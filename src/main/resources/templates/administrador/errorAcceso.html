@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Acceso Denegado</title>
+    <link rel="stylesheet" th:href="@{/css/estilosAddProducto.css}">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+<!--            <li><a href="/">Inicio</a></li>-->
+            <li><a href="/administrador/productos">Productos</a></li>
+            <li><a href="/administrador/categorias">Categorías</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <h1>Acceso Denegado</h1>
+    <p>Debe iniciar sesión para acceder a esta página.</p>
+    <ul>
+        <li><a th:href="@{/loginAdmin}"><span>Iniciar sesión como Administrador</span></a></li>
+        <li><a th:href="@{/loginUsuario}"><span>Iniciar sesión como Usuario</span></a></li>
+    </ul>
+</main>
+</body>
+</html>
