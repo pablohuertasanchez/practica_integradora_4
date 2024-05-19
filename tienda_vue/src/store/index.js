@@ -1,5 +1,4 @@
 // store/index.js
-
 import { createStore } from 'vuex';
 import productosModule from "@/modules/productos";
 

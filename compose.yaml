@@ -1,6 +1,8 @@
 services:
   mongodb:
-    image: 'mongo:latest'
+    build:
+      context: './mongodb'
+      dockerfile: 'Dockerfile'
     container_name: 'contiene_mongo'
     environment:
       - 'MONGO_INITDB_DATABASE=mydatabase'
@@ -8,8 +10,9 @@ services:
 #      - 'MONGO_INITDB_ROOT_USERNAME=root'
     ports:
       - '27017:27017'
-#    volumes:
-#      - './productos.json:/data/db/productos.json'  # Monta el archivo JSON como un volumen
+    volumes:
+      - './data/db:/data/db'
+      - './mongodb/productos.json:/docker-entrypoint-initdb.d/productos.json'  # Monta el archivo JSON como un volumen
 
   mysql:
     image: 'mysql:latest'
@@ -19,3 +22,21 @@ services:
       - 'MYSQL_ROOT_PASSWORD=admin'
     ports:
       - '3306:3306'
+
+  tomcat:
+    container_name: 'contiene_tomcat'
+    image: 'tomcat:latest'
+    ports:
+      - "8080:8080"
+    volumes:
+      - './build/libs/tienda.war:/usr/local/tomcat/webapps/tienda.war'
+
+    node:
+      container_name: 'contiene_node'
+      build:
+        context: './node' # Carpeta donde se encuentra el Dockerfile
+      ports:
+        - "8081:8081"
+      volumes:
+        - '.:/app'
+      working_dir: '/app'

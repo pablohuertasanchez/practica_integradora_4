@@ -6,7 +6,7 @@
       <option v-for="categoria in categoriasDisponibles" :value="categoria" :key="categoria">{{ categoria }}</option>
     </select>
     <!-- Select para ordenar por precio -->
-    <select v-model="orden" @change="ordenarProductos">
+    <select v-model="orden" @change="filtrarPorCategoria">
       <option value="">Ordenar por precio</option>
       <option value="asc">Precio ascendente</option>
       <option value="desc">Precio descendente</option>
@@ -33,20 +33,17 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
   name: 'ProductosView',
-  components: {
-
-  },
   computed: {
-    ...mapState('productos', ['productos', 'productosFiltrados']),
+    ...mapState('productos', ['productosFiltrados']),
     productosMostrados() {
-      return this.productosFiltrados.length > 0 ? this.productosFiltrados : this.productos;
+      return this.productosFiltrados;
     },
     categoriasDisponibles() {
-      return [...new Set(this.productos.map(producto => producto.categoria))];
+      return [...new Set(this.productosFiltrados.map(producto => producto.categoria))];
     },
   },
   data() {
@@ -56,40 +53,30 @@ export default {
     };
   },
   methods: {
-    ...mapActions('productos', ['fetchProductos', 'searchProducto']),
     filtrarPorCategoria() {
-      this.$store.dispatch('productos/filtrarPorCategoria', this.categoriaSeleccionada);
-    },
-    ordenarProductos() {
-      if (this.orden === 'asc') {
-        this.productosMostrados.sort((a, b) => a.precio - b.precio);
-      } else {
-        this.productosMostrados.sort((a, b) => b.precio - a.precio);
-      }
+      // Esta función ya no será necesaria porque el filtrado se realiza en el backend
+      // Pero puedes mantenerla para actualizar la categoría seleccionada
+      // this.$store.dispatch('productos/filtrarPorCategoria', this.categoriaSeleccionada);
     },
   },
-  created() {
-    this.fetchProductos();
-  }
 };
 </script>
 
 <style>
 /* Estilos */
-.card{
+.card {
   background-image: linear-gradient(to left, #c6c2c2 0%, #ffffff 100%);
   height: 35em;
 }
-img{
+img {
   margin: 1em;
   border: 1px solid black;
   height: 50%;
   width: 50%;
 }
 
-select{
+select {
   margin : 1em;
-
 }
 
 .expand-on-hover {
@@ -99,5 +86,4 @@ select{
 .expand-on-hover:hover {
   transform: scale(1.1); /* Puedes ajustar el factor de escala según tus preferencias */
 }
-
 </style>

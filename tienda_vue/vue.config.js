@@ -1,8 +1,10 @@
-const {defineConfig} = require('@vue/cli-service')
-module.exports = defineConfig({
-    transpileDependencies: true,
+module.exports = {
+    transpileDependencies: ['vue'], // Lista de dependencias a transpilar
     devServer: {
         port: 8081
     },
     publicPath: '/tienda'
-})
+}
+
+
+
