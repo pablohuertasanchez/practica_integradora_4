@@ -1,9 +1,6 @@
 package org.grupo4.practica_integradora_g4.model.entidades;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import org.grupo4.practica_integradora_g4.validaciones.ComprobarClaves;
@@ -23,30 +20,27 @@ import java.util.Set;
 @ToString
 @Validated
 @ComprobarClaves
+
+
 @Entity
 public class Usuario {
     @Id
-    @NotNull
-    @NotBlank
-//    @ComprobarEmail
-//    @ComprobarNombreEmail
-    private String email;
-    @NotNull
-    @NotBlank
-    @Size(min=3, max=12)
-    //@Pattern(regexp ="(?=.*[0-9])(?=.*[a-zñ])(?=.*[A-ZÑ])(?=.*[!#$%&]).*")
-    private String clave;
-//    @NotNull
-    private String confirmarClave;
-//    @NotNull
-//    @NotBlank
-    private String pregRec;
-//    @NotNull
-//    @NotBlank
-    private String respRec;
-    private LocalDate fechaUltimaConexion=LocalDate.now();
-    private Integer numeroAccesos=0;
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Auditoria> auditoria;
-}
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    @Email(message = "El correo electrónico debe ser válido")
+    @NotBlank(message = "El correo electrónico es obligatorio")
+    private String email;
+
+    @NotBlank(message = "La clave es obligatoria")
+    private String clave;
+
+    private LocalDate fechaUltimaConexion;
+
+    @Min(value = 0, message = "El número de accesos debe ser un valor positivo")
+    private Integer numeroAccesos;
+
+    @Embedded
+    private Auditoria auditoria;
+
+}

@@ -8,7 +8,7 @@ public class ValidadorClaves implements ConstraintValidator<ComprobarClaves, Usu
     @Override
     public boolean isValid(Usuario u, ConstraintValidatorContext context) {
         String clave= u.getClave();
-        String confClave = u.getConfirmarClave();
+        String confClave = u.getClave();//getConformarClave
 
         return  clave.equals(confClave);
     }

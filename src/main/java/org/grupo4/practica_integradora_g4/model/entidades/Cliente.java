@@ -3,6 +3,8 @@ package org.grupo4.practica_integradora_g4.model.entidades;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 import org.grupo4.practica_integradora_g4.model.extra.DatosContacto;
@@ -19,72 +21,82 @@ import java.util.UUID;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @ToString
-@Entity
 @Data
+@Entity
 public class Cliente {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-    //DATOS PERSONALES
-    @ManyToOne
-    @JoinColumn(
-            name = "genero_gen",
-            foreignKey = @ForeignKey(name = "FK_cli_genero_generoGen")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    )
-    private Genero genero;
-    private LocalDate fechaNacimiento;
-    @ManyToOne
-    @JoinColumn(
-            name = "nombre_Pais",
-            foreignKey = @ForeignKey(name = "FK_cli_pais_nombrePais")
-
-    )
-    private Pais pais;
-    private String tipoDocumentoCliente;
-    private String documento;
-    @NotBlank( groups = DatosPersonales.class)
+    // Datos personales (paso 1)
+    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
+
+    @NotBlank(message = "Los apellidos son obligatorios")
     private String apellidos;
 
-    //DATOS DE CONTACTO
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Direccion> direcciones;
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Direccion> direccionesEntrega;
-    @NotBlank ( groups = DatosContacto.class)
-    private String telefonoMovil;
-
-    //DATOS DE CLIENTE
-    @OneToOne
-    @JoinColumn(
-            name = "email_usuario",
-            foreignKey = @ForeignKey(name = "FK_cli_usuario_usuarioEmail")
-    )
-    private Usuario usuarioEmail;
-
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<TarjetaCredito> tarjetasCredito;
-
-    private BigDecimal gastoAcumuladoCliente;
+    @NotBlank(message = "El género es obligatorio")
+    private String genero;
 
     @ManyToOne
-    @JoinColumn(
-            name = "tipo_Cliente",
-            foreignKey = @ForeignKey(name = "FK_cli_tipoCli_tipoCli")
+    @JoinColumn(name = "pais_nacimiento_id")
+    @NotNull(message = "El país de nacimiento es obligatorio")
+    private Pais paisNacimiento;
 
+    @Past(message = "La fecha de nacimiento debe ser una fecha pasada")
+    @NotNull(message = "La fecha de nacimiento es obligatoria")
+    private LocalDate fechaNacimiento;
+
+    @NotBlank(message = "El tipo de documento es obligatorio")
+    private String tipoDocumentoCliente;
+
+    @NotBlank(message = "El documento es obligatorio")
+    private String documento;
+
+    // Datos de contacto (paso 2)
+    @NotBlank(message = "El teléfono móvil es obligatorio")
+    private String telefonoMovil;
+
+    @ManyToOne
+    @JoinColumn(name = "direccion_id")
+    @NotNull(message = "La dirección es obligatoria")
+    private Direccion direccion;
+
+    @OneToMany
+    @JoinTable(
+            name = "cliente_direcciones_entrega",
+            joinColumns = @JoinColumn(name = "cliente_id"),
+            inverseJoinColumns = @JoinColumn(name = "direccion_id")
     )
-    private TipoCliente tipoCliente;
+    private Set<Direccion> direccionesEntrega;
 
+    // Datos de cliente (paso 3)
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    @NotNull(message = "El usuario es obligatorio")
+    private Usuario usuario;
 
-    private boolean licencia;
-    @OneToOne
-    @JoinColumn(
-            name = "id_auditoria",
-            foreignKey = @ForeignKey(name = "FK_cli_auditoria_idAuditoria")
+    @OneToMany
+    @JoinTable(
+            name = "cliente_tarjetas_credito",
+            joinColumns = @JoinColumn(name = "cliente_id"),
+            inverseJoinColumns = @JoinColumn(name = "tarjeta_credito_id")
     )
+    private Set<TarjetaCredito> tarjetasCredito;
+
+    @DecimalMin(value = "0.0", inclusive = false, message = "El gasto acumulado debe ser mayor que 0")
+    private BigDecimal gastoAcumuladoCliente;
+
+    @NotBlank(message = "El tipo de cliente es obligatorio")
+    private String tipoCliente;
+
+    private String comentarios;
+
+    @NotNull(message = "La aceptación de la licencia es obligatoria")
+    private Boolean aceptacionLicencia;
+
+    @Embedded
     private Auditoria auditoria;
 
-    @NotBlank ( groups = DatosUsuario.class)
-    private String comentarios;
+
 }

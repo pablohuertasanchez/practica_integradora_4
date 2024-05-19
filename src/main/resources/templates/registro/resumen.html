@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Resumen de Registro</title>
+</head>
+<body>
+<h1>Resumen de Registro</h1>
+<div>
+    <h2>Datos Personales</h2>
+    <p>Nombre: <span th:text="${cliente.nombre}">Nombre</span></p>
+    <p>Apellidos: <span th:text="${cliente.apellidos}">Apellidos</span></p>
+    <p>Género: <span th:text="${cliente.genero}">Género</span></p>
+    <p>País de Nacimiento: <span th:text="${cliente.paisNacimiento.nombre}">País</span></p>
+    <p>Fecha de Nacimiento: <span th:text="${cliente.fechaNacimiento}">Fecha de Nacimiento</span></p>
+    <p>Tipo de Documento: <span th:text="${cliente.tipoDocumentoCliente}">Tipo de Documento</span></p>
+    <p>Documento: <span th:text="${cliente.documento}">Documento</span></p>
+</div>
+<div>
+    <h2>Datos de Contacto</h2>
+    <p>Teléfono Móvil: <span th:text="${cliente.telefonoMovil}">Teléfono Móvil</span></p>
+    <h3>Dirección</h3>
+    <p>Tipo de Vía: <span th:text="${cliente.direccion.tipoVia}">Tipo de Vía</span></p>
+    <p>Número: <span th:text="${cliente.direccion.numero}">Número</span></p>
+    <p>Portal: <span th:text="${cliente.direccion.portal}">Portal</span></p>
+    <p>Planta: <span th:text="${cliente.direccion.planta}">Planta</span></p>
+    <p>Puerta: <span th:text="${cliente.direccion.puerta}">Puerta</span></p>
+    <p>Localidad: <span th:text="${cliente.direccion.localidad}">Localidad</span></p>
+    <p>Región: <span th:text="${cliente.direccion.region}">Región</span></p>
+    <p>Código Postal: <span th:text="${cliente.direccion.codigoPostal}">Código Postal</span></p>
+</div>
+<div>
+    <h2>Datos del Cliente</h2>
+    <p>Tipo de Cliente: <span th:text="${cliente.tipoCliente}">Tipo de Cliente</span></p>
+    <p>Comentarios: <span th:text="${cliente.comentarios}">Comentarios</span></p>
+    <p>Aceptación de Licencia: <span th:text="${cliente.aceptacionLicencia}">Aceptación de Licencia</span></p>
+</div>
+<form th:action="@{/registro/finalizar}" method="post">
+    <button type="submit">Finalizar Registro</button>
+</form>
+</body>
+</html>

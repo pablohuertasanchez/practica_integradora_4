@@ -11,13 +11,16 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Data
+
 public class TarjetaCredito {
     @Id
-    Integer numero;
-    String tipoTarjetaCredito;
-    String cvv;
-    LocalDate fechaCad;
-    @ManyToOne
-    @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String tipoTarjetaCredito;
+    private String numero;
+    private String cvv;
+    private LocalDate fechaCaducidad;
+
+    // Getters y setters
+    // ...
 }

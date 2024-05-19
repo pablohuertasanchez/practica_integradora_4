@@ -46,8 +46,8 @@ public class Colecciones {
         TIPO_DOCUMENTO.put("pass","Pasaporte");
 
 
-        USUARIOSADMIN.put("root",new Usuario("root","admin","admin","","",null,0,null));
-        USUARIOSADMIN.put("pablo",new Usuario("pablo","huerta","huerta","","",null,0,null));
+//        USUARIOSADMIN.put("root",new Usuario("root","admin","admin","","",null,0,null));
+//        USUARIOSADMIN.put("pablo",new Usuario("pablo","huerta","huerta","","",null,0,null));
 
     }
 

@@ -11,39 +11,29 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity
-@Data
+
+
+@Embeddable
 public class Auditoria {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
     private LocalDate fechaAltaEntidad;
-    @ManyToOne
-    @JoinColumn(
-            name = "usuario_QueDaDeAlta",
-            foreignKey = @ForeignKey(name = "FK_aud_usuario_usuarioQueDaDeAlta")
 
-    )
-    private Usuario usuarioAdminQueRealizaAlta;
+    @ManyToOne
+    @JoinColumn(name = "usuario_alta_id")
+    private Usuario usuarioAdministradorQueRealizaAlta;
+
     private LocalDate fechaUltimaModificacionEntidad;
-    @ManyToOne
-    @JoinColumn(
-            name = "usuario_QueModifica",
-            foreignKey = @ForeignKey(name = "FK_aud_usuario_usuarioQueModifica")
 
-    )
-    private Usuario usuarioAdminQueRealizaUltimaModf;
+    @ManyToOne
+    @JoinColumn(name = "usuario_modificacion_id")
+    private Usuario usuarioAdministradorQueRealizaUltimaModificacion;
+
     private LocalDate fechaBorradoEntidad;
-    @ManyToOne
-    @JoinColumn(
-            name = "usuario_QueBorra",
-            foreignKey = @ForeignKey(name = "FK_aud_usuario_usuarioQueBorra")
-
-    )
-    private Usuario usuarioAdminQueRealizaBorrado;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
+    @JoinColumn(name = "usuario_borrado_id")
+    private Usuario usuarioAdministradorQueRealizaBorrado;
 
+    // Getters y setters
+    // ...
 }
+

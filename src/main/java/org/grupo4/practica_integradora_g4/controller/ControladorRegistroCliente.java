@@ -22,7 +22,7 @@ import java.util.Map;
 
 
 @Controller
-@RequestMapping(value = "registro")
+//@RequestMapping(value = "registro")
 public class ControladorRegistroCliente {
 
     @ModelAttribute("listaGeneros")
@@ -146,7 +146,7 @@ public class ControladorRegistroCliente {
             Cliente datos_personales = (Cliente) sesion.getAttribute("datos_personales");
             cliente.setGenero(datos_personales.getGenero());
             cliente.setFechaNacimiento(datos_personales.getFechaNacimiento());
-            cliente.setPais(datos_personales.getPais());
+//            cliente.setPais(datos_personales.getPais());
             cliente.setTipoDocumentoCliente(datos_personales.getTipoDocumentoCliente());
             cliente.setDocumento(datos_personales.getDocumento());
             cliente.setNombre(datos_personales.getNombre());
@@ -155,7 +155,7 @@ public class ControladorRegistroCliente {
         }
         if (sesion.getAttribute("datos_contacto")!=null) {
             Cliente datos_contacto = (Cliente) sesion.getAttribute("datos_contacto");
-            cliente.setDirecciones(datos_contacto.getDirecciones());
+//            cliente.setDirecciones(datos_contacto.getDirecciones());
             cliente.setTelefonoMovil(datos_contacto.getTelefonoMovil());
             comprobador++;
         }
@@ -165,7 +165,7 @@ public class ControladorRegistroCliente {
             //cliente.setUsuario(datos_usuario.getUsuario());
             cliente.setComentarios(datos_usuario.getComentarios());
             Usuario usuAut = (Usuario) sesion.getAttribute("usuarioAut");
-            cliente.setUsuarioEmail(usuAut);
+//            cliente.setUsuarioEmail(usuAut);
             //cliente.setLicencia(datos_usuario.isLicencia());
             comprobador++;
         }
