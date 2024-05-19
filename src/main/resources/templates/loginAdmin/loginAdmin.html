@@ -9,10 +9,13 @@
 <body>
     <div class="login-container">
         <h2>Iniciar Sesión</h2>
-        <form action="/loginAdmin" method="post">
+        <form th:action="@{/loginAdmin}" method="post">
             <div class="input-group">
-                <label for="email">Nombre de usuario:</label>
-                <input type="text" id="email" name="email">
+                <label>Email:</label>
+                <input type="text" name="email"/>
+            </div>
+            <div th:if="${errorUsu}">
+                <p class="error" th:text="${errorUsu}"></p>
             </div>
             <div class="input-group">
                 <label for="clave">Contraseña:</label>
@@ -21,11 +24,12 @@
                     <span class="toggle-password">👁️</span>
                 </div>
             </div>
+            <div th:if="${errorClave}">
+                <p class="error" th:text="${errorClave}"></p>
+            </div>
             <button type="submit">Iniciar Sesión</button>
         </form>
     </div>
-
-
 </body>
 <script th:src="@{/js/loginAdmin.js}"></script>
 </html>

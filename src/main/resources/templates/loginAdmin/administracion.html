@@ -15,6 +15,14 @@
 
 <div class="content">
     <h1>Página de administración</h1>
+    <div th:if="${session.usuario != null}">
+        <p>Bienvenido, <span th:text="${session.usuario.email}">Señor Administrador: </span>!</p>
+        <a th:href="@{/logout}">Logout</a>
+    </div>
+    <div th:if="${session.usuario == null}">
+        <a th:href="@{/loginAdmin}">Login</a>
+        <a th:href="@{/register}">Register</a>
+    </div>
     <p>Contenido de la página...</p>
 </div>
 </body>

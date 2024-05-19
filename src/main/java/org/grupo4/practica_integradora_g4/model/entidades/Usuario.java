@@ -28,21 +28,21 @@ public class Usuario {
     @Id
     @NotNull
     @NotBlank
-    @ComprobarEmail
-    @ComprobarNombreEmail
+//    @ComprobarEmail
+//    @ComprobarNombreEmail
     private String email;
     @NotNull
     @NotBlank
     @Size(min=3, max=12)
     //@Pattern(regexp ="(?=.*[0-9])(?=.*[a-zñ])(?=.*[A-ZÑ])(?=.*[!#$%&]).*")
     private String clave;
-    @NotNull
+//    @NotNull
     private String confirmarClave;
-    @NotNull
-    @NotBlank
+//    @NotNull
+//    @NotBlank
     private String pregRec;
-    @NotNull
-    @NotBlank
+//    @NotNull
+//    @NotBlank
     private String respRec;
     private LocalDate fechaUltimaConexion=LocalDate.now();
     private Integer numeroAccesos=0;

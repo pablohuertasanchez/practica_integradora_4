@@ -1,7 +1,9 @@
 package org.grupo4.practica_integradora_g4.components;
 
+import org.grupo4.practica_integradora_g4.model.entidades.Usuario;
 import org.grupo4.practica_integradora_g4.model.mongo.Categoria;
 import org.grupo4.practica_integradora_g4.model.mongo.Producto;
+import org.grupo4.practica_integradora_g4.repositories.UsuarioRepository;
 import org.grupo4.practica_integradora_g4.repositories.mongo.CategoriaRepository;
 import org.grupo4.practica_integradora_g4.repositories.mongo.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,22 @@ public class MeteDatos {
     private ProductoRepository productoRepository;
     @Autowired
     private CategoriaRepository categoriaRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
 
+    @PostConstruct
+    public void creaUsuariosAdmin() {
+        if (usuarioRepository.count() == 0) {
+            Usuario admin = new Usuario();
+            admin.setEmail("root");
+            admin.setClave("admin");
+            admin.setConfirmarClave("admin");
+            admin.setPregRec(" ");
+            admin.setRespRec(" ");
+            usuarioRepository.save(admin);
+        }
+    }
     @PostConstruct
     public void init() {
         // Inicializar categorías por defecto
