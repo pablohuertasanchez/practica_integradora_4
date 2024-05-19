@@ -1,8 +1,10 @@
 package org.grupo4.practica_integradora_g4.extras;
 
 import org.grupo4.practica_integradora_g4.model.entidades.Cliente;
+import org.grupo4.practica_integradora_g4.model.entidades.TipoCliente;
 import org.grupo4.practica_integradora_g4.model.entidades.Usuario;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class Colecciones {
@@ -13,6 +15,7 @@ public class Colecciones {
     private final static Map<String, Usuario> USUARIOSADMIN = new HashMap<String,Usuario>();
     private final static Map<String, String> TIPO_DOCUMENTO = new HashMap<String,String>();
     private final static Map<String, Cliente> CLIENTES = new HashMap<String,Cliente>();
+    private final static List<TipoCliente> TIPOCLIENTES = new ArrayList<>();
 
     private static final List<Usuario> USUARIOS = new ArrayList<>();
 
@@ -36,6 +39,10 @@ public class Colecciones {
         NACIONALIDADES.put("FR","Francia");
         NACIONALIDADES.put("GR","Grecia");
 
+        TIPOCLIENTES.add(new TipoCliente("Bronce", "BR", new BigDecimal("12000.00"), new BigDecimal("5.00")));
+        TIPOCLIENTES.add(new TipoCliente("Plata", "PL", new BigDecimal("20000.00"), new BigDecimal("20.00")));
+        TIPOCLIENTES.add( new TipoCliente("Oro", "OR", new BigDecimal("30000.00"), new BigDecimal("40.00")));
+
         DEPARTAMENTOS.put("0", "Selecciona tu departamento");
         DEPARTAMENTOS.put("10", "reseach");
         DEPARTAMENTOS.put("20", "Consulting");
@@ -57,6 +64,10 @@ public class Colecciones {
     public static Map<String, String> getDepartamentos(){ return DEPARTAMENTOS; }
     public static Map<String, Usuario> getUsuariosAdmin(){ return USUARIOSADMIN; }
     public static Map<String, String> getTipoDocumento(){ return TIPO_DOCUMENTO; }
+
+    public static List<TipoCliente> getTIPOCLIENTES() {
+        return TIPOCLIENTES;
+    }
 
     public static List<Usuario> devuelveUsu() {
         return USUARIOS;

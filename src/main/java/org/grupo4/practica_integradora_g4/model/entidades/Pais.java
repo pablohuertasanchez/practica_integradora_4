@@ -1,13 +1,12 @@
 package org.grupo4.practica_integradora_g4.model.entidades;
 
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.UUID;
 
-@AllArgsConstructor
+
 @RequiredArgsConstructor
 @Getter
 @Setter
@@ -15,7 +14,12 @@ import java.io.Serializable;
 @Data
 public class Pais {
     @Id
+
     private String nombre;
     private String siglas;
 
+    public Pais(String nombre, String siglas) {
+        this.nombre = nombre;
+        this.siglas = siglas;
+    }
 }

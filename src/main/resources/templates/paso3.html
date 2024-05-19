@@ -4,6 +4,31 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let counter = -1;
+
+            $("#agregarTarjeta").click(function () {
+                counter++;
+                let newTarjeta = `
+                    <div class="tarjeta">
+
+                        <label for="numero${counter}">Numero:</label>
+                        <input type="text" th:field="*{tarjetasCredito[${counter}].nuero}"><br>
+                        <label for="tipoTarjeta${counter}">Tipo de tarjeta:</label>
+                        <input type="text" th:field="*{tarjetasCredito[${counter}].tipoTarjetaCredito}"><br>
+                        <label for="cvv${counter}">CVV:</label>
+                        <input type="text" th:field="*{tarjetasCredito[${counter}].cvv}"><br>
+                        <label for="fechaCad${counter}">Fecha de caducidad:</label>
+                        <input type="text" th:field="*{tarjetasCredito[${counter}].fechaCad}"><br>
+                        <input type="hidden" th:field="*{tarjetasCredito}">
+                    </div>
+                `;
+                $("#fieldsetTarjeta").append(newTarjeta);
+            });
+        });
+    </script>
 </head>
 <body>
 <header>
@@ -12,23 +37,40 @@
         <h1>Autos Elite</h1>
     </div>
     <nav th:replace="~{fragments/barraNavegacionRegistro}"></nav>
-</header><form action="/registro/paso3" method="post" th:object="${clientePlantilla}">
+</header>
+
+<form action="/registro/paso3" method="post" th:object="${clientePlantilla}">
     <fieldset>
-        <legend>Datos de cliente: </legend>
+        <legend>Datos de cliente:</legend>
 
         <!--TEXTAREA-->
-        <label for="comentarios">Comentarios: </label><br>
-        <textarea name="comentarios"  cols="20" rows="2"
-                  th:field="*{comentarios}">
-        </textarea>
+        <label for="comentarios">Comentarios:</label><br>
+        <textarea name="comentarios" cols="20" rows="2" th:field="*{comentarios}"></textarea>
         <br>
-        <label for="licencia" >Licencia: </label>
+        <label for="licencia">Licencia:</label>
         <input type="checkbox" value="true" id="licencia" th:field="*{licencia}"/>
         <div th:errors="*{licencia}" class="error"></div>
         <br>
+        <fieldset id="fieldsetTarjeta">
+            <legend>Tarjetas de crédito:</legend>
+            <div class="tarjeta">
+
+                <label for="numero${counter}">Numero:</label>
+                <input type="text" th:field="*{tarjetasCredito[0].numero}"><br>
+                <label for="tipoTarjeta${counter}">Tipo de tarjeta:</label>
+                <input type="text" th:field="*{tarjetasCredito[0].tipoTarjetaCredito}"><br>
+                <label for="cvv${counter}">CVV:</label>
+                <input type="text" th:field="*{tarjetasCredito[0].cvv}"><br>
+                <label for="fechaCad${counter}">Fecha de caducidad:</label>
+                <input type="text" th:field="*{tarjetasCredito[0].fechaCad}"><br>
+
+            </div>
+        </fieldset>
+        <button type="button" id="agregarTarjeta">Agregar otra tarjeta</button>
     </fieldset>
-    <input type="submit" value="Guardar infortmación y pasar al siguente paso">
+    <input type="submit" value="Guardar información y pasar al siguiente paso">
 </form>
 
 </body>
 </html>
+

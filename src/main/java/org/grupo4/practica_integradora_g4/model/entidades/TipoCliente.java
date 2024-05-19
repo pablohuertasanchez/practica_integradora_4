@@ -5,16 +5,19 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
 
 @Entity
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+
+@RequiredArgsConstructor
 public class TipoCliente {
     @Id
     private String tipo;
+    private String siglas;
     private BigDecimal gastoUmbral;
     private BigDecimal porcentajeDescuento;
 }

@@ -11,17 +11,19 @@ import org.grupo4.practica_integradora_g4.model.extra.DatosUsuario;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
 @Getter
 @Setter
 @AllArgsConstructor
-@RequiredArgsConstructor
+
 @ToString
 @Entity
 @Data
 public class Cliente {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -48,10 +50,14 @@ public class Cliente {
     private String apellidos;
 
     //DATOS DE CONTACTO
+    @OneToOne
+    @JoinColumn(
+            name = "direccion_personal",
+            foreignKey = @ForeignKey(name = "FK_cli_direccion_direccionPersonal")
+    )
+    private Direccion direcciones;
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Direccion> direcciones;
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Direccion> direccionesEntrega;
+    private Set<Direccion> direccionesEntrega = new HashSet<>();
     @NotBlank ( groups = DatosContacto.class)
     private String telefonoMovil;
 
@@ -64,7 +70,8 @@ public class Cliente {
     private Usuario usuarioEmail;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<TarjetaCredito> tarjetasCredito;
+    private Set<TarjetaCredito> tarjetasCredito = new HashSet<>(5) ;
+
 
     private BigDecimal gastoAcumuladoCliente;
 
@@ -87,4 +94,9 @@ public class Cliente {
 
     @NotBlank ( groups = DatosUsuario.class)
     private String comentarios;
+    public Cliente() {
+        this.tarjetasCredito = new HashSet<>();
+        this.tarjetasCredito.add(new TarjetaCredito()); // Agregar una tarjeta por defecto
+    }
 }
+

@@ -15,24 +15,31 @@
 </header><form action="/registro/paso2" method="post" th:object="${clientePlantilla}">
   <fieldset>
     <legend>Datos de contacto:</legend>
-
-    <label for="prefijo">Prefijo: </label>
-    <select id="prefijo" name="tratamiento_deseado">
-      <option th:each="p : ${listaPrefijos}"
-              th:value="${p.key}"
-              th:text="${p.value}">
-<!--              th:field="*{tratamiento_deseado}"-->
-
-      </option>
-    </select>
-
-    <label for="telefonoMovil" >Teléfono Móvil: </label>
+   <label for="telefonoMovil" >Teléfono Móvil: </label>
     <input placeholder="999 999 999.." type="text" th:field="*{telefonoMovil}"/>
     <div th:errors="*{telefonoMovil}" class="error"></div>
     <br>
 
-    <label for="direccion" >Direccion: </label>
-    <input placeholder="C/sjdfjk, 5, 3d" type="text" th:field="*{direcciones}"/>
+<!--    <label for="direccion" >Direccion: </label>-->
+<!--    <input placeholder="C/Alcalá, 5, 3d" type="text" th:field="*{direcciones}"/>-->
+
+
+      <fieldset id="fieldsetDireccion">
+          <legend>Dirección:</legend>
+          <label for="numero" >Numero: </label>
+          <input placeholder="46" type="text" th:field="*{direcciones.numero}" />
+          <label for="portal" >Portal: </label>
+          <input placeholder="5" type="text" th:field="*{direcciones.portal}"/>
+          <label for="planta" >Planta: </label>
+          <input placeholder="3" type="text" th:field="*{direcciones.planta}"/>
+          <label for="localidad" >Localidad: </label>
+          <input placeholder="Aranjuez" type="text" th:field="*{direcciones.localidad}"/>
+          <label for="region" >Region: </label>
+          <input placeholder="Madrid" type="text" th:field="*{direcciones.region}"/>
+          <label for="codPostal" >Código Postal: </label>
+          <input placeholder="28000" type="text" th:field="*{direcciones.codigoPostal}"/>
+      </fieldset>
+
     <div th:errors="*{direcciones}" class="error"></div>
     <br>
   </fieldset>

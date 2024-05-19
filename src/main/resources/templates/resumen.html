@@ -23,13 +23,13 @@
     <fieldset>
         <legend>Datos Personales: </legend>
         <th:text class="pre">Genero: </th:text>
-        <th:block th:text="*{genero}"></th:block>
+        <th:block th:text="*{genero.gen}"></th:block>
         <br>
         <th:text class="pre">Fecha Nacimiento: </th:text>
         <th:block th:text="*{fechaNacimiento}"></th:block>
         <br>
         <th:text class="pre">pais: </th:text>
-        <th:block th:text="*{pais}"></th:block>
+        <th:block th:text="*{pais.nombre}"></th:block>
         <br>
         <th:text class="pre">tipoDocumentoCliente: </th:text>
         <th:block th:text="*{tipoDocumentoCliente}"></th:block>
@@ -49,25 +49,26 @@
         <legend>Datos de contacto:</legend>
 
         <th:text class="pre">direccion: </th:text>
-        <th:block th:text="*{direcciones}"></th:block>
+        <th:block th:text="*{direcciones.numero}"></th:block>
         <br>
-        <th:text class="pre">telefonoMovil: </th:text>
+    <!--    <th:text class="pre">telefonoMovil: </th:text>
         <th:block th:text="*{telefonoMovil}"></th:block>
-        <br>
+        <br> -->
     </fieldset>
 
     <fieldset>
         <legend>Datos de usuario: </legend>
 
         <th:text class="pre">usuario correspondiente: </th:text>
-        <th:block th:text="*{usuarioEmail}"></th:block>
+        <th:block th:text="*{usuarioEmail.email}"></th:block>
         <br>
         <th:text class="pre">direccionesEntrega: </th:text>
         <th:block th:text="*{direccionesEntrega}"></th:block>
         <br>
-        <th:text class="pre">tarjetasCredito: </th:text>
-        <th:block th:text="*{tarjetasCredito}"></th:block>
+      <!--  <th:text class="pre">tarjetasCredito: </th:text>
+        <th:block th:text="*{tarjetasCredito[0].tipoTarjetaCredito} , *{tarjetasCredito[1].tipoTarjetaCredito}"></th:block>
         <br>
+        -->
         <th:text class="pre">gastoAcumuladoCliente: </th:text>
         <th:block th:text="*{gastoAcumuladoCliente}"></th:block>
         <br>
