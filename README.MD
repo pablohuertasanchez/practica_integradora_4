@@ -20,6 +20,8 @@ Este proyecto es una aplicación web para la gestión de usuarios y productos, d
 - Thymeleaf
 - MongoDB
 - MySQL
+- Vue.js
+- Docker
 
 ## Requisitos Previos
 
