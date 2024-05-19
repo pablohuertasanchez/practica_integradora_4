@@ -55,7 +55,7 @@ public class ControladorLoginUsuario {
         modelo.addAttribute("usuario", u);
         if (uS != null) {
             modelo.addAttribute("usuario", uS);
-            System.out.println(uS.toString());
+
         }
         return "loginUsuario/registroUsuario";
     }

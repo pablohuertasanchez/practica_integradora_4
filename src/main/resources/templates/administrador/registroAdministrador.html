@@ -20,6 +20,29 @@
             <input type="password" th:field="*{clave}"/>
         </div>
         <div>
+            <label>Confirmar Clave:</label>
+            <input type="password" th:field="*{confirmarClave}"/>
+        </div>
+
+            <label for="pregRec">Pregunta de Recuperacion:</label>
+                <textarea th:field="*{pregRec}" cols="20" rows="2"></textarea>
+                    <div class="error" th:errors="*{pregRec}"></div>
+        <br>
+            <label for="respRec">Respuesta de Recuperacion:</label>
+                <textarea th:field="*{respRec}" cols="20" rows="2"></textarea>
+                    <div class="error" th:errors="*{respRec}"></div>
+        <br>
+        <input type="button" value="Mostrar Contraseñas" onclick="
+                    let claveInput = document.getElementById('clave');
+                    let confirmarClaveInput = document.getElementById('confirmarClave');
+                    if (claveInput.type === 'password') {
+                        claveInput.type = 'text';
+                        confirmarClaveInput.type = 'text';
+                    } else {
+                        claveInput.type = 'password';
+                        confirmarClaveInput.type = 'password';
+                }">
+        <div>
             <button type="submit">Registrar </button>
         </div>
         <div th:if="${error}">
