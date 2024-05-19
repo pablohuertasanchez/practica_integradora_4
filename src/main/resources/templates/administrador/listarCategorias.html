@@ -10,7 +10,7 @@
 </header>
 <main>
     <h1>Lista de Categorías</h1>
-    <a class="btn" th:href="@{/categorias/add}">Añadir Categoría</a>
+    <a class="btn" th:href="@{/administrador/categorias/add}">Añadir Categoría</a>
     <div class="table-container">
         <table>
             <thead>
@@ -25,7 +25,7 @@
                 <td th:text="${categoria.nombre}">Nombre</td>
                 <td th:text="${categoria.descripcion}">Descripción</td>
                 <td>
-                    <a class="btn-danger" th:href="@{/categorias/eliminar(id=${categoria.id})}">Eliminar</a>
+                    <a class="btn-danger" th:href="@{/administrador/categorias/eliminar(id=${categoria.id})}">Eliminar</a>
                 </td>
             </tr>
             </tbody>

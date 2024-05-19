@@ -10,7 +10,7 @@
 </header>
 <main>
     <h2>Añadir Categoría</h2>
-    <form th:action="@{/categorias}" th:object="${nuevaCategoria}" method="post" class="form-container">
+    <form th:action="@{/administrador/categorias}" th:object="${nuevaCategoria}" method="post" class="form-container">
         <div class="form-group">
             <label>Nombre:</label>
             <input type="text" th:field="*{nombre}" />

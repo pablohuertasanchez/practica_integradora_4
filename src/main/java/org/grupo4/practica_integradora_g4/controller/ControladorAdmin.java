@@ -3,6 +3,7 @@ package org.grupo4.practica_integradora_g4.controller;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.grupo4.practica_integradora_g4.model.entidades.Usuario;
+import org.grupo4.practica_integradora_g4.model.mongo.Categoria;
 import org.grupo4.practica_integradora_g4.model.mongo.Producto;
 import org.grupo4.practica_integradora_g4.repositories.UsuarioRepository;
 import org.grupo4.practica_integradora_g4.repositories.mongo.ProductoRepository;
@@ -36,6 +37,7 @@ public class ControladorAdmin {
         return "loginAdmin/administracion";
     }
 
+    //PRODUCTOS
     @GetMapping("/productos")
     public String listarProductos(HttpSession session,Model model) {
         if (session.getAttribute("usuario") == null) {
@@ -45,7 +47,6 @@ public class ControladorAdmin {
         model.addAttribute("usuario", session.getAttribute("usuario"));
         return "administrador/productos";
     }
-
     @GetMapping("/productos/add")
     public String getAgregarProducto(HttpSession session,Model model) {
         if (session.getAttribute("usuario") == null) {
@@ -56,7 +57,6 @@ public class ControladorAdmin {
         model.addAttribute("usuario", session.getAttribute("usuario"));
         return "administrador/addProducto";
     }
-
     @PostMapping("/productos")
     public String agregarProducto(HttpSession session, @Valid @ModelAttribute("nuevoProducto") Producto producto, BindingResult result, Model model) {
         if (session.getAttribute("usuario") == null) {
@@ -71,7 +71,6 @@ public class ControladorAdmin {
         model.addAttribute("usuario", session.getAttribute("usuario"));
         return "redirect:/administrador/productos";
     }
-
     @GetMapping("/productos/eliminar")
     public String eliminarProducto(HttpSession session,Model model, @RequestParam String id) {
         if (session.getAttribute("usuario") == null) {
@@ -82,6 +81,29 @@ public class ControladorAdmin {
         return "redirect:/administrador/productos";
     }
 
+    //CATEGORIAS
+    @GetMapping("/categorias")
+    public String listarCategorias(Model model) {
+        model.addAttribute("categorias", categoriaRepository.findAll());
+        return "administrador/listarCategorias";
+    }
+    @GetMapping("/categorias/add")
+    public String getAgregarCategoria(Model model) {
+        model.addAttribute("nuevaCategoria", new Categoria());
+        return "administrador/addCategoria";
+    }
+    @PostMapping("/categorias")
+    public String agregarCategoria(@ModelAttribute Categoria categoria) {
+        categoriaRepository.save(categoria);
+        return "redirect:/administrador/categorias";
+    }
+    @GetMapping("/categorias/eliminar")
+    public String eliminarCategoria(@RequestParam String id) {
+        categoriaRepository.deleteById(id);
+        return "redirect:/administrador/categorias";
+    }
+
+    //USUARIOS ADMINISTRADORES
     @GetMapping("/addAdmin")
     public String getAgregarAdministrador(HttpSession session, Model model){
         if (session.getAttribute("usuario") == null) {
@@ -107,6 +129,8 @@ public class ControladorAdmin {
 
     }
 
+
+    //CERRAR SESION
     @GetMapping("/cerrar_sesion")
     public String cerrarSesion(HttpSession sesion) {
         sesion.invalidate();

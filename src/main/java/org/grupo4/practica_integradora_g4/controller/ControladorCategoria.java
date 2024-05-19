@@ -14,27 +14,27 @@ public class ControladorCategoria {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    @GetMapping
-    public String listarCategorias(Model model) {
-        model.addAttribute("categorias", categoriaRepository.findAll());
-        return "administrador/listarCategorias";
-    }
-
-    @GetMapping("/add")
-    public String getAgregarCategoria(Model model) {
-        model.addAttribute("nuevaCategoria", new Categoria());
-        return "administrador/addCategoria";
-    }
-
-    @PostMapping
-    public String agregarCategoria(@ModelAttribute Categoria categoria) {
-        categoriaRepository.save(categoria);
-        return "redirect:/categorias";
-    }
-
-    @GetMapping("/eliminar")
-    public String eliminarCategoria(@RequestParam String id) {
-        categoriaRepository.deleteById(id);
-        return "redirect:/categorias";
-    }
+//    @GetMapping
+//    public String listarCategorias(Model model) {
+//        model.addAttribute("categorias", categoriaRepository.findAll());
+//        return "administrador/listarCategorias";
+//    }
+//
+//    @GetMapping("/add")
+//    public String getAgregarCategoria(Model model) {
+//        model.addAttribute("nuevaCategoria", new Categoria());
+//        return "administrador/addCategoria";
+//    }
+//
+//    @PostMapping
+//    public String agregarCategoria(@ModelAttribute Categoria categoria) {
+//        categoriaRepository.save(categoria);
+//        return "redirect:/categorias";
+//    }
+//
+//    @GetMapping("/eliminar")
+//    public String eliminarCategoria(@RequestParam String id) {
+//        categoriaRepository.deleteById(id);
+//        return "redirect:/categorias";
+//    }
 }
