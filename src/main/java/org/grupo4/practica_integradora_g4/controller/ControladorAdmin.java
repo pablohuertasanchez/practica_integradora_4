@@ -2,7 +2,9 @@ package org.grupo4.practica_integradora_g4.controller;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.grupo4.practica_integradora_g4.model.entidades.Usuario;
 import org.grupo4.practica_integradora_g4.model.mongo.Producto;
+import org.grupo4.practica_integradora_g4.repositories.UsuarioRepository;
 import org.grupo4.practica_integradora_g4.repositories.mongo.ProductoRepository;
 import org.grupo4.practica_integradora_g4.repositories.mongo.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class ControladorAdmin {
     private ProductoRepository productoRepository;
     @Autowired
     private CategoriaRepository categoriaRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
 
     @GetMapping("/inicio")
     public String getAdministracion(HttpSession session, Model model) {
@@ -75,6 +80,31 @@ public class ControladorAdmin {
         productoRepository.deleteById(id);
         model.addAttribute("usuario", session.getAttribute("usuario"));
         return "redirect:/administrador/productos";
+    }
+
+    @GetMapping("/addAdmin")
+    public String getAgregarAdministrador(HttpSession session, Model model){
+        if (session.getAttribute("usuario") == null) {
+            return "redirect:/registro/paso1";
+        }
+        model.addAttribute("administrador", new Usuario());
+        model.addAttribute("usuario", session.getAttribute("usuario"));
+        return "administrador/registroAdministrador";
+    }
+    @PostMapping("/addAdmin")
+    public String postAgregarAdministrador(Usuario administrador,HttpSession session, Model model){
+        if (session.getAttribute("usuario") == null) {
+            return "redirect:/registro/paso1";
+        }
+        if (usuarioRepository.findByEmail(administrador.getEmail()).isPresent()) {
+            model.addAttribute("error", "Ya estás registrado");
+            model.addAttribute("usuario", session.getAttribute("usuario"));
+            return "administrador/registroAdministrador";
+        }
+        usuarioRepository.save(administrador);
+        model.addAttribute("usuario", session.getAttribute("usuario"));
+        return "redirect:/administrador/inicio";
+
     }
 
     @GetMapping("/cerrar_sesion")
