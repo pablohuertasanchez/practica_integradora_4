@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Productos por Categoría</title>
+    <link rel="stylesheet" th:href="@{/css/estilosAddProducto.css}">
+</head>
+<body>
+<header>
+    <nav th:replace="~{fragments/cabeceraAdmin}"></nav>
+</header>
+<main>
+    <h1>Productos en Categoría: <span th:text="${categoria.nombre}">Categoría</span></h1>
+    <a class="btn" th:href="@{/administrador/productos}">Volver a la lista de productos</a>
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Unidades Vendidas</th>
+                <th>Gasto Acumulado</th>
+                <th>Cantidad Almacén</th>
+                <th>Umbral Solicitud Proveedor</th>
+                <th>Umbral Oculto En Tienda</th>
+                <th>En Oferta</th>
+                <th>Descuento</th>
+                <th>Es Novedad</th>
+                <th>Valoración Producto</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Comentarios</th>
+                <th>Categoría</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="producto : ${productos}">
+                <td th:text="${producto.descripcion}">Descripción</td>
+                <td th:text="${producto.precio}">Precio</td>
+                <td th:text="${producto.unidadesVendidas}">Unidades Vendidas</td>
+                <td th:text="${producto.gastoAcumulado}">Gasto Acumulado</td>
+                <td th:text="${producto.cantidadAlmacen}">Cantidad Almacén</td>
+                <td th:text="${producto.umbralSolicitudProveedor}">Umbral Solicitud Proveedor</td>
+                <td th:text="${producto.umbralOcultoEnTienda}">Umbral Oculto En Tienda</td>
+                <td th:text="${producto.enOferta} ? 'Sí' : 'No'">En Oferta</td>
+                <td th:text="${producto.descuento}">Descuento</td>
+                <td th:text="${producto.esNovedad} ? 'Sí' : 'No'">Es Novedad</td>
+                <td th:text="${producto.valoracionProducto}">Valoración Producto</td>
+                <td th:text="${producto.marca}">Marca</td>
+                <td th:text="${producto.modelo}">Modelo</td>
+                <td th:text="${producto.comentarios}">Comentarios</td>
+                <td th:text="${producto.categoria != null ? producto.categoria.nombre : 'No hay categoría seleccionada'}">Categoría</td>
+                <td>
+                    <a class="btn-danger" th:href="@{/administrador/productos/eliminar(id=${producto.id})}">Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

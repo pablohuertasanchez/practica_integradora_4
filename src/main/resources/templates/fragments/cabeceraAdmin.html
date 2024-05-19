@@ -1,9 +1,12 @@
 <header>
     <nav>
-        <ul>
-            <li><a href="#">Clientes</a></li>
-            <li><a href="#">Productos</a></li>
-            <li><a href="#">Cerrar Sesión</a></li>
+        <ul class="navigation-bar">
+            <li><a th:href="@{/administrador/inicio}"><span>Clientes</span></a></li>
+            <li><a th:href="@{/administrador/productos}"><span>Productos</span></a></li>
+            <li><a th:href="@{/administrador/categorias}"><span>Categorias</span></a></li>
+            <li><a th:href="@{/administrador/addAdmin}"><span>Añadir Administrador</span></a></li>
+            <li><a th:href="@{/administrador/cerrar_sesion}"><span>Cerrar Sesion</span></a></li>
+
         </ul>
     </nav>
 </header>

@@ -64,3 +64,8 @@ button:hover {
     font-size: 1.2em; /* Ajusta el tamaño del icono */
     color: #555; /* Color del icono */
 }
+.error {
+    color: #ff0000;
+    font-size: 0.875em;
+    margin-top: 5px;
+}

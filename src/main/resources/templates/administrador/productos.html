@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Lista de Productos</title>
+    <link rel="stylesheet" th:href="@{/css/estilosAddProducto.css}">
+</head>
+<body>
+<header>
+    <nav th:replace="~{fragments/cabeceraAdmin}"></nav>
+</header>
+<main>
+    <h1>Lista de Productos</h1>
+    <a class="btn" th:href="@{/administrador/productos/add}">Añadir Producto</a>
+    <div class="category-links">
+        <h2>Categorías</h2>
+        <ul>
+            <li th:each="categoria : ${categorias}">
+                <a th:href="@{/administrador/productos/categoria/{id}(id=${categoria.id})}" th:text="${categoria.nombre}">Categoría</a>
+            </li>
+        </ul>
+    </div>
+    <div class="sort-options">
+        <form th:action="@{/administrador/productos}" method="get">
+            <label for="sortField">Ordenar por:</label>
+            <select id="sortField" name="sortField">
+                <option value="cantidadAlmacen" th:selected="${sortField == 'cantidadAlmacen'}">Cantidad en Almacén</option>
+                <option value="precio" th:selected="${sortField == 'precio'}">Precio</option>
+                <option value="valoracionProducto" th:selected="${sortField == 'valoracionProducto'}">Valoración</option>
+            </select>
+            <select id="sortDir" name="sortDir">
+                <option value="asc" th:selected="${sortDir == 'asc'}">Ascendente</option>
+                <option value="desc" th:selected="${sortDir == 'desc'}">Descendente</option>
+            </select>
+            <button type="submit" class="btn">Ordenar</button>
+        </form>
+    </div>
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Categoría</th>
+                <th>Unidades Vendidas</th>
+                <th>Gasto Acumulado</th>
+                <th>Cantidad Almacén</th>
+                <th>Umbral Solicitud Proveedor</th>
+                <th>Umbral Oculto En Tienda</th>
+                <th>En Oferta</th>
+                <th>Descuento</th>
+                <th>Es Novedad</th>
+                <th>Valoración Producto</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Comentarios</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="producto : ${productos}">
+                <td th:text="${producto.descripcion}">Descripción</td>
+                <td th:text="${producto.precio}">Precio</td>
+                <td th:text="${producto.categoria != null} ? ${producto.categoria.nombre} : 'No hay categoría seleccionada'">Categoría</td>
+                <td th:text="${producto.unidadesVendidas}">Unidades Vendidas</td>
+                <td th:text="${producto.gastoAcumulado}">Gasto Acumulado</td>
+                <td th:text="${producto.cantidadAlmacen}">Cantidad Almacén</td>
+                <td th:text="${producto.umbralSolicitudProveedor}">Umbral Solicitud Proveedor</td>
+                <td th:text="${producto.umbralOcultoEnTienda}">Umbral Oculto En Tienda</td>
+                <td th:text="${producto.enOferta} ? 'Sí' : 'No'">En Oferta</td>
+                <td th:text="${producto.descuento}">Descuento</td>
+                <td th:text="${producto.esNovedad} ? 'Sí' : 'No'">Es Novedad</td>
+                <td th:text="${producto.valoracionProducto}">Valoración Producto</td>
+                <td th:text="${producto.marca}">Marca</td>
+                <td th:text="${producto.modelo}">Modelo</td>
+                <td th:text="${producto.comentarios}">Comentarios</td>
+                <td>
+                    <a class="btn-danger" th:href="@{/administrador/productos/eliminar(id=${producto.id})}">Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>
