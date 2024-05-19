@@ -58,8 +58,8 @@ public class Cliente {
     private Direccion direcciones;
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Direccion> direccionesEntrega = new HashSet<>();
- //   @NotBlank ( groups = DatosContacto.class)
-  //  private String telefonoMovil;
+    @NotBlank ( groups = DatosContacto.class)
+    private String telefonoMovil;
 
     //DATOS DE CLIENTE
     @OneToOne
@@ -70,7 +70,7 @@ public class Cliente {
     private Usuario usuarioEmail;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<TarjetaCredito> tarjetasCredito = new HashSet<>(1) ;
+    private Set<TarjetaCredito> tarjetasCredito = new HashSet<>(5) ;
 
 
     private BigDecimal gastoAcumuladoCliente;

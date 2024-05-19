@@ -8,9 +8,7 @@ import org.grupo4.practica_integradora_g4.model.extra.DatosPersonales;
 import org.grupo4.practica_integradora_g4.model.extra.DatosUsuario;
 import org.grupo4.practica_integradora_g4.repositories.GeneroRepository;
 import org.grupo4.practica_integradora_g4.repositories.PaisRepository;
-import org.grupo4.practica_integradora_g4.services.GeneroService;
-import org.grupo4.practica_integradora_g4.services.PaisService;
-import org.grupo4.practica_integradora_g4.services.UsuarioService;
+import org.grupo4.practica_integradora_g4.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -34,6 +33,13 @@ public class ControladorRegistroCliente {
     private PaisRepository paisRepository;
     @Autowired
     private GeneroRepository generoRepository;
+    @Autowired
+    private TipoClienteService tipoClienteService;
+    @Autowired
+    private DireccionService direccionService;
+    @Autowired
+    private ClienteService clienteService;
+
 
     @ModelAttribute("listaGeneros")
     private Map<String, String> getGeneros(){return Colecciones.getGeneros();}
@@ -49,6 +55,9 @@ public class ControladorRegistroCliente {
 
     @ModelAttribute("listaTiposDocumento")
     private Map<String, String> getTipoDocumento(){return Colecciones.getTipoDocumento();}
+
+    @ModelAttribute("listaTipoCliente")
+    private List< TipoCliente> getTipoCliente(){return Colecciones.getTIPOCLIENTES();}
 
     private boolean registroCompleto;
 
@@ -67,6 +76,10 @@ public class ControladorRegistroCliente {
         Colecciones.getGeneros().forEach((siglas, gen) -> {
             Genero genero = new Genero(gen, siglas);
             generoService.save(genero);
+        });
+        Colecciones.getTIPOCLIENTES().forEach((tipo) -> {
+            TipoCliente tipoCliente = new TipoCliente(tipo.getTipo(),tipo.getSiglas(),tipo.getGastoUmbral(),tipo.getPorcentajeDescuento());
+            tipoClienteService.save(tipoCliente);
         });
 
         // Añadir la lista de países al modelo
@@ -155,8 +168,8 @@ public class ControladorRegistroCliente {
         if (posiblesErrores.hasErrors()) {
             System.out.println(posiblesErrores.getAllErrors());
             return "paso2";
-        }
-        else {
+        } else {
+
             System.out.println(cliente.toString());
             sesion.setAttribute("datos_contacto", cliente);
             return "redirect:/registro/paso3";
@@ -199,17 +212,18 @@ public class ControladorRegistroCliente {
 
 
             // Procesar las tarjetas de crédito y agregar al cliente
-            Set<TarjetaCredito> tarjetasCredito = cliente.getTarjetasCredito();
+      /*      Set<TarjetaCredito> tarjetasCredito = cliente.getTarjetasCredito();
             if (tarjetasCredito != null) {
                 for (TarjetaCredito tarjeta : tarjetasCredito) {
                     tarjeta.setCliente(cliente);
                 }
             }
 
+       */
+
             // Guardar el cliente en la base de datos, si es necesario
             // clienteService.save(cliente);
 
-            System.out.println(cliente.toString());
             sesion.setAttribute("datos_usuario", cliente);
             return "redirect:/registro/resumen";
         }
@@ -222,8 +236,8 @@ public class ControladorRegistroCliente {
                               HttpSession sesion
     ){
 
-        int comprobador=0;
-        if (sesion.getAttribute("datos_personales")!=null) {
+        int comprobador = 0;
+        if (sesion.getAttribute("datos_personales") != null) {
             Cliente datos_personales = (Cliente) sesion.getAttribute("datos_personales");
             cliente.setGenero(datos_personales.getGenero());
             cliente.setPais(datos_personales.getPais());
@@ -234,27 +248,46 @@ public class ControladorRegistroCliente {
             cliente.setApellidos(datos_personales.getApellidos());
             comprobador++;
         }
-        if (sesion.getAttribute("datos_contacto")!=null) {
+        if (sesion.getAttribute("datos_contacto") != null) {
             Cliente datos_contacto = (Cliente) sesion.getAttribute("datos_contacto");
-            cliente.setDirecciones(datos_contacto.getDirecciones());
-//            cliente.setTelefonoMovil(datos_contacto.getTelefonoMovil());
+            cliente.setTelefonoMovil(datos_contacto.getTelefonoMovil());
             comprobador++;
         }
-        if (sesion.getAttribute("datos_usuario")!=null) {
+        if (sesion.getAttribute("datos_usuario") != null) {
 
             Cliente datos_usuario = (Cliente) sesion.getAttribute("datos_usuario");
-            //cliente.setUsuario(datos_usuario.getUsuario());
             cliente.setComentarios(datos_usuario.getComentarios());
-            //cliente.setLicencia(datos_usuario.isLicencia());
             comprobador++;
         }
+        Cliente datos_usuario = (Cliente) sesion.getAttribute("datos_usuario");
+        cliente.setTarjetasCredito(datos_usuario.getTarjetasCredito());
+
         Usuario usuAut = (Usuario) sesion.getAttribute("usuarioAut");
         cliente.setUsuarioEmail(usuAut);
-        System.out.println(cliente.toString());
+
+        // Guardar primero el cliente
+        clienteService.save(cliente);
+
+        // Asignar la dirección al cliente
+        if (sesion.getAttribute("datos_contacto") != null) {
+            Cliente datos_contacto = (Cliente) sesion.getAttribute("datos_contacto");
+            System.out.println( datos_contacto.toString());
+            Direccion direccion = datos_contacto.getDirecciones();
+            System.out.println(direccion.toString());
+            direccion.setCliente(cliente);
+            System.out.println(direccion.toString());
+            direccionService.save(direccion);
+            cliente.setDirecciones(direccion);
+
+            clienteService.save(cliente);
+        }
+
+
         model.addAttribute("clientePlantilla", cliente);
-        sesion.setAttribute("clienteFinal",cliente);
-        if (comprobador==3){
-            registroCompleto=true;
+
+        sesion.setAttribute("clienteFinal", cliente);
+        if (comprobador == 3) {
+            registroCompleto = true;
         }
         return "resumen";
     }
