@@ -25,7 +25,7 @@ public class ControladorLoginUsuario {
     public String log1(@ModelAttribute("usuario") Usuario u, Model modelo) {
         List<String> emailUsu = Colecciones.obtenerEmailUsuarios();
         modelo.addAttribute("emailUsuarios", emailUsu);
-        return "loginUsuario.html";
+        return "loginUsuario/loginUsuario";
     }
 
     @PostMapping("/loginUsuario-post")
@@ -45,7 +45,7 @@ public class ControladorLoginUsuario {
             return "redirect:/loginUsuario2";
         } else {
             modelo.addAttribute("error", "Usuario no existente");
-            return "loginUsuario.html";
+            return "loginUsuario/loginUsuario";
         }
     }
 
@@ -57,7 +57,7 @@ public class ControladorLoginUsuario {
             modelo.addAttribute("usuario", uS);
             System.out.println(uS.toString());
         }
-        return "registroUsuario.html";
+        return "loginUsuario/registroUsuario";
     }
 
     @PostMapping("/registroUsuario-post")
@@ -65,7 +65,7 @@ public class ControladorLoginUsuario {
         if (result.hasErrors()) {
             modelo.addAttribute("errors", result.getAllErrors());
             System.out.println(result.getAllErrors());
-            return "registroUsuario.html";
+            return "loginUsuario/registroUsuario";
         }
 
         System.out.println(u.toString());
@@ -81,7 +81,7 @@ public class ControladorLoginUsuario {
 
     @GetMapping("/loginUsuario2")
     public String aut2(@ModelAttribute("usuario") Usuario u, Model modelo) {
-        return "loginUsuario2.html";
+        return "loginUsuario/loginUsuario2";
     }
 
     @PostMapping("/loginUsuario2-post")
@@ -92,11 +92,11 @@ public class ControladorLoginUsuario {
                 return "redirect:/registro/paso1";
             } else {
                 modelo.addAttribute("error", "Clave incorrecta");
-                return "loginUsuario2";
+                return "loginUsuario/loginUsuario2";
             }
         } else {
             modelo.addAttribute("error", "No se ha iniciado sesión");
-            return "loginUsuario2";
+            return "loginUsuario/loginUsuario2";
         }
     }
 }

@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 
 
 @Controller
@@ -90,7 +88,7 @@ public class ControladorRegistroCliente {
             model.addAttribute("clientePlantilla", cliente);
         }else model.addAttribute("clientePlantilla",cliente);
 
-        return "paso1";
+        return "registro/paso1";
     }
 
     @PostMapping("paso1")
@@ -133,7 +131,7 @@ public class ControladorRegistroCliente {
 
         if (posiblesErrores.hasErrors()) {
             System.out.println(posiblesErrores.getAllErrors());
-            return "paso1";
+            return "registro/paso1";
         }
         else {
             System.out.println(cliente.toString());
@@ -156,7 +154,7 @@ public class ControladorRegistroCliente {
             model.addAttribute("clientePlantilla", cliente);
         }else model.addAttribute("clientePlantilla",cliente);
 
-        return "paso2";
+        return "registro/paso2";
     }
     @PostMapping("paso2")
     private String paso2Post(
@@ -167,7 +165,7 @@ public class ControladorRegistroCliente {
     ){
         if (posiblesErrores.hasErrors()) {
             System.out.println(posiblesErrores.getAllErrors());
-            return "paso2";
+            return "registro/paso2";
         } else {
 
             System.out.println(cliente.toString());
@@ -191,7 +189,7 @@ public class ControladorRegistroCliente {
             model.addAttribute("clientePlantilla", cliente);
         }else model.addAttribute("clientePlantilla",cliente);
 
-        return "paso3";
+        return "registro/paso3";
     }
 
     @PostMapping("paso3")
@@ -203,7 +201,7 @@ public class ControladorRegistroCliente {
     ){
         if (posiblesErrores.hasErrors()) {
             System.out.println(posiblesErrores.getAllErrors());
-            return "paso3";
+            return "registro/paso3";
         } else {
             // El objeto cliente ya contiene las tarjetas de crédito ingresadas en el formulario
             // Puedes acceder a ellas directamente desde el objeto cliente
@@ -289,7 +287,7 @@ public class ControladorRegistroCliente {
         if (comprobador == 3) {
             registroCompleto = true;
         }
-        return "resumen";
+        return "registro/resumen";
     }
 
     @PostMapping("resumen")
@@ -308,7 +306,7 @@ public class ControladorRegistroCliente {
             return "redirect:/registro/paso1";
         }
         else {
-            return "resumen";
+            return "registro/resumen";
         }
     }
 
