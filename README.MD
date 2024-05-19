@@ -1,0 +1,3 @@
+rutas principasles.
+/loginAdmin
+/loginUsuario
