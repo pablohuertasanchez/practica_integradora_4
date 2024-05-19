@@ -229,12 +229,8 @@ public class ControladorRegistroCliente {
 
 
     @GetMapping("resumen")
-    private String resumenGet(Cliente cliente,
-                              Model model,
-                              HttpSession sesion
-    ){
-
-        int comprobador = 0;
+    private String resumenGet(Cliente cliente, Model model, HttpSession sesion) {
+        cliente = new Cliente();
         if (sesion.getAttribute("datos_personales") != null) {
             Cliente datos_personales = (Cliente) sesion.getAttribute("datos_personales");
             cliente.setGenero(datos_personales.getGenero());
@@ -244,49 +240,32 @@ public class ControladorRegistroCliente {
             cliente.setDocumento(datos_personales.getDocumento());
             cliente.setNombre(datos_personales.getNombre());
             cliente.setApellidos(datos_personales.getApellidos());
-            comprobador++;
         }
         if (sesion.getAttribute("datos_contacto") != null) {
             Cliente datos_contacto = (Cliente) sesion.getAttribute("datos_contacto");
             cliente.setTelefonoMovil(datos_contacto.getTelefonoMovil());
-            comprobador++;
         }
         if (sesion.getAttribute("datos_usuario") != null) {
-
             Cliente datos_usuario = (Cliente) sesion.getAttribute("datos_usuario");
             cliente.setComentarios(datos_usuario.getComentarios());
-            comprobador++;
+            cliente.setTarjetasCredito(datos_usuario.getTarjetasCredito());
         }
-        Cliente datos_usuario = (Cliente) sesion.getAttribute("datos_usuario");
-        cliente.setTarjetasCredito(datos_usuario.getTarjetasCredito());
-
         Usuario usuAut = (Usuario) sesion.getAttribute("usuarioAut");
         cliente.setUsuarioEmail(usuAut);
 
-        // Guardar primero el cliente
         clienteService.save(cliente);
 
-        // Asignar la dirección al cliente
         if (sesion.getAttribute("datos_contacto") != null) {
             Cliente datos_contacto = (Cliente) sesion.getAttribute("datos_contacto");
-            System.out.println( datos_contacto.toString());
             Direccion direccion = datos_contacto.getDirecciones();
-            System.out.println(direccion.toString());
             direccion.setCliente(cliente);
-            System.out.println(direccion.toString());
             direccionService.save(direccion);
             cliente.setDirecciones(direccion);
-
-            clienteService.save(cliente);
         }
-
 
         model.addAttribute("clientePlantilla", cliente);
-
         sesion.setAttribute("clienteFinal", cliente);
-        if (comprobador == 3) {
-            registroCompleto = true;
-        }
+        registroCompleto = true;
         return "registro/resumen";
     }
 
@@ -296,14 +275,13 @@ public class ControladorRegistroCliente {
             HttpSession sesion
     ){
         Cliente cliente = (Cliente) sesion.getAttribute("clienteFinal");
-        System.out.println(cliente.toString());
         model.addAttribute("clientePlantilla", cliente);
 
         if (registroCompleto) {
             registroCompleto=false;
             Colecciones.addCliente(cliente);
             sesion.invalidate();
-            return "redirect:/registro/paso1";
+            return "redirect:/tienda";
         }
         else {
             return "registro/resumen";
