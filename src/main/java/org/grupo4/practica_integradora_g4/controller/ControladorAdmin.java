@@ -21,6 +21,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Controller
@@ -49,6 +50,12 @@ public class ControladorAdmin {
         model.addAttribute("clientes", clientes);
         model.addAttribute("usuario", session.getAttribute("usuario"));
         return "loginAdmin/administracion";
+    }
+    @PostMapping("/inicio/eliminar/{id}")
+    public String eliminarCliente(@PathVariable("id") String id) {
+        UUID uuid = UUID.fromString(id);
+        clienteService.deleteById(uuid);
+        return "redirect:/administrador/inicio";
     }
 
     //PRODUCTOS
