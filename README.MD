@@ -5,7 +5,7 @@ Este proyecto es una aplicación web para la gestión de usuarios y productos, d
 ## Rutas Principales
 
 - `/loginAdmin`: Página de inicio de sesión para administradores.
-- `/loginUsuario`: Página de inicio de sesión para usuarios/clientes.
+- `/loginUsuario/email`: Página de inicio de sesión para usuarios/clientes.
 
 ## Funcionalidades
 
@@ -31,14 +31,21 @@ Este proyecto es una aplicación web para la gestión de usuarios y productos, d
 
 ## Instalación
 
-1. Clona este repositorio: `git clone https://github.com/tuusuario/tuproyecto.git`
-2. Configura MongoDB y MySQL.
+1. Clona este repositorio: `git clone https://github.com/pablohuertasanchez/practica_integradora_4.git`
+2. Configura MongoDB y MySQL. 
+  De momento en wsl
+  docker run -d --name mi-mongo-container -p 27017:27017 mongo
+  docker run --name contiene_mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -d mysql
 3. Importa el proyecto en tu IDE favorito.
 4. Ejecuta la aplicación.
+  http://localhost:8080/loginAdmin
+  http://localhost:8080/loginUsuario/email
 
 ## Configuración
 
 - Configura las credenciales de MongoDB y MySQL en el archivo `application.properties`.
+spring.datasource.url=jdbc:mysql://tu_ip_de_wsl:3306/Practica4?createDatabaseIfNotExist=true
+spring.data.mongodb.host=tu_ip_de_wsl
 
 ## Estructura del Proyecto
 
