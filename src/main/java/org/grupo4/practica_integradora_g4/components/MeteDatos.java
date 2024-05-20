@@ -33,14 +33,18 @@ public class MeteDatos {
             admin.setEmail("root@email.com");
             admin.setClave("admin");
             admin.setConfirmarClave("admin");
+
             admin.setPregRec("1234 ");
             admin.setRespRec("1234 ");
+
             Usuario admin2 = new Usuario();
             admin2.setEmail("pablo@email.com");
             admin2.setClave("huerta");
             admin2.setConfirmarClave("huerta");
-            admin2.setPregRec(" 1234");
-            admin2.setRespRec("1234 ");
+
+            admin2.setPregRec("que tal");
+            admin2.setRespRec("bien");
+
             usuarioRepository.save(admin);
             usuarioRepository.save(admin2);
         }
