@@ -23,7 +23,7 @@
           <router-link class="nav-link" to="/carrito">Carrito</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/loginUsuario">Login</router-link>
+          <router-link class="nav-link" to="/loginUsuario/email">Login</router-link>
         </li>
       </ul>
 

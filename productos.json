@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "modelo": "Clase B",
+    "marca": "Mercedes-Benz",
+    "categoria": "Familiar",
+    "precio": 120.52,
+    "cantidad": 50,
+    "imagen": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.topgear.com%2Fsites%2Fdefault%2Ffiles%2Fcars-car%2Fcarousel%2F2016%2F08%2Frpbclass.jpg&f=1&nofb=1&ipt=ecc1374b770b51c0a39e99791ad6c18b28c7f0b1207471644428862d09688bd3&ipo=images",
+    "descripcion": "Compacto y versátil, ideal para la ciudad y viajes cortos."
+  },
+  {
+    "id": 2,
+    "modelo": "Serie 1",
+    "marca": "BMW",
+    "categoria": "Compacto",
+    "precio": 140.71,
+    "cantidad": 50,
+    "imagen": "https://cdn.bmwblog.com/wp-content/uploads/2017/05/BMW-1-Series-Facelift-20.jpg",
+    "descripcion": "Diseño deportivo y rendimiento excepcional."
+  },
+  {
+    "id": 3,
+    "modelo": "Qashqai",
+    "marca": "Nissan",
+    "categoria": "Familiar",
+    "precio": 194.16,
+    "cantidad": 50,
+    "imagen": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmediacloud.carbuyer.co.uk%2Fimage%2Fprivate%2Fs--LcdpCh_v--%2Fv1579621488%2Fcarbuyer%2F2017%2F03%2Fnissan_qashqai_2017_faceliftqqfl01.jpg&f=1&nofb=1&ipt=1c70376171a8977c73d9c74bb2168ee85859f150d312d97b2c5cde37b6d06700&ipo=images",
+    "descripcion": "Espacioso y cómodo, perfecto para aventuras familiares."
+  },
+  {
+    "id": 4,
+    "modelo": "Giulietta",
+    "marca": "Alfa Romeo",
+    "categoria": "Deportivo",
+    "precio": 167.47,
+    "cantidad": 50,
+    "imagen": "https://media.autoexpress.co.uk/image/private/s--ajyiZ007--/v1562242159/autoexpress/2016/02/160225_alfa-romeo_nuova-giulietta_05.jpg",
+    "descripcion": "Estilo italiano y rendimiento dinámico."
+  },
+  {
+    "id": 5,
+    "modelo": "E-Tron",
+    "marca": "Audi",
+    "categoria": "Lujo",
+    "precio": 373.34,
+    "cantidad": 50,
+    "imagen": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fperformancedrive.com.au%2Fwp-content%2Fuploads%2F2018%2F09%2F2019-Audi-e-tron.jpg&f=1&nofb=1&ipt=551c96c4170d8f8029ebde63719ec5bb53a829ddea6a174b848dd2ecf1d41eb3&ipo=images",
+    "descripcion": "Vehículo eléctrico de alta gama con tecnología innovadora."
+  },
+  {
+    "id": 6,
+    "modelo": "Clase S",
+    "marca": "Mercedes-Benz",
+    "categoria": "Lujo",
+    "precio": 457.72,
+    "cantidad": 50,
+    "imagen": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmediacloud.carbuyer.co.uk%2Fimage%2Fprivate%2Fs--XdNY7oiw--%2Fv1579632369%2Fcarbuyer%2F2017%2F07%2F17c521_010.jpg&f=1&nofb=1&ipt=b643933b35c475b67a1ff2086d570c733b395312de39cec52ae2f34471468fe5&ipo=images",
+    "descripcion": "Elegancia y confort supremo para los viajes más exclusivos."
+  },
+  {
+    "id": 7,
+    "modelo": "Focus",
+    "marca": "Ford",
+    "categoria": "Compacto",
+    "precio": 155.99,
+    "cantidad": 30,
+    "imagen": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fst.motortrendenespanol.com%2Fuploads%2Fsites%2F45%2F2014%2F02%2F2015-Ford-Focus-hatchback-front-view.jpg&f=1&nofb=1&ipt=6d1a82baf1d570f5b4148d9e8d6046601962643a47d8b16897a2811af09b5303&ipo=images",
+    "descripcion": "Equilibrio perfecto entre rendimiento y eficiencia."
+  },
+  {
+    "id": 8,
+    "modelo": "Civic",
+    "marca": "Honda",
+    "categoria": "Compacto",
+    "precio": 170.25,
+    "cantidad": 40,
+    "imagen": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.hgmsites.net%2Fhug%2F2019-honda-civic-sdn_100677004_h.jpg&f=1&nofb=1&ipt=d498a4d6cd7641bb3766c85d9d0200cb55b6b6161e2dbb70443ecaa07d7069d6&ipo=images",
+    "descripcion": "Estilo deportivo y fiabilidad honda."
+  },
+  {
+    "id": 9,
+    "modelo": "Corolla",
+    "marca": "Toyota",
+    "categoria": "Compacto",
+    "precio": 180.50,
+    "cantidad": 25,
+    "imagen": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.autocentrum.pl%2Fac-file%2Fcar-version%2F62ff64ae277d1a1baa7d5ee5.jpg&f=1&nofb=1&ipt=efb45c9ec25a02783619074b1829ff2d6b9a8bf9ad071aaada762ce572dc084d&ipo=images",
+    "descripcion": "Icono de confiabilidad y eficiencia."
+  },
+  {
+    "id": 10,
+    "modelo": "Camry",
+    "marca": "Toyota",
+    "categoria": "Sedan",
+    "precio": 210.75,
+    "cantidad": 35,
+    "imagen": "https://cleanfleetreport.com/wp-content/uploads/2016/07/NO-1-CAMRY-HYBRID.jpg",
+    "descripcion": "Elegante y espacioso, ideal para viajes largos."
+  },
+  {
+    "id": 11,
+    "modelo": "Accord",
+    "marca": "Honda",
+    "categoria": "Sedan",
+    "precio": 200.00,
+    "cantidad": 45,
+    "imagen": "https://www.automobilemag.com/uploads/sites/11/2013/06/2014-Honda-Accord-Hybrid-front-three-quarters1.jpg",
+    "descripcion": "Confort y seguridad para toda la familia."
+  },
+  {
+    "id": 12,
+    "modelo": "X5",
+    "marca": "BMW",
+    "categoria": "SUV",
+    "precio": 350.80,
+    "cantidad": 20,
+    "imagen": "https://www.bmw.com.au/content/dam/bmw/common/all-models/x-series/x5/2018/mperformance/bmw-g05-x5-m-performance-exterior-gallery-wallpaper-04.jpg.asset.1526634134384.jpg",
+    "descripcion": "Potencia y lujo combinados en un SUV versátil."
+  },
+  {
+    "id": 13,
+    "modelo": "Tucson",
+    "marca": "Hyundai",
+    "categoria": "SUV",
+    "precio": 190.30,
+    "cantidad": 30,
+    "imagen": "https://images.autodaily.com.au/2021/01/Hyundai-Tucson-PHEV.jpg",
+    "descripcion": "Diseño moderno y comodidad para la aventura."
+  },
+  {
+    "id": 14,
+    "modelo": "CR-V",
+    "marca": "Honda",
+    "categoria": "SUV",
+    "precio": 220.45,
+    "cantidad": 35,
+    "imagen": "https://images.carexpert.com.au/resize/3000/-/app/uploads/2023/03/2024-Honda-CR-V-THAILAND-HERO-3x2-1.jpg",
+    "descripcion": "Espacio y versatilidad para el día a día."
+  },
+  {
+    "id": 15,
+    "modelo": "CX-5",
+    "marca": "Mazda",
+    "categoria": "SUV",
+    "precio": 205.60,
+    "cantidad": 25,
+    "imagen": "https://cdn.drivek.it/configurator-covermobile/cars/es/$original$/MAZDA/CX-5/39095_SUV-5-DOORS/mazda-cx-5-my19-cover-mobile.jpg",
+    "descripcion": "Compacto y versátil, ideal para la ciudad y viajes cortos."
+  }
+]

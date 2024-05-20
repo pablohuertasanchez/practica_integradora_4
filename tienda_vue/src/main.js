@@ -15,19 +15,10 @@ import ProductDetail from "@/views/ProductDetailView.vue";
 const router = createRouter({
     history: createWebHistory('/tienda'),
     routes: [
-        // {
-        //     path: '/',
-        //     name: 'App',
-        //     component: App
-        // },
         {
             path: "/",
             name: 'HomeView',
             component: HomeView
-        },
-        {
-            path: '/loginUsuario',
-            redirect: () => window.location.href = 'http://localhost:8080/loginUsuario'
         },
         {
             path: '/productos',
@@ -42,7 +33,11 @@ const router = createRouter({
         {
             path: '/carrito',
             name: 'carrito',
-            component: Carrito
+            component: Carrito,
+        },
+        {
+            path: '/loginUsuario/email',
+            redirect: () => window.location.href = 'http://localhost:8080/loginUsuario/email'
         },
 
     ]
