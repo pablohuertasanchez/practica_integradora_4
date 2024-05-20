@@ -30,17 +30,17 @@ public class MeteDatos {
 //        usuarioRepository.deleteAll();
         if (usuarioRepository.count() == 0) {
             Usuario admin = new Usuario();
-            admin.setEmail("root");
+            admin.setEmail("root@email.com");
             admin.setClave("admin");
             admin.setConfirmarClave("admin");
-            admin.setPregRec(" ");
-            admin.setRespRec(" ");
+            admin.setPregRec("hola");
+            admin.setRespRec("adios");
             Usuario admin2 = new Usuario();
-            admin2.setEmail("pablo");
+            admin2.setEmail("pablo@email.com");
             admin2.setClave("huerta");
             admin2.setConfirmarClave("huerta");
-            admin2.setPregRec(" ");
-            admin2.setRespRec(" ");
+            admin2.setPregRec("que tal");
+            admin2.setRespRec("bien");
             usuarioRepository.save(admin);
             usuarioRepository.save(admin2);
         }

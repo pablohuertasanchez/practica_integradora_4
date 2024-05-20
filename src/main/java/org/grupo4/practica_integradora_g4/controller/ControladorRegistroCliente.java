@@ -284,7 +284,12 @@ public class ControladorRegistroCliente {
             cliente.setComentarios(datos_usuario.getComentarios());
             cliente.setTarjetasCredito(datos_usuario.getTarjetasCredito());
         }
-        Usuario usuAut = (Usuario) sesion.getAttribute("usuarioAut");
+
+        Usuario usuAut = (Usuario) sesion.getAttribute("usuarioAutenticado");
+        if (usuAut == null) {
+            return "error";  // Maneja el caso donde el usuario no está en la sesión
+        }
+
         cliente.setUsuarioEmail(usuAut);
 
         clienteService.save(cliente);
