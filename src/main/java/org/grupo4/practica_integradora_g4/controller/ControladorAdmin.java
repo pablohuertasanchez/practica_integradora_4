@@ -2,13 +2,16 @@ package org.grupo4.practica_integradora_g4.controller;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.grupo4.practica_integradora_g4.model.entidades.Cliente;
 import org.grupo4.practica_integradora_g4.model.entidades.Usuario;
 import org.grupo4.practica_integradora_g4.model.mongo.Categoria;
 import org.grupo4.practica_integradora_g4.model.mongo.Producto;
+import org.grupo4.practica_integradora_g4.repositories.ClienteRepository;
 import org.grupo4.practica_integradora_g4.repositories.UsuarioRepository;
 import org.grupo4.practica_integradora_g4.repositories.mongo.ProductoRepository;
 import org.grupo4.practica_integradora_g4.repositories.mongo.CategoriaRepository;
 import org.grupo4.practica_integradora_g4.service.CategoriaService;
+import org.grupo4.practica_integradora_g4.service.ClienteService;
 import org.grupo4.practica_integradora_g4.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -18,6 +21,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Controller
@@ -33,14 +37,25 @@ public class ControladorAdmin {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private ClienteService clienteService;
+
 
     @GetMapping("/inicio")
     public String getAdministracion(HttpSession session, Model model) {
         if (session.getAttribute("usuario") == null) {
             return "administrador/errorAcceso";
         }
+        List<Cliente> clientes = clienteService.findAll();
+        model.addAttribute("clientes", clientes);
         model.addAttribute("usuario", session.getAttribute("usuario"));
         return "loginAdmin/administracion";
+    }
+    @PostMapping("/inicio/eliminar/{id}")
+    public String eliminarCliente(@PathVariable("id") String id) {
+        UUID uuid = UUID.fromString(id);
+        clienteService.deleteById(uuid);
+        return "redirect:/administrador/inicio";
     }
 
     //PRODUCTOS
