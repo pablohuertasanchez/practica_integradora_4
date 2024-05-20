@@ -89,6 +89,7 @@ public class ControladorLoginUsuario {
         Usuario usuAut = (Usuario) sesion.getAttribute("usuarioAut");
         if (usuAut != null) {
             if (usuAut.getClave().equals(u.getClave())) {
+                sesion.setAttribute("usuarioAutenticado", usuAut);
                 return "redirect:/registro/paso1";
             } else {
                 modelo.addAttribute("error", "Clave incorrecta");

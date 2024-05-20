@@ -66,6 +66,9 @@ public class ControladorRegistroCliente {
                                 Model model,
                                 HttpSession sesion
     ){
+        if (sesion.getAttribute("usuarioAutenticado") == null) {
+            return "administrador/errorAcceso";
+        }
         // Cargar los países y guardarlos en el servicio de países
         Colecciones.getNacionalidades().forEach((siglas, nombre) -> {
             Pais pais = new Pais(nombre, siglas);
@@ -88,6 +91,7 @@ public class ControladorRegistroCliente {
             model.addAttribute("clientePlantilla", cliente);
         }else model.addAttribute("clientePlantilla",cliente);
 
+        model.addAttribute("usuarioAutenticado", sesion.getAttribute("usuarioAutenticado"));
         return "registro/paso1";
     }
 
@@ -101,6 +105,9 @@ public class ControladorRegistroCliente {
             HttpSession sesion,
             Model model
     ){
+        if (sesion.getAttribute("usuarioAutenticado") == null) {
+            return "administrador/errorAcceso";
+        }
         // Añadir la lista de países y generos al modelo
         model.addAttribute("listaP", paisRepository.findAll());
         model.addAttribute("listaG", generoRepository.findAll());
@@ -131,11 +138,15 @@ public class ControladorRegistroCliente {
 
         if (posiblesErrores.hasErrors()) {
             System.out.println(posiblesErrores.getAllErrors());
+
+            model.addAttribute("usuarioAutenticado", sesion.getAttribute("usuarioAutenticado"));
             return "registro/paso1";
         }
         else {
             System.out.println(cliente.toString());
             sesion.setAttribute("datos_personales", cliente);
+
+            model.addAttribute("usuarioAutenticado", sesion.getAttribute("usuarioAutenticado"));
             return "redirect:/registro/paso2";
         }
     }
@@ -147,6 +158,9 @@ public class ControladorRegistroCliente {
                                Model model,
                                 HttpSession sesion
     ){
+        if (sesion.getAttribute("usuarioAutenticado") == null) {
+            return "administrador/errorAcceso";
+        }
         System.out.println(cliente
                 .toString());
         if (sesion.getAttribute("datos_contacto")!=null){
@@ -154,6 +168,7 @@ public class ControladorRegistroCliente {
             model.addAttribute("clientePlantilla", cliente);
         }else model.addAttribute("clientePlantilla",cliente);
 
+        model.addAttribute("usuarioAutenticado", sesion.getAttribute("usuarioAutenticado"));
         return "registro/paso2";
     }
     @PostMapping("paso2")
@@ -161,8 +176,12 @@ public class ControladorRegistroCliente {
             @Validated({DatosContacto.class})
             @ModelAttribute("clientePlantilla")Cliente cliente,
             BindingResult posiblesErrores,
-            HttpSession sesion
+            HttpSession sesion,
+            Model model
     ){
+        if (sesion.getAttribute("usuarioAutenticado") == null) {
+            return "administrador/errorAcceso";
+        }
         if (posiblesErrores.hasErrors()) {
             System.out.println(posiblesErrores.getAllErrors());
             return "registro/paso2";
@@ -170,6 +189,8 @@ public class ControladorRegistroCliente {
 
             System.out.println(cliente.toString());
             sesion.setAttribute("datos_contacto", cliente);
+
+            model.addAttribute("usuarioAutenticado", sesion.getAttribute("usuarioAutenticado"));
             return "redirect:/registro/paso3";
         }
     }
@@ -181,6 +202,9 @@ public class ControladorRegistroCliente {
                             HttpSession sesion
 
     ){
+        if (sesion.getAttribute("usuarioAutenticado") == null) {
+            return "administrador/errorAcceso";
+        }
 
 
         if (sesion.getAttribute("datos_usuario")!=null){
@@ -189,6 +213,7 @@ public class ControladorRegistroCliente {
             model.addAttribute("clientePlantilla", cliente);
         }else model.addAttribute("clientePlantilla",cliente);
 
+        model.addAttribute("usuarioAutenticado", sesion.getAttribute("usuarioAutenticado"));
         return "registro/paso3";
     }
 
@@ -197,8 +222,12 @@ public class ControladorRegistroCliente {
             @Validated({DatosUsuario.class})
             @ModelAttribute("clientePlantilla") Cliente cliente,
             BindingResult posiblesErrores,
-            HttpSession sesion
+            HttpSession sesion,
+            Model model
     ){
+        if (sesion.getAttribute("usuarioAutenticado") == null) {
+            return "administrador/errorAcceso";
+        }
         if (posiblesErrores.hasErrors()) {
             System.out.println(posiblesErrores.getAllErrors());
             return "registro/paso3";
@@ -223,6 +252,7 @@ public class ControladorRegistroCliente {
             // clienteService.save(cliente);
 
             sesion.setAttribute("datos_usuario", cliente);
+            model.addAttribute("usuarioAutenticado", sesion.getAttribute("usuarioAutenticado"));
             return "redirect:/registro/resumen";
         }
     }
@@ -230,6 +260,10 @@ public class ControladorRegistroCliente {
 
     @GetMapping("resumen")
     private String resumenGet(Cliente cliente, Model model, HttpSession sesion) {
+        if (sesion.getAttribute("usuarioAutenticado") == null) {
+        return "administrador/errorAcceso";
+    }
+
         cliente = new Cliente();
         if (sesion.getAttribute("datos_personales") != null) {
             Cliente datos_personales = (Cliente) sesion.getAttribute("datos_personales");
@@ -266,6 +300,8 @@ public class ControladorRegistroCliente {
         model.addAttribute("clientePlantilla", cliente);
         sesion.setAttribute("clienteFinal", cliente);
         registroCompleto = true;
+
+        model.addAttribute("usuarioAutenticado", sesion.getAttribute("usuarioAutenticado"));
         return "registro/resumen";
     }
 
@@ -274,6 +310,9 @@ public class ControladorRegistroCliente {
             Model model,
             HttpSession sesion
     ){
+        if (sesion.getAttribute("usuarioAutenticado") == null) {
+            return "administrador/errorAcceso";
+        }
         Cliente cliente = (Cliente) sesion.getAttribute("clienteFinal");
         model.addAttribute("clientePlantilla", cliente);
 
@@ -284,12 +323,16 @@ public class ControladorRegistroCliente {
             return "redirect:/tienda";
         }
         else {
+            model.addAttribute("usuarioAutenticado", sesion.getAttribute("usuarioAutenticado"));
             return "registro/resumen";
         }
     }
 
     @PostMapping("cerrar-sesion")
     private String cerrarSesion(HttpSession sesion){
+        if (sesion.getAttribute("usuarioAutenticado") == null) {
+            return "administrador/errorAcceso";
+        }
         registroCompleto=false;
         sesion.invalidate();
         return "redirect:/registro/paso1";
