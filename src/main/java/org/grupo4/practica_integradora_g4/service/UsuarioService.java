@@ -8,17 +8,8 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class UsuarioService {
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
-
-    public void save(Usuario usuario){
-        usuarioRepository.save(usuario);
-    }
-
-    public Optional<Usuario> findByEmail(String email) {
-        return usuarioRepository.findByEmail(email);
-    }
+public interface UsuarioService {
+    Optional<Usuario> findByEmail(String email);
+    Usuario save(Usuario usuario);
 
 }

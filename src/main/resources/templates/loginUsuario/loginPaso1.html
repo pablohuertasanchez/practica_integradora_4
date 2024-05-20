@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login - Paso 1</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    <script>
+        function redirectToVue() {
+            window.location.href = 'http://localhost:8081/tienda';
+        }
+    </script>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <img th:src="@{/img/logo.png}" height="100" width="100" alt="Logo de tu Aplicación">
+        <h1>Autos Elite</h1>
+    </div>
+</header>
+<div class="login-container">
+    <h2>Login - Paso 1</h2>
+    <form th:action="@{/loginUsuario/email}" method="post" th:object="${usuario}">
+        <fieldset>
+            <legend>Ingrese su correo electrónico</legend>
+            <div>
+                <label for="email">Email:</label>
+                <input type="text" id="email" th:field="*{email}" required/>
+            </div>
+            <div th:if="${error}" class="error">
+                <p th:text="${error}"></p>
+            </div>
+        </fieldset>
+        <input type="submit" value="Siguiente">
+        <a th:href="@{/registroUsuario}" class="register-link">Regístrate aquí</a>
+        <a th:href="@{/loginAdmin}" >Soy Usuario Administrador</a>
+
+        <input type="button" value="Ir a la tienda" formnovalidate onclick="redirectToVue()">
+    </form>
+</div>
+</body>
+</html>

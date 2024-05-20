@@ -12,8 +12,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ControladorLoginUsuario {
@@ -21,83 +23,72 @@ public class ControladorLoginUsuario {
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/loginUsuario")
-    public String log1(@ModelAttribute("usuario") Usuario u, Model modelo) {
-        List<String> emailUsu = Colecciones.obtenerEmailUsuarios();
-        modelo.addAttribute("emailUsuarios", emailUsu);
-        return "loginUsuario/loginUsuario";
+    // Paso 1: Pedir el email del usuario
+    @GetMapping("/loginUsuario/email")
+    public String mostrarFormularioEmail(Model model) {
+        model.addAttribute("usuario", new Usuario());
+        return "loginUsuario/loginPaso1";
+    }
+    @PostMapping("/loginUsuario/email")
+    public String verificarEmail(@ModelAttribute Usuario usuario, HttpSession session, Model model) {
+        Optional<Usuario> usuarioExistente = usuarioService.findByEmail(usuario.getEmail());
+        if (usuarioExistente.isPresent()) {
+            session.setAttribute("usuarioTemporal", usuarioExistente.get());
+            return "redirect:/loginUsuario/clave";
+        } else {
+            model.addAttribute("error", "El correo no está registrado.");
+            return "loginUsuario/loginPaso1";
+        }
+
     }
 
-    @PostMapping("/loginUsuario-post")
-    public String log1P(@ModelAttribute("usuario") Usuario u, Model modelo, HttpSession sesion) {
-        List<String> emailUsu = Colecciones.obtenerEmailUsuarios();
-        modelo.addAttribute("emailUsuarios", emailUsu);
-        List<Usuario> listaUsuarios = Colecciones.devuelveUsu();
-        Usuario usuarioAut = null;
-        for (Usuario usu : listaUsuarios) {
-            if (usu.getEmail().equals(u.getEmail())) {
-                usuarioAut = usu;
-            }
+    // Paso 2: Pedir la contraseña del usuario
+    @GetMapping("/loginUsuario/clave")
+    public String mostrarFormularioPassword(HttpSession session, Model model) {
+        if (session.getAttribute("usuarioTemporal") == null) {
+            return "redirect:/loginUsuario/email";
         }
-        System.out.println(u.toString());
-        if (usuarioAut != null) {
-            sesion.setAttribute("usuarioAut", usuarioAut);
-            return "redirect:/loginUsuario2";
-        } else {
-            modelo.addAttribute("error", "Usuario no existente");
-            return "loginUsuario/loginUsuario";
+        model.addAttribute("usuario", new Usuario());
+        return "loginUsuario/loginPaso2";
+    }
+
+    @PostMapping("/loginUsuario/clave")
+    public String verificarPassword(@ModelAttribute Usuario usuario, HttpSession session, Model model) {
+        if (session.getAttribute("usuarioTemporal") == null) {
+            return "administrador/errorAcceso";
         }
+        Usuario usuarioTemporal = (Usuario) session.getAttribute("usuarioTemporal");
+        if (usuarioTemporal == null) {
+            return "redirect:/loginUsuario/email";
+        }
+        if (!usuarioTemporal.getClave().equals(usuario.getClave())) {
+            model.addAttribute("error", "Contraseña incorrecta.");
+            return "loginUsuario/loginPaso2";
+        }
+        session.setAttribute("usuarioAutenticado", usuarioTemporal);
+        session.removeAttribute("usuarioTemporal");
+        return "redirect:/registro/paso1";
     }
 
     @GetMapping("/registroUsuario")
-    public String reg1(@ModelAttribute("usuario") Usuario u, Model modelo, HttpSession sesion) {
-        Usuario uS = (Usuario) sesion.getAttribute("usuario");
-        modelo.addAttribute("usuario", u);
-        if (uS != null) {
-            modelo.addAttribute("usuario", uS);
-            System.out.println(uS.toString());
-        }
-        return "loginUsuario/registroUsuario";
+    public String mostrarFormularioDeRegistro(Model model) {
+        model.addAttribute("usuario", new Usuario());
+        return "loginUsuario/registrarUsuario";
     }
 
-    @PostMapping("/registroUsuario-post")
-    public String reg1P(@Valid @ModelAttribute("usuario") Usuario u, BindingResult result, Model modelo, HttpSession sesion) {
+    @PostMapping("/registroUsuario")
+    public String registrarUsuario(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            modelo.addAttribute("errors", result.getAllErrors());
-            System.out.println(result.getAllErrors());
-            return "loginUsuario/registroUsuario";
+            return "loginUsuario/registrarUsuario";
         }
 
-        System.out.println(u.toString());
-        sesion.setAttribute("usuario", u);
-
-        // Guardar el usuario en la base de datos
-        usuarioService.save(u);
-        Colecciones.agregarUsuario(u);
-        // Limpiar la sesión y redirigir al login
-        sesion.removeAttribute("usuario");
-        return "redirect:/loginUsuario";
-    }
-
-    @GetMapping("/loginUsuario2")
-    public String aut2(@ModelAttribute("usuario") Usuario u, Model modelo) {
-        return "loginUsuario/loginUsuario2";
-    }
-
-    @PostMapping("/loginUsuario2-post")
-    public String aut2P(@ModelAttribute("usuario") Usuario u, Model modelo, HttpSession sesion) {
-        Usuario usuAut = (Usuario) sesion.getAttribute("usuarioAut");
-        if (usuAut != null) {
-            if (usuAut.getClave().equals(u.getClave())) {
-                sesion.setAttribute("usuarioAutenticado", usuAut);
-                return "redirect:/registro/paso1";
-            } else {
-                modelo.addAttribute("error", "Clave incorrecta");
-                return "loginUsuario/loginUsuario2";
-            }
-        } else {
-            modelo.addAttribute("error", "No se ha iniciado sesión");
-            return "loginUsuario/loginUsuario2";
+        if (usuarioService.findByEmail(usuario.getEmail()).isPresent()) {
+            model.addAttribute("error", "El correo ya está registrado.");
+            return "loginUsuario/registrarUsuario";
         }
+
+        usuarioService.save(usuario);
+        return "redirect:/loginUsuario/email";
     }
+
 }
