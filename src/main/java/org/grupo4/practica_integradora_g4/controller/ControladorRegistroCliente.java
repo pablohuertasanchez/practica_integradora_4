@@ -1,4 +1,5 @@
-package org.grupo4.practica_integradora_g4.controller;
+
+        package org.grupo4.practica_integradora_g4.controller;
 
 import jakarta.servlet.http.HttpSession;
 import org.grupo4.practica_integradora_g4.extras.Colecciones;
@@ -63,8 +64,8 @@ public class ControladorRegistroCliente {
     //PASO 1
     @GetMapping("paso1")
     private String paso1Get(Cliente cliente,
-                                Model model,
-                                HttpSession sesion
+                            Model model,
+                            HttpSession sesion
     ){
         if (sesion.getAttribute("usuarioAutenticado") == null) {
             return "administrador/errorAcceso";
@@ -94,6 +95,7 @@ public class ControladorRegistroCliente {
         model.addAttribute("usuarioAutenticado", sesion.getAttribute("usuarioAutenticado"));
         return "registro/paso1";
     }
+
 
     @PostMapping("paso1")
     private String paso1Post(
@@ -155,8 +157,8 @@ public class ControladorRegistroCliente {
     //PASO 2
     @GetMapping("paso2")
     private String paso2Get(Cliente cliente,
-                               Model model,
-                                HttpSession sesion
+                            Model model,
+                            HttpSession sesion
     ){
         if (sesion.getAttribute("usuarioAutenticado") == null) {
             return "administrador/errorAcceso";
@@ -200,6 +202,7 @@ public class ControladorRegistroCliente {
     private String paso3Get(Cliente cliente,
                             Model model,
                             HttpSession sesion
+
 
     ){
         if (sesion.getAttribute("usuarioAutenticado") == null) {
@@ -261,8 +264,8 @@ public class ControladorRegistroCliente {
     @GetMapping("resumen")
     private String resumenGet(Cliente cliente, Model model, HttpSession sesion) {
         if (sesion.getAttribute("usuarioAutenticado") == null) {
-        return "administrador/errorAcceso";
-    }
+            return "administrador/errorAcceso";
+        }
 
         cliente = new Cliente();
         if (sesion.getAttribute("datos_personales") != null) {
@@ -284,10 +287,16 @@ public class ControladorRegistroCliente {
             cliente.setComentarios(datos_usuario.getComentarios());
             cliente.setTarjetasCredito(datos_usuario.getTarjetasCredito());
         }
-        Usuario usuAut = (Usuario) sesion.getAttribute("usuarioAut");
+
+        Usuario usuAut = (Usuario) sesion.getAttribute("usuarioAutenticado");
+        if (usuAut == null) {
+            return "error";  // Maneja el caso donde el usuario no está en la sesión
+        }
+
         cliente.setUsuarioEmail(usuAut);
 
         clienteService.save(cliente);
+
 
         if (sesion.getAttribute("datos_contacto") != null) {
             Cliente datos_contacto = (Cliente) sesion.getAttribute("datos_contacto");
@@ -320,7 +329,7 @@ public class ControladorRegistroCliente {
             registroCompleto=false;
             Colecciones.addCliente(cliente);
             sesion.invalidate();
-            return "redirect:/tienda";
+            return "redirect:http://localhost:8081/tienda";
         }
         else {
             model.addAttribute("usuarioAutenticado", sesion.getAttribute("usuarioAutenticado"));
