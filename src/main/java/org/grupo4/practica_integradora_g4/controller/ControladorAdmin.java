@@ -13,6 +13,7 @@ import org.grupo4.practica_integradora_g4.repositories.mongo.CategoriaRepository
 import org.grupo4.practica_integradora_g4.service.CategoriaService;
 import org.grupo4.practica_integradora_g4.service.ClienteService;
 import org.grupo4.practica_integradora_g4.service.ProductoService;
+import org.grupo4.practica_integradora_g4.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -35,7 +36,7 @@ public class ControladorAdmin {
     private CategoriaService categoriaService;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UsuarioService usuarioService;
 
     @Autowired
     private ClienteService clienteService;
@@ -186,16 +187,19 @@ public class ControladorAdmin {
         return "administrador/registroAdministrador";
     }
     @PostMapping("/addAdmin")
-    public String postAgregarAdministrador(Usuario administrador,HttpSession session, Model model){
+    public String postAgregarAdministrador(@Valid @ModelAttribute("administrador") Usuario administrador, BindingResult result,HttpSession session, Model model){
         if (session.getAttribute("usuario") == null) {
             return "administrador/errorAcceso";
         }
-        if (usuarioRepository.findByEmail(administrador.getEmail()).isPresent()) {
-            model.addAttribute("error", "Ya estás registrado");
-            model.addAttribute("usuario", session.getAttribute("usuario"));
+        if (result.hasErrors()) {
             return "administrador/registroAdministrador";
         }
-        usuarioRepository.save(administrador);
+        if (usuarioService.findByEmail(administrador.getEmail()).isPresent()) {
+            model.addAttribute("error", "El correo ya está registrado.");
+            return "administrador/registroAdministrador";
+        }
+
+        usuarioService.save(administrador);
         model.addAttribute("usuario", session.getAttribute("usuario"));
         return "redirect:/administrador/inicio";
 
