@@ -33,19 +33,18 @@ Este proyecto es una aplicación web para la gestión de usuarios y productos, d
 
 1. Clona este repositorio: `git clone https://github.com/pablohuertasanchez/practica_integradora_4.git`
 2. Configura MongoDB y MySQL. 
-  De momento en wsl
-  docker run -d --name mi-mongo-container -p 27017:27017 mongo
-  docker run --name contiene_mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -d mysql
+ - De momento en wsl
+ - docker run -d --name mi-mongo-container -p 27017:27017 mongo
+ - docker run --name contiene_mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -d mysql
 3. Importa el proyecto en tu IDE favorito.
 4. Ejecuta la aplicación.
-  http://localhost:8080/loginAdmin
-  http://localhost:8080/loginUsuario/email
+ - http://localhost:8080/loginAdmin
+ - http://localhost:8080/loginUsuario/email
 
-## Configuración
+## Configuración de las credenciales de MongoDB y MySQL en el archivo `application.properties`.
 
-- Configura las credenciales de MongoDB y MySQL en el archivo `application.properties`.
-spring.datasource.url=jdbc:mysql://tu_ip_de_wsl:3306/Practica4?createDatabaseIfNotExist=true
-spring.data.mongodb.host=tu_ip_de_wsl
+ - spring.datasource.url=jdbc:mysql://tu_ip_de_wsl:3306/Practica4?createDatabaseIfNotExist=true
+ - spring.data.mongodb.host=tu_ip_de_wsl
 
 ## Estructura del Proyecto
 
