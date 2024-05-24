@@ -4,10 +4,12 @@ import jakarta.transaction.Transactional;
 import org.grupo4.practica_integradora_g4.model.entidades.Cliente;
 import org.grupo4.practica_integradora_g4.repositories.ClienteRepository;
 import org.grupo4.practica_integradora_g4.repositories.DireccionRepository;
+import org.grupo4.practica_integradora_g4.specifications.ClienteSpecifications;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -27,5 +29,11 @@ public class ClienteService {
         direccionRepository.deleteByClienteId(id);
         clienteRepository.deleteById(id);
     }
-
+    public Optional<Cliente> findById(UUID id) {
+        return clienteRepository.findById(id);
+    }
+//
+//    public List<Cliente> buscarClientes(String apellido, Date fechaInicio, Date fechaFin, Double salarioMin, Double salarioMax, List<String> nacionalidades) {
+//        return clienteRepository.findAll(ClienteSpecifications.withFilters(apellido, fechaInicio, fechaFin, salarioMin, salarioMax, nacionalidades));
+//    }
 }

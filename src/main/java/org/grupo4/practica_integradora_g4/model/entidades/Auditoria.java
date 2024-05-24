@@ -18,7 +18,7 @@ public class Auditoria {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private LocalDate fechaAltaEntidad;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "usuario_QueDaDeAlta",
             foreignKey = @ForeignKey(name = "FK_aud_usuario_usuarioQueDaDeAlta")
@@ -26,7 +26,7 @@ public class Auditoria {
     )
     private Usuario usuarioAdminQueRealizaAlta;
     private LocalDate fechaUltimaModificacionEntidad;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "usuario_QueModifica",
             foreignKey = @ForeignKey(name = "FK_aud_usuario_usuarioQueModifica")
@@ -34,7 +34,7 @@ public class Auditoria {
     )
     private Usuario usuarioAdminQueRealizaUltimaModf;
     private LocalDate fechaBorradoEntidad;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "usuario_QueBorra",
             foreignKey = @ForeignKey(name = "FK_aud_usuario_usuarioQueBorra")
@@ -42,7 +42,7 @@ public class Auditoria {
     )
     private Usuario usuarioAdminQueRealizaBorrado;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 

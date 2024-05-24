@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Principal</title>
     <link rel="stylesheet" th:href="@{/css/estilosAddProducto.css}">
-
 </head>
 <body>
 <header>
     <nav th:replace="~{fragments/cabeceraAdmin}"></nav>
 </header>
-
 
 <div class="content">
     <h1>Página de administración</h1>
@@ -28,7 +26,7 @@
         <table class="table table-bordered mt-3">
             <thead>
             <tr>
-                <th>ID</th>
+                <th>Borrado</th>
                 <th>Nombre</th>
                 <th>Apellidos</th>
                 <th>Email</th>
@@ -38,24 +36,36 @@
                 <th>Tipo Documento</th>
                 <th>Documento</th>
                 <th>Comentarios</th>
+                <th>Acción</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="cliente : ${clientes}">
-                <td th:text="${cliente.id}"></td>
-                <td th:text="${cliente.nombre}"></td>
-                <td th:text="${cliente.apellidos}"></td>
-                <td th:text="${cliente.usuarioEmail.email}"></td>
-                <td th:text="${cliente.pais.nombre}"></td>
-                <td th:text="${cliente.genero.gen}"></td>
-                <td th:text="${cliente.telefonoMovil}"></td>
-                <td th:text="${cliente.tipoDocumentoCliente}"></td>
-                <td th:text="${cliente.documento}"></td>
-                <td th:text="${cliente.comentarios}"></td>
                 <td>
-                    <form th:action="@{/administrador/inicio/eliminar/{id}(id=${cliente.id})}" method="post">
-                        <button type="submit" >Eliminar</button>
-                    </form>
+                    <span th:if="${cliente.borrado}" style="color: red;">Eliminado</span>
+                </td>
+                <td th:if="${cliente.nombre != null}" th:text="${cliente.nombre}"></td>
+                <td th:if="${cliente.apellidos != null}" th:text="${cliente.apellidos}"></td>
+                <td th:if="${cliente.usuarioEmail != null}" th:text="${cliente.usuarioEmail.email}"></td>
+                <td th:if="${cliente.pais != null}" th:text="${cliente.pais.nombre}"></td>
+                <td th:if="${cliente.genero != null}" th:text="${cliente.genero.gen}"></td>
+                <td th:if="${cliente.telefonoMovil != null}" th:text="${cliente.telefonoMovil}"></td>
+                <td th:if="${cliente.tipoDocumentoCliente != null}" th:text="${cliente.tipoDocumentoCliente}"></td>
+                <td th:if="${cliente.documento != null}" th:text="${cliente.documento}"></td>
+                <td th:if="${cliente.comentarios != null}" th:text="${cliente.comentarios}"></td>
+                <td>
+                    <span th:if="${cliente.borrado}">
+                        <form th:action="@{/administrador/inicio/restablecer/{id}(id=${cliente.id})}" method="post">
+                            <input type="hidden" name="clienteId" th:value="${cliente.id}">
+                            <button type="submit">Restablecer Cliente</button>
+                        </form>
+                    </span>
+                    <span th:unless="${cliente.borrado}">
+                        <form th:action="@{/administrador/inicio/eliminar/{id}(id=${cliente.id})}" method="post">
+                            <input type="hidden" name="clienteId" th:value="${cliente.id}">
+                            <button type="submit">Eliminar Cliente</button>
+                        </form>
+                    </span>
                 </td>
             </tr>
             </tbody>

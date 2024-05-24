@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Contador de Visitas</title>
+</head>
+<body>
+<h1>Bienvenido, <span th:text="${usuarioAutenticado.email}"></span></h1>
+<p>Páginas visitadas en esta sesión: <span th:text="${pageVisitCount}"></span></p>
+<p>Número de páginas visitadas en el último acceso: <span th:text="${lastVisitCount}"></span></p>
+</body>
+</html>

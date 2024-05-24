@@ -1,5 +1,7 @@
 package org.grupo4.practica_integradora_g4.controller;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.grupo4.practica_integradora_g4.model.entidades.Usuario;
 import org.grupo4.practica_integradora_g4.service.UsuarioService;
@@ -42,9 +44,18 @@ public class ControladorLoginUsuarioAdministrador {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpSession session) {
+    public String logout(HttpSession session, HttpServletResponse response) {
+        if (session.getAttribute("usuarioAutenticado") == null) {
+            return "administrador/errorAcceso";
+        }
+        Integer visitCount = (Integer) session.getAttribute("pageVisitCount");
+        if (visitCount != null) {
+            Cookie cookie = new Cookie("lastPageVisitCount", visitCount.toString());
+            cookie.setMaxAge(7 * 24 * 60 * 60); // Cookie válida por 1 semana
+            response.addCookie(cookie);
+        }
         session.invalidate();
-        return "redirect:/loginAdmin";
+        return "redirect:/";
     }
 
 }

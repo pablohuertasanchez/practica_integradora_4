@@ -22,6 +22,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -55,8 +56,26 @@ public class ControladorAdmin {
     @PostMapping("/inicio/eliminar/{id}")
     public String eliminarCliente(@PathVariable("id") String id) {
         UUID uuid = UUID.fromString(id);
-        clienteService.deleteById(uuid);
-        return "redirect:/administrador/inicio";
+        Optional<Cliente> optionalCliente = clienteService.findById(uuid);
+        if (optionalCliente.isPresent()) {
+            Cliente cliente = optionalCliente.get();
+            cliente.setBorrado(true); // Marcar cliente como eliminado
+            clienteService.save(cliente); // Guardar cambios en la base de datos
+        }
+        return "redirect:/administrador/inicio"; // Redireccionar a la página de inicio
+    }
+
+    // Restablecer cliente
+    @PostMapping("/inicio/restablecer/{id}")
+    public String restablecerCliente(@PathVariable("id") String id) {
+        UUID uuid = UUID.fromString(id);
+        Optional<Cliente> optionalCliente = clienteService.findById(uuid);
+        if (optionalCliente.isPresent()) {
+            Cliente cliente = optionalCliente.get();
+            cliente.setBorrado(false); // Marcar cliente como eliminado
+            clienteService.save(cliente); // Guardar cambios en la base de datos
+        }
+        return "redirect:/administrador/inicio"; // Redireccionar a la página de inicio
     }
 
     //PRODUCTOS

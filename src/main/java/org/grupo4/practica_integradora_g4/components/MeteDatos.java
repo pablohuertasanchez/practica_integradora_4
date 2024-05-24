@@ -1,18 +1,21 @@
 package org.grupo4.practica_integradora_g4.components;
 
-import org.grupo4.practica_integradora_g4.model.entidades.Usuario;
+import jakarta.annotation.PostConstruct;
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
+import org.grupo4.practica_integradora_g4.extras.Colecciones;
+import org.grupo4.practica_integradora_g4.model.entidades.*;
 import org.grupo4.practica_integradora_g4.model.mongo.Categoria;
 import org.grupo4.practica_integradora_g4.model.mongo.Producto;
-import org.grupo4.practica_integradora_g4.repositories.UsuarioRepository;
+import org.grupo4.practica_integradora_g4.repositories.*;
 import org.grupo4.practica_integradora_g4.repositories.mongo.CategoriaRepository;
 import org.grupo4.practica_integradora_g4.repositories.mongo.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import jakarta.annotation.PostConstruct;
-
 import java.math.BigDecimal;
-import java.util.Arrays;
+import java.time.LocalDate;
+import java.util.UUID;
 
 @Component
 public class MeteDatos {
@@ -23,6 +26,18 @@ public class MeteDatos {
     private CategoriaRepository categoriaRepository;
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private ClienteRepository clienteRepository;
+    @Autowired
+    private GeneroRepository generoRepository;
+    @Autowired
+    private PaisRepository paisRepository;
+    @Autowired
+    private TipoClienteRepository tipoClienteRepository;
+    @Autowired
+    private TarjetaCreditoRepository tarjetaCreditoRepository;
+//    @Autowired
+//    private AuditoriaRepository auditoriaRepository; // Asegúrate de tener este repositorio inyectado
 
 
     @PostConstruct
@@ -49,13 +64,15 @@ public class MeteDatos {
             usuarioRepository.save(admin2);
         }
     }
+
+    @Transactional
     @PostConstruct
     public void init() {
         // Inicializar categorías por defecto
-        Categoria compacto = new Categoria("1","Compacto","Mejor coche para la familia");
-        Categoria deportivo = new Categoria("2","Deportivo","Para los más atrevidos");
-        Categoria lujo = new Categoria("3","Lujo","Experimenta la comodidad en movimiento");
-        Categoria suv = new Categoria("4","SUV","Más grande es mejor");
+        Categoria compacto = new Categoria("1", "Compacto", "Mejor coche para la familia");
+        Categoria deportivo = new Categoria("2", "Deportivo", "Para los más atrevidos");
+        Categoria lujo = new Categoria("3", "Lujo", "Experimenta la comodidad en movimiento");
+        Categoria suv = new Categoria("4", "SUV", "Más grande es mejor");
 
         categoriaRepository.save(compacto);
         categoriaRepository.save(suv);
@@ -138,5 +155,102 @@ public class MeteDatos {
             productoRepository.save(producto3);
             productoRepository.save(producto4);
         }
+
+        if (tarjetaCreditoRepository.count() == 0) {
+            TarjetaCredito tarjetaCredito1 = new TarjetaCredito(1234-5678-9012-3456, "VISA","332", LocalDate.of(2025, 12, 31), null);
+            tarjetaCreditoRepository.save(tarjetaCredito1);
+        }
+
+        if (clienteRepository.count() == 0) {
+            // Crear algunos tipos de cliente de prueba
+            TipoCliente tipoBronce = Colecciones.getTIPOCLIENTES().get(0);
+            TipoCliente tipoPlata = Colecciones.getTIPOCLIENTES().get(1);
+
+            tipoClienteRepository.save(tipoBronce);
+            tipoClienteRepository.save(tipoPlata);
+
+            // Crear algunos usuarios de prueba
+            Usuario usuario1 = new Usuario("root@email.com", "admin", "admin", "1234", "1234", LocalDate.now(), 0, null);
+            Usuario usuario2 = new Usuario("pablo@email.com", "huerta", "huerta", "1234", "1234", LocalDate.now(), 0, null);
+
+            usuarioRepository.save(usuario1);
+            usuarioRepository.save(usuario2);
+
+            // Crear algunos clientes de prueba
+            Cliente cliente1 = new Cliente();
+            cliente1.setId(UUID.randomUUID());
+            cliente1.setBorrado(false);
+            cliente1.setNombre("Cliente");
+            cliente1.setApellidos("Uno");
+            cliente1.setFechaNacimiento(LocalDate.of(1990, 5, 15));
+            cliente1.setPais(paisRepository.findBySiglas("ES"));
+            cliente1.setGenero(generoRepository.findBySiglas("M"));
+            cliente1.setTipoDocumentoCliente("dni");
+            cliente1.setDocumento("12345678A");
+            cliente1.setTelefonoMovil("123456789");
+            cliente1.setUsuarioEmail(usuario1);
+            cliente1.setTipoCliente(tipoBronce);
+            cliente1.setGastoAcumuladoCliente(BigDecimal.ZERO);
+            cliente1.setLicencia(true);
+            cliente1.setComentarios("Comentarios del Cliente Uno");
+
+            Cliente cliente2 = new Cliente();
+            cliente2.setId(UUID.randomUUID());
+            cliente2.setBorrado(false);
+            cliente2.setNombre("Cliente");
+            cliente2.setApellidos("Dos");
+            cliente2.setFechaNacimiento(LocalDate.of(1985, 9, 20));
+            cliente2.setTipoDocumentoCliente("dni");
+            cliente2.setDocumento("87654321B");
+            cliente2.setTelefonoMovil("987654321");
+            cliente2.setUsuarioEmail(usuario2);
+            cliente2.setTipoCliente(tipoPlata);
+            cliente2.setGastoAcumuladoCliente(BigDecimal.valueOf(15000));
+            cliente2.setLicencia(false);
+            cliente2.setComentarios("Comentarios del Cliente Dos");
+
+            // Agregar los clientes a la colección de clientes
+            Colecciones.addCliente(cliente1);
+            Colecciones.addCliente(cliente2);
+
+            clienteRepository.save(cliente1);
+            clienteRepository.save(cliente2);
+        }
     }
-}
+
+//        if (clienteRepository.count() == 0) {
+//            // Inicializar clientes por defecto
+//            // ...
+//            Genero generoMasculino = generoRepository.findBySiglas("Masculino");
+//            Pais paisARG = paisRepository.findBySiglas("ARG");
+//            Usuario usuarioPablo = usuarioRepository.findByEmail("pablo@email.com").orElseThrow(
+//                    () -> new RuntimeException("Usuario no encontrado")
+//            );
+//
+//
+//            // Crea una instancia de Auditoria
+//            Auditoria auditoria = new Auditoria();
+//            auditoria.setFechaAltaEntidad(LocalDate.now());
+//            auditoria.setUsuarioAdminQueRealizaAlta(usuarioPablo);
+//
+//            Cliente cliente1 = new Cliente();
+//            cliente1.setGenero(generoMasculino);
+//            cliente1.setPais(paisARG);
+//            cliente1.setFechaNacimiento(LocalDate.of(1990, 1, 1));
+//            cliente1.setTipoDocumentoCliente("Cedula");
+//            cliente1.setDocumento("123456789");
+//            cliente1.setNombre("Pablo");
+//            cliente1.setApellidos("Herrera");
+//            cliente1.setUsuarioEmail(usuarioPablo);
+////            cliente1.setAuditoria(new Auditoria());
+//
+//
+//            TarjetaCredito tarjetaCredito = new TarjetaCredito();
+//            tarjetaCredito.setNumero(1234 - 5678 - 9012 - 3456);
+//            cliente1.addTarjetaCredito(tarjetaCredito);
+//
+//            clienteRepository.save(cliente1);
+//        }
+
+
+    }

@@ -1,9 +1,6 @@
 package org.grupo4.practica_integradora_g4.model.entidades;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import org.grupo4.practica_integradora_g4.validaciones.ComprobarClaves;
@@ -46,7 +43,7 @@ public class Usuario {
     private String respRec;
     private LocalDate fechaUltimaConexion=LocalDate.now();
     private Integer numeroAccesos=0;
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario",  fetch = FetchType.LAZY,  cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Auditoria> auditoria;
 }
 

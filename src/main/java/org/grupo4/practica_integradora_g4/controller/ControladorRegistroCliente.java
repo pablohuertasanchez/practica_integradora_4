@@ -11,12 +11,14 @@ import org.grupo4.practica_integradora_g4.repositories.GeneroRepository;
 import org.grupo4.practica_integradora_g4.repositories.PaisRepository;
 import org.grupo4.practica_integradora_g4.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -347,4 +349,18 @@ public class ControladorRegistroCliente {
         return "redirect:/registro/paso1";
     }
 
+//    @GetMapping("/buscarClientes")
+//    public String buscarClientes(
+//            @RequestParam(required = false) String apellido,
+//            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio,
+//            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaFin,
+//            @RequestParam(required = false) Double salarioMin,
+//            @RequestParam(required = false) Double salarioMax,
+//            @RequestParam(required = false) List<String> nacionalidades,
+//            Model model) {
+//
+//        List<Cliente> clientes = clienteService.buscarClientes(apellido, fechaInicio, fechaFin, salarioMin, salarioMax, nacionalidades);
+//        model.addAttribute("clientes", clientes);
+//        return "registroClientes";
+//    }
 }
