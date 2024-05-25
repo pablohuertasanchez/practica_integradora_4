@@ -4,7 +4,7 @@ services:
     build:
       context: './mongodb'
       dockerfile: 'Dockerfile'
-    container_name: 'contiene_mongo'
+    container_name: 'contienen_mongo'
     environment:
       - 'MONGO_INITDB_DATABASE=mydatabase'
     #      - 'MONGO_INITDB_ROOT_PASSWORD=secret'
@@ -17,7 +17,7 @@ services:
 #
   mysql:
     image: 'mysql:latest'
-    container_name: 'contiene_mysql'
+    container_name: 'contienen_mysql'
     environment:
       - 'MYSQL_DATABASE=Practica4'
       - 'MYSQL_ROOT_PASSWORD=admin'
@@ -38,7 +38,7 @@ services:
 #      - './build/libs/tienda.war:/usr/local/tomcat/webapps/tienda.war'
 
   node:
-    container_name: 'contiene_node'
+    container_name: 'contienen_node'
     build:
       context: './tienda_vue' # Carpeta donde se encuentra el Dockerfile
       dockerfile: 'Dockerfile' # Nombre del Dockerfile

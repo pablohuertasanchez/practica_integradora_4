@@ -59,6 +59,8 @@ public class ControladorAdmin {
         return "redirect:/administrador/inicio";
     }
 
+
+
     //PRODUCTOS
     @GetMapping("/productos")
     public String listarProductos(HttpSession session, Model model,
